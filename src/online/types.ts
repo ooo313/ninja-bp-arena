@@ -22,7 +22,8 @@ export interface RoomSnapshot {
     expires_at: string
     host_user_id: string
     /** v0.3：{id,enabled}[]；v0.4 起为完整轻量 Ninja Snapshot（id/name/enabled/quality/avatar/assetKey） */
-    pool: unknown[]
+    /** Loaded once on entry; omitted by lightweight state refreshes. */
+    pool?: unknown[]
     /** v0.4：房主创建时固化的数据包元信息（旧房间可能为 null） */
     data_pack_metadata?: { packId: string; schemaVersion?: number; packVersion?: string; checksum?: string } | null
     resource_snapshot?: BattleResourceSnapshot | null

@@ -69,19 +69,23 @@ export const roomApi = {
   },
 
   /** 拉取权威快照（RLS：仅成员可读；非成员读取返回 null room） */
-  async fetchSnapshot(roomId: string): Promise<RoomSnapshot> {
+  async fetchSnapshot(roomId: string, includeResources = true): Promise<RoomSnapshot> {
     const client = requireClient()
-    const { data: room, error: roomError } = await client
-      .from('rooms')
-      .select('id, code, status, match_state, revision, pending_action, expires_at, host_user_id, pool, resource_snapshot, data_pack_metadata')
-      .eq('id', roomId)
-      .maybeSingle()
+    // Both reads are independent. Bound each request so a stalled connection
+    // cannot indefinitely block the room's single in-flight refresh.
+    const signal = AbortSignal.timeout(15_000)
+    const columns = 'id, code, status, match_state, revision, pending_action, expires_at, host_user_id'
+    const [roomResult, membersResult] = await Promise.all([
+      client.from('rooms')
+        .select(includeResources ? `${columns}, pool, resource_snapshot, data_pack_metadata` : columns)
+        .eq('id', roomId).abortSignal(signal).maybeSingle(),
+      client.from('room_members').select('user_id, seat, display_name')
+        .eq('room_id', roomId).abortSignal(signal),
+    ])
+    const { data: room, error: roomError } = roomResult
     if (roomError) throw Object.assign(new Error(roomError.message), { code: 'DB_ERROR' })
 
-    const { data: members, error: membersError } = await client
-      .from('room_members')
-      .select('user_id, seat, display_name')
-      .eq('room_id', roomId)
+    const { data: members, error: membersError } = membersResult
     if (membersError) throw Object.assign(new Error(membersError.message), { code: 'DB_ERROR' })
 
     return {

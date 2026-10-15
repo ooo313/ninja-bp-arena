@@ -225,6 +225,7 @@ function WaitingRoom({ code }: { code: string }) {
   const sendCommand = useOnlineRoomStore((s) => s.sendCommand)
   const match = useOnlineRoomStore((s) => s.match)
   const connection = useOnlineRoomStore((s) => s.connection)
+  const realtimeConnected = useOnlineRoomStore((s) => s.realtimeConnected)
   const roomPackMetadata = useOnlineRoomStore((s) => s.roomPackMetadata)
   const activePackId = useDataPackStore((s) => s.activePackId)
   const installedPacks = useDataPackStore((s) => s.installedPacks)
@@ -239,7 +240,7 @@ function WaitingRoom({ code }: { code: string }) {
   const red = members.find((m) => m.seat === 'RED')
   const observers = members.filter((m) => m.seat === 'OBSERVER')
   const bothReady = Boolean(blue && red)
-  const inviteUrl = `${location.origin}/room/${code}`
+  const inviteUrl = new URL(`${import.meta.env.BASE_URL}room/${code}`, location.origin).href
   const online = (userId: string) => Boolean(presence[userId])
 
   // v0.4：房主数据包与本机不同 → 会话级提示（绝不修改本地池）
@@ -272,7 +273,7 @@ function WaitingRoom({ code }: { code: string }) {
         <p className="mt-2 font-mono text-4xl font-black tracking-[0.25em] text-fog-100">{code}</p>
         <div className="mt-3 flex items-center justify-center gap-2 text-xs">
           <span className={connection === 'connected' ? 'text-emerald-400' : 'text-fog-500'}>
-            ● {connection === 'connected' ? '已连接' : '正在同步'}
+            ● {connection === 'connected' ? realtimeConnected ? '已连接' : '已连接（轮询同步）' : '正在同步'}
           </span>
           <button type="button" onClick={() => void copy(code, '房间号')} className="text-fog-500 underline underline-offset-2 hover:text-fog-300">
             复制房间号
@@ -367,6 +368,8 @@ function OnlineRoomBody({ code }: { code: string }) {
   const roomCode = useOnlineRoomStore((s) => s.roomCode) ?? code
   const roomId = useOnlineRoomStore((s) => s.roomId)
   const connection = useOnlineRoomStore((s) => s.connection)
+  const realtimeConnected = useOnlineRoomStore((s) => s.realtimeConnected)
+  const pendingCommand = useOnlineRoomStore((s) => s.pendingCommand)
   const roomStatus = useOnlineRoomStore((s) => s.roomStatus)
   const isHost = useOnlineRoomStore((s) => s.isHost)
   const match = useOnlineRoomStore((s) => s.match)
@@ -375,7 +378,7 @@ function OnlineRoomBody({ code }: { code: string }) {
   const [closeOpen, setCloseOpen] = useState(false)
   void navigate
 
-  const inviteUrl = `${location.origin}/room/${roomCode}`
+  const inviteUrl = new URL(`${import.meta.env.BASE_URL}room/${roomCode}`, location.origin).href
   const copy = async (text: string, label: string) => {
     const ok = await copyToClipboard(text)
     toast(ok ? `${label}已复制` : '复制失败', ok ? 'success' : 'error')
@@ -388,7 +391,9 @@ function OnlineRoomBody({ code }: { code: string }) {
   }
 
   const connectionText =
-    connection === 'connected' ? '已连接' : connection === 'syncing' ? '正在同步' : connection === 'reconnecting' ? '正在重连' : '离线'
+    connection === 'connected' ? pendingCommand ? '正在确认操作' : realtimeConnected ? '已连接' : '已连接（轮询同步）'
+      : connection === 'syncing' ? '正在同步' : connection === 'reconnecting' ? '正在重连'
+        : connection === 'connecting' ? '正在连接' : connection === 'idle' ? '未连接' : '离线'
 
   return (
     <OnlineMatchSource>
