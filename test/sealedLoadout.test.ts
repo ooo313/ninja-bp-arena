@@ -24,9 +24,10 @@ function reveal(match: MatchState, prefix: string) {
 }
 
 describe('同时盲选与原规则兼容', () => {
-  it('新模板只改变辅助资源；旧模板和最小池要求保持原样', () => {
+  it('新模板使用左方先选与换边；旧模板和最小池要求保持原样', () => {
     expect(validateBattleRule(WUDOU_LOADOUT_RULE)).toEqual([])
-    expect(WUDOU_LOADOUT_RULE.resourceDrafts![0]).toEqual(FULL_LOADOUT_DEMO_RULE.resourceDrafts![0])
+    expect(WUDOU_LOADOUT_RULE.resourceDrafts![0].sequence.filter((step) => step.action === 'BAN')).toEqual(DEFAULT_RULE.banSequence)
+    expect(WUDOU_LOADOUT_RULE.swapSidesEachGame).toBe(true)
     expect(getMinimumRequiredResources(WUDOU_LOADOUT_RULE)).toEqual({ ninjas: 22, secretScrolls: 3, summons: 3 })
     expect(getSealedDraft(scrollPhase(FULL_LOADOUT_DEMO_RULE))).toBeNull()
     expect(DEFAULT_RULE.resourceDrafts).toBeUndefined()

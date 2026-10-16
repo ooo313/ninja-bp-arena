@@ -3,6 +3,7 @@ import type { EngineResult, GameState, MatchState } from './types.ts'
 import type { Ninja } from './types.ts'
 import { expandSequence, getResourceDraftRules, normalizeBattleRule, type ExpandedAction } from './ruleEngine.ts'
 import { RESOURCE_TYPE_LABEL } from './resourceRegistry.ts'
+import { rotateSide } from './sideRotation.ts'
 
 /**
  * BP 引擎：整个项目的核心状态机（Shared BP Core）。
@@ -161,7 +162,7 @@ export function getGameSequence(m: MatchState, gameNumber: number): ExpandedActi
     const steps = gameNumber > 1 && draft.banOnlyFirstGame
       ? draft.sequence.filter((step) => step.action !== 'BAN')
       : draft.sequence
-    expanded.push(...expandSequence(steps, draft.resourceType, stepOffset))
+    expanded.push(...expandSequence(steps.map((step) => ({ ...step, side: rotateSide(m.rule, gameNumber, step.side) })), draft.resourceType, stepOffset))
     stepOffset += steps.length
   }
   return expanded
@@ -360,8 +361,13 @@ export function getResourceCardStatus(m: MatchState, resourceType: DraftResource
     }
   }
 
-  if (getPlayerResourceState(game.blue, resourceType).picks.includes(resource.id)) return { status: 'BLUE_PICKED', reason: '蓝方已选择' }
-  if (getPlayerResourceState(game.red, resourceType).picks.includes(resource.id)) return { status: 'RED_PICKED', reason: '红方已选择' }
+  for (const side of ['BLUE', 'RED'] as const) {
+    const player = side === 'BLUE' ? game.blue : game.red
+    if (getPlayerResourceState(player, resourceType).picks.includes(resource.id)) {
+      const position = rotateSide(m.rule, currentNumber, side)
+      return { status: position === 'BLUE' ? 'BLUE_PICKED' : 'RED_PICKED', reason: position === 'BLUE' ? '蓝方已选择' : '红方已选择' }
+    }
+  }
 
   if (draft?.crossGameLock) {
     for (const g of m.games) {

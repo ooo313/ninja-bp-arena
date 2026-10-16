@@ -1,3 +1,4 @@
+import { sideAtPosition } from '@bp-core'
 import { Swords } from 'lucide-react'
 import type { Side } from '@/types/bp'
 import type { MatchState } from '@/types/match'
@@ -17,10 +18,10 @@ export function ReadyStage({ match }: ReadyStageProps) {
 
   const renderSide = (side: Side) => {
     const player = side === 'BLUE' ? game.blue : game.red
-    const color = side === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'
+    const color = sideAtPosition(match, side) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'
     return (
       <div className="flex flex-1 flex-col items-center gap-2">
-        <span className={`text-xs font-bold tracking-widest ${color}`}>{side === 'BLUE' ? 'BLUE' : 'RED'}</span>
+        <span className={`text-xs font-bold tracking-widest ${color}`}>{sideAtPosition(match, side)}</span>
         <div className="flex justify-center gap-2">
           {player.picks.map((id, i) => {
             const ninja = ninjaById(id)
@@ -29,7 +30,7 @@ export function ReadyStage({ match }: ReadyStageProps) {
                 <NinjaAvatar
                   name={ninja?.name ?? '?'}
                   avatar={ninja?.avatar}
-                  className={`h-14 w-14 rounded-lg border lg:h-16 lg:w-16 ${side === 'BLUE' ? 'border-side-blue/60' : 'border-side-red/60'}`}
+                  className={`h-14 w-14 rounded-lg border lg:h-16 lg:w-16 ${sideAtPosition(match, side) === 'BLUE' ? 'border-side-blue/60' : 'border-side-red/60'}`}
                 />
                 <span className="text-[10px] text-fog-500">P{i + 1}</span>
               </div>
@@ -46,9 +47,9 @@ export function ReadyStage({ match }: ReadyStageProps) {
         <Swords size={16} /> GAME {game.gameNumber} 阵容锁定
       </h2>
       <div className="flex items-center justify-center gap-3 sm:gap-6">
-        {renderSide('BLUE')}
+        {renderSide(sideAtPosition(match, 'BLUE'))}
         <span className="text-2xl font-black italic text-fog-600 lg:text-3xl">VS</span>
-        {renderSide('RED')}
+        {renderSide(sideAtPosition(match, 'RED'))}
       </div>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         <button

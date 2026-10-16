@@ -1,3 +1,4 @@
+import { sideAtPosition } from '@bp-core'
 import type { Side } from '@/types/bp'
 import type { MatchState } from '@/types/match'
 
@@ -18,14 +19,14 @@ export function PlayingStage({ match, onRequestWinner }: PlayingStageProps) {
       <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
         <button
           type="button"
-          onClick={() => onRequestWinner('BLUE')}
+          onClick={() => onRequestWinner(sideAtPosition(match, 'BLUE'))}
           className="rounded-lg bg-side-blue px-6 py-2.5 text-sm font-bold text-white transition-all hover:brightness-110 active:scale-[0.98]"
         >
           蓝方获胜
         </button>
         <button
           type="button"
-          onClick={() => onRequestWinner('RED')}
+          onClick={() => onRequestWinner(sideAtPosition(match, 'RED'))}
           className="rounded-lg bg-side-red px-6 py-2.5 text-sm font-bold text-white transition-all hover:brightness-110 active:scale-[0.98]"
         >
           红方获胜

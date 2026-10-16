@@ -62,7 +62,7 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
 
   const changeSlots = (item: ResourceDraftRule, slots: number) => {
     const bans = item.sequence.filter((step) => step.action === 'BAN')
-    const first = item.resourceType === 'NINJA' ? 'RED' : 'BLUE'
+    const first = item.sequence.find((step) => step.action === 'PICK')?.side ?? 'BLUE'
     const second = first === 'RED' ? 'BLUE' : 'RED'
     updateDraft(item.resourceType, { slotsPerSide: slots, sequence: [
       ...bans, { side: first, action: 'PICK', count: slots }, { side: second, action: 'PICK', count: slots },
@@ -92,7 +92,7 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
       <p className="text-xs text-fog-500">规则为玩家自定义示例，不代表官方赛事规则。保存仅影响新比赛。</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1 text-xs text-fog-300">模板
-          <select className={fieldClass} value={draft.id === DEFAULT_RULE.id ? 'NINJA' : draft.id === FULL_LOADOUT_DEMO_RULE.id ? 'FULL' : draft.id === WUDOU_LOADOUT_RULE.id ? 'WUDOU' : 'CUSTOM'} onChange={(event) => {
+          <select className={fieldClass} value={draft.id === DEFAULT_RULE.id ? 'NINJA' : draft.id === FULL_LOADOUT_DEMO_RULE.id ? 'FULL' : draft.id === WUDOU_LOADOUT_RULE.id && draft.version === WUDOU_LOADOUT_RULE.version ? 'WUDOU' : 'CUSTOM'} onChange={(event) => {
             if (event.target.value === 'NINJA') onChange(cloneRule(DEFAULT_RULE))
             if (event.target.value === 'FULL') onChange(cloneRule(FULL_LOADOUT_DEMO_RULE))
             if (event.target.value === 'WUDOU') onChange(cloneRule(WUDOU_LOADOUT_RULE))
@@ -113,6 +113,8 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
         </label>
       </div>
 
+      <label className="flex items-center gap-2 text-xs text-fog-300"><input type="checkbox" checked={Boolean(draft.swapSidesEachGame)} onChange={(event) => onChange({ ...draft, swapSidesEachGame: event.target.checked })} />每局结束后交换左右位置与先后手</label>
+      <p className="text-xs text-fog-500">步骤中的蓝/红表示当局左/右位置；换边后选手随位置交换，比分、跨局锁定和在线身份仍归原选手。秘卷、通灵的同时盲选不设先后手。</p>
       {TYPES.map((type) => {
         const item = drafts.find((entry) => entry.resourceType === type)
         if (!item && type !== 'NINJA') return <label key={type} className="flex items-center gap-2 text-sm text-fog-300"><input type="checkbox" checked={false} onChange={() => updateDraft(type, defaultDraft(type))} />启用{RESOURCE_TYPE_LABEL[type]}</label>
@@ -168,7 +170,7 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
       <section className="rounded border border-border-muted bg-ink-900/60 p-3 text-xs">
         <h3 className="mb-2 font-bold text-fog-100">规则预览 · BO{draft.bestOf}</h3>
         <div className="max-h-52 space-y-2 overflow-y-auto">
-          {preview.map(({ game, groups }) => <div key={game}><p className="font-semibold text-gold-accent">GAME {game}</p>
+          {preview.map(({ game, groups }) => <div key={game}><p className="font-semibold text-gold-accent">GAME {game}{draft.swapSidesEachGame && <span> · {game % 2 === 0 ? '双方已交换左右位置' : game > 1 ? '双方换回首局位置' : '首局位置'}</span>}</p>
             {groups.length ? groups.map(({ type, steps }) => <p key={type} className="text-fog-400">{RESOURCE_TYPE_LABEL[type]}：{drafts.find((item) => item.resourceType === type)?.selectionMode === 'SIMULTANEOUS' ? `双方同时盲选各 ${drafts.find((item) => item.resourceType === type)?.slotsPerSide} 个 → 双方确认后公开` : steps.map((step) => `${step.side === 'BLUE' ? '蓝方' : '红方'} ${step.action} ×${step.count}`).join(' → ') || '沿用上一局'}</p>) : <p className="text-fog-400">沿用上一局阵容</p>}
             <p className="text-fog-600">READY → PLAYING → RESULT</p>
           </div>)}

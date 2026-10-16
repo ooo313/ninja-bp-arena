@@ -1,3 +1,4 @@
+import { sideAtPosition } from '@bp-core'
 import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import type { MatchState } from '@/types/match'
@@ -21,7 +22,7 @@ export function MobileTeamBar({ match }: MobileTeamBarProps) {
 
   const miniSide = (side: Side) => {
     const player = side === 'BLUE' ? game.blue : game.red
-    const isBlue = side === 'BLUE'
+    const isBlue = sideAtPosition(match, side) === 'BLUE'
     return (
       <div className={`flex flex-1 flex-col gap-1 ${isBlue ? 'items-start' : 'items-end'}`}>
         <span className={`text-[9px] font-bold tracking-[0.2em] ${isBlue ? 'text-blue-team-soft' : 'text-red-team-soft'}`}>
@@ -54,9 +55,9 @@ export function MobileTeamBar({ match }: MobileTeamBarProps) {
         aria-expanded={expanded}
         className="flex w-full items-center gap-2 rounded-lg border border-border-muted bg-ink-900/95 px-3 py-2.5 shadow-xl backdrop-blur"
       >
-        {miniSide('BLUE')}
+        {miniSide(sideAtPosition(match, 'BLUE'))}
         <span className="text-sm font-black italic text-fog-600">VS</span>
-        {miniSide('RED')}
+        {miniSide(sideAtPosition(match, 'RED'))}
         {expanded ? (
           <ChevronUp size={14} className="shrink-0 text-fog-500" />
         ) : (
@@ -65,8 +66,8 @@ export function MobileTeamBar({ match }: MobileTeamBarProps) {
       </button>
       {expanded && (
         <div className="mt-2 grid max-h-[55vh] grid-cols-2 gap-2 overflow-y-auto rounded-lg bg-arena-bg/95 p-2 shadow-2xl">
-          <PlayerPanel side="BLUE" />
-          <PlayerPanel side="RED" />
+          <PlayerPanel side={sideAtPosition(match, 'BLUE')} />
+          <PlayerPanel side={sideAtPosition(match, 'RED')} />
         </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import type { MatchState } from './types.ts'
 import { SIDE_TEXT, ACTION_TEXT, type BPAction } from './types.ts'
+import { sideLabel, playerName, sideAtPosition } from './sideRotation.ts'
 import { RESOURCE_TYPE_LABEL } from './resourceRegistry.ts'
 
 /**
@@ -114,36 +115,38 @@ export function buildShareText(
 
   lines.push('忍界 BP｜武斗赛模拟结果')
   lines.push(`${m.rule.name}`)
-  lines.push(`BO${m.rule.bestOf}  蓝方 ${m.score.blue} : ${m.score.red} 红方`)
+  lines.push(m.rule.swapSidesEachGame ? `BO${m.rule.bestOf}  ${m.bluePlayerName} ${m.score.blue} : ${m.score.red} ${m.redPlayerName}` : `BO${m.rule.bestOf}  蓝方 ${m.score.blue} : ${m.score.red} 红方`)
   if (finished && winnerSide) {
-    lines.push(`总胜者：${SIDE_TEXT[winnerSide]}（${winnerSide === 'BLUE' ? m.bluePlayerName : m.redPlayerName}）`)
+    lines.push(`总胜者：${sideLabel(m, winnerSide)}（${playerName(m, winnerSide)}）`)
   }
   lines.push('')
 
   for (const game of m.games) {
+    const blueLabel = sideLabel(m, 'BLUE', game.gameNumber), redLabel = sideLabel(m, 'RED', game.gameNumber)
     lines.push(`【GAME ${game.gameNumber}】`)
+    if (m.rule.swapSidesEachGame) lines.push(`左侧蓝方：${playerName(m, sideAtPosition(m, 'BLUE', game.gameNumber))}；右侧红方：${playerName(m, sideAtPosition(m, 'RED', game.gameNumber))}`)
     const bans = [...game.blue.bans, ...game.red.bans]
     if (bans.length) {
       lines.push('【BAN】')
-      lines.push(`蓝方：${game.blue.bans.map(nameOf).join('、') || '无'}`)
-      lines.push(`红方：${game.red.bans.map(nameOf).join('、') || '无'}`)
+      lines.push(`${blueLabel}：${game.blue.bans.map(nameOf).join('、') || '无'}`)
+      lines.push(`${redLabel}：${game.red.bans.map(nameOf).join('、') || '无'}`)
       lines.push('')
     }
-    lines.push(`蓝方：${game.blue.picks.map((id, i) => `${i + 1}. ${nameOf(id)}`).join('　') || '无'}`)
-    lines.push(`红方：${game.red.picks.map((id, i) => `${i + 1}. ${nameOf(id)}`).join('　') || '无'}`)
+    lines.push(`${blueLabel}：${game.blue.picks.map((id, i) => `${i + 1}. ${nameOf(id)}`).join('　') || '无'}`)
+    lines.push(`${redLabel}：${game.red.picks.map((id, i) => `${i + 1}. ${nameOf(id)}`).join('　') || '无'}`)
     const blueScrolls = game.blue.resources?.SECRET_SCROLL?.picks ?? []
     const redScrolls = game.red.resources?.SECRET_SCROLL?.picks ?? []
     const blueSummons = game.blue.resources?.SUMMON?.picks ?? []
     const redSummons = game.red.resources?.SUMMON?.picks ?? []
     if (blueScrolls.length || redScrolls.length) {
-      lines.push(`蓝方秘卷：${blueScrolls.map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}`)
-      lines.push(`红方秘卷：${redScrolls.map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}`)
+      lines.push(`${blueLabel}秘卷：${blueScrolls.map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}`)
+      lines.push(`${redLabel}秘卷：${redScrolls.map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}`)
     }
     if (blueSummons.length || redSummons.length) {
-      lines.push(`蓝方通灵：${blueSummons.map((id, i) => `${i + 1}. ${resourceNameOf('SUMMON', id)}`).join('　') || '无'}`)
-      lines.push(`红方通灵：${redSummons.map((id, i) => `${i + 1}. ${resourceNameOf('SUMMON', id)}`).join('　') || '无'}`)
+      lines.push(`${blueLabel}通灵：${blueSummons.map((id, i) => `${i + 1}. ${resourceNameOf('SUMMON', id)}`).join('　') || '无'}`)
+      lines.push(`${redLabel}通灵：${redSummons.map((id, i) => `${i + 1}. ${resourceNameOf('SUMMON', id)}`).join('　') || '无'}`)
     }
-    if (game.winner) lines.push(`胜者：${SIDE_TEXT[game.winner]}`)
+    if (game.winner) lines.push(`胜者：${sideLabel(m, game.winner, game.gameNumber)}`)
     lines.push('')
   }
 

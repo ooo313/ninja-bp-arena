@@ -1,9 +1,9 @@
+import { sideAtPosition, sideLabel, playerScore } from '@bp-core'
 import type { MatchState } from '@/types/match'
 import { getPhase } from '@/engine/bpEngine'
 import { CountdownTimer } from './CountdownTimer'
 import { getResourceDraftRules, RESOURCE_TYPE_LABEL } from '@bp-core'
 
-const SIDE_LABEL = { BLUE: '蓝方', RED: '红方' } as const
 
 /** 序列步骤条：整局 Ban/Pick 流程一览（已完成 / 进行中 / 待执行） */
 function SequenceStrip({ match }: { match: MatchState }) {
@@ -24,7 +24,7 @@ function SequenceStrip({ match }: { match: MatchState }) {
           <span
             key={step.stepIndex}
             aria-current={current ? 'step' : undefined}
-            title={`${SIDE_LABEL[step.side]} ${isBan ? '禁用' : '选择'}${RESOURCE_TYPE_LABEL[step.resourceType]} ×${count} · ${done ? '已完成' : current ? '当前' : '待执行'}`}
+            title={`${sideLabel(match, step.side)} ${isBan ? '禁用' : '选择'}${RESOURCE_TYPE_LABEL[step.resourceType]} ×${count} · ${done ? '已完成' : current ? '当前' : '待执行'}`}
             className={`flex h-6 min-w-12 items-center justify-center rounded-sm px-1.5 text-[10px] font-bold transition-colors ${
               current
                 ? isBan
@@ -39,7 +39,7 @@ function SequenceStrip({ match }: { match: MatchState }) {
           >
             <span className="opacity-70">{step.resourceType === 'NINJA' ? '忍' : step.resourceType === 'SECRET_SCROLL' ? '卷' : '灵'}</span>
             {isBan ? '禁' : '选'}×{count}
-            <span className="ml-0.5 opacity-70">{step.side === 'BLUE' ? '蓝' : '红'}</span>
+            <span className="ml-0.5 opacity-70">{sideAtPosition(match, step.side) === 'BLUE' ? '蓝' : '红'}</span>
           </span>
         )
       })}
@@ -76,7 +76,7 @@ export function BPStage({
   const rule = match.rule
   const inBP = phase.status === 'BANNING' || phase.status === 'PICKING'
 
-  const sideText = phase.side ? SIDE_LABEL[phase.side] : ''
+  const sideText = phase.side ? sideLabel(match, phase.side) : ''
   const actionEn = phase.action === 'BAN' ? 'BAN' : 'PICK'
   const actionCn = phase.action === 'BAN' ? '禁用阶段' : '选择阶段'
   const resourceLabel = phase.resourceType ? RESOURCE_TYPE_LABEL[phase.resourceType] : '资源'
@@ -97,7 +97,7 @@ export function BPStage({
         <span className="text-ink-400">/</span>
         <span className="font-semibold text-gold">GAME {phase.gameNumber}</span>
         <span className="text-ink-400">/</span>
-        <span>比分 蓝 {match.score.blue} : {match.score.red} 红</span>
+        <span>比分 蓝 {playerScore(match, sideAtPosition(match, 'BLUE'))} : {playerScore(match, sideAtPosition(match, 'RED'))} 红</span>
         <span className="text-ink-400">/</span>
         <span className="max-w-[180px] truncate">{rule.name}</span>
       </div>
@@ -114,10 +114,10 @@ export function BPStage({
             <div className="text-left">
               <p
                 className={`text-xl font-black leading-tight tracking-wide lg:text-2xl ${
-                  phase.side === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'
+                  (phase.side && sideAtPosition(match, phase.side)) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'
                 }`}
               >
-                {phase.side === 'BLUE' ? 'BLUE' : 'RED'} {actionEn}
+                {(phase.side && sideAtPosition(match, phase.side)) === 'BLUE' ? 'BLUE' : 'RED'} {actionEn}
               </p>
               <p className="mt-1 text-[10px] font-bold tracking-[0.2em] text-fog-600">
                 {RESOURCE_TYPE_LABEL[phase.resourceType!].toUpperCase()} · {phase.doneInStep + 1} / {phase.stepCount}

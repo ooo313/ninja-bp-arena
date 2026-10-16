@@ -42,6 +42,7 @@ export function normalizeBattleRule(rule: BattleRule | NormalizedBattleRule): No
         resetEachGame: true,
       }]
   return {
+    swapSidesEachGame: rule.swapSidesEachGame,
     id: rule.id, name: rule.name, version: rule.version,
     bestOf: rule.bestOf, winsRequired: rule.winsRequired,
     timerEnabled: rule.timerEnabled, timerSeconds: rule.timerSeconds,
@@ -117,6 +118,7 @@ export function parseSequenceSteps(input: unknown, label: string, expectedAction
 /** 校验整份规则（设置页保存 / 在线房间创建时使用） */
 export function validateBattleRule(rule: BattleRule): string[] {
   const errors: string[] = []
+  if (rule.swapSidesEachGame !== undefined && typeof rule.swapSidesEachGame !== 'boolean') errors.push('swapSidesEachGame 必须是 boolean')
   if (![1, 3, 5, 7].includes(rule.bestOf)) errors.push('赛制 bestOf 只支持 1 / 3 / 5 / 7')
   if (rule.winsRequired !== (rule.bestOf + 1) / 2) errors.push('winsRequired 必须等于过半胜场')
   if (typeof rule.timerEnabled !== 'boolean') errors.push('timerEnabled 必须是 boolean')

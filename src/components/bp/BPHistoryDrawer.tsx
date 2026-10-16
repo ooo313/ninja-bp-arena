@@ -4,7 +4,7 @@ import { useMatchSource } from '@/matchSource/context'
 import { useNinjaLookup, useResourceLookup } from '@/hooks/useNinjaLookup'
 import { groupHistoryByGame } from '@/engine/historyEngine'
 import { formatTime } from '@/utils/format'
-import { SIDE_TEXT } from '@/types/bp'
+import { sideAtPosition, sideLabel } from '@bp-core'
 
 interface BPHistoryDrawerProps {
   open: boolean
@@ -18,7 +18,7 @@ export function BPHistoryDrawer({ open, onClose }: BPHistoryDrawerProps) {
   const resourceNameOf = useResourceLookup(match)
   const groups = useMemo(() => (match ? groupHistoryByGame(match) : []), [match])
 
-  if (!open) return null
+  if (!open || !match) return null
 
   return (
     <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label="历史记录">
@@ -42,8 +42,8 @@ export function BPHistoryDrawer({ open, onClose }: BPHistoryDrawerProps) {
               <h4 className="mb-2 flex items-center gap-2 text-[11px] font-bold tracking-widest text-gold">
                 GAME {group.gameNumber}
                 {group.winner && (
-                  <span className={`rounded px-1.5 py-0.5 text-[9px] ${group.winner === 'BLUE' ? 'bg-side-blue/20 text-side-blue-soft' : 'bg-side-red/20 text-side-red-soft'}`}>
-                    {SIDE_TEXT[group.winner]}胜
+                  <span className={`rounded px-1.5 py-0.5 text-[9px] ${sideAtPosition(match, group.winner, group.gameNumber) === 'BLUE' ? 'bg-side-blue/20 text-side-blue-soft' : 'bg-side-red/20 text-side-red-soft'}`}>
+                    {sideLabel(match, group.winner, group.gameNumber)}胜
                   </span>
                 )}
               </h4>
@@ -51,8 +51,8 @@ export function BPHistoryDrawer({ open, onClose }: BPHistoryDrawerProps) {
                 {group.actions.map((action, i) => (
                   <li key={action.id} className="flex items-center gap-2 rounded-md bg-ink-800/60 px-2.5 py-1.5 text-xs">
                     <span className="w-6 text-right tabular-nums text-fog-600">{String(i + 1).padStart(2, '0')}</span>
-                    <span className={`w-8 font-semibold ${action.side === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}`}>
-                      {SIDE_TEXT[action.side]}
+                    <span className={`w-8 font-semibold ${sideAtPosition(match, action.side, group.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}`}>
+                      {sideLabel(match, action.side, group.gameNumber)}
                     </span>
                     <span
                       className={`w-10 rounded px-1 text-center text-[10px] font-bold ${

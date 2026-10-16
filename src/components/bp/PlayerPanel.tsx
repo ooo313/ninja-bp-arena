@@ -1,3 +1,4 @@
+import { sideAtPosition } from '@bp-core'
 import { useMemo } from 'react'
 import { Radio } from 'lucide-react'
 import type { Side } from '@/types/bp'
@@ -45,8 +46,8 @@ export function PlayerPanel({ side }: PlayerPanelProps) {
 
   if (!match) return null
 
-  const isBlue = side === 'BLUE'
-  const playerName = isBlue ? match.bluePlayerName : match.redPlayerName
+  const isBlue = sideAtPosition(match, side) === 'BLUE'
+  const playerName = side === 'BLUE' ? match.bluePlayerName : match.redPlayerName
   const teamColor = isBlue ? 'text-blue-team-soft' : 'text-red-team-soft'
   const game = match.games[match.games.length - 1]
   const player = side === 'BLUE' ? game.blue : game.red
@@ -98,7 +99,7 @@ export function PlayerPanel({ side }: PlayerPanelProps) {
         <h4 className="mb-1.5 text-[9px] font-bold tracking-[0.25em] text-fog-600">PICK · 出战</h4>
         <div className="grid grid-cols-3 gap-2">
           {picks.map((id, i) => (
-            <PickSlot key={`pick-${i}`} ninja={id ? ninjaById(id) : undefined} order={i + 1} side={side} />
+            <PickSlot key={`pick-${i}`} ninja={id ? ninjaById(id) : undefined} order={i + 1} side={sideAtPosition(match, side)} />
           ))}
         </div>
       </section>

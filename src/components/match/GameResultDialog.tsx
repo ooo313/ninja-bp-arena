@@ -1,5 +1,5 @@
 import type { MatchState } from '@/types/match'
-import { SIDE_TEXT } from '@/types/bp'
+import { sideAtPosition, sideLabel, playerName, playerScore } from '@bp-core'
 import { useMatchSource } from '@/matchSource/context'
 import { Dialog } from '@/components/common/Dialog'
 import { useResourceLookup } from '@/hooks/useNinjaLookup'
@@ -19,16 +19,16 @@ export function GameResultDialog({ match, open, onClose }: GameResultDialogProps
 
   if (!winner) return null
 
-  const isBlue = winner === 'BLUE'
+  const isBlue = sideAtPosition(match, winner) === 'BLUE'
 
   return (
     <Dialog open={open} onClose={onClose} title={`GAME ${game.gameNumber} RESULT`}>
       <div className="flex flex-col items-center gap-4 py-2">
         <span className={`text-2xl font-black ${isBlue ? 'text-side-blue-soft' : 'text-side-red-soft'}`}>
-          {SIDE_TEXT[winner]}获胜
+          {sideLabel(match, winner)} · {playerName(match, winner)}获胜
         </span>
         <span className="text-3xl font-bold tabular-nums tracking-widest text-fog-100">
-          {match.score.blue} <span className="text-fog-600">:</span> {match.score.red}
+          {playerScore(match, sideAtPosition(match, 'BLUE'))} <span className="text-fog-600">:</span> {playerScore(match, sideAtPosition(match, 'RED'))}
         </span>
         <p className="text-xs text-fog-500">
           已使用的忍者将在后续小局中保持禁用；首局 Ban 全场有效。
@@ -39,8 +39,8 @@ export function GameResultDialog({ match, open, onClose }: GameResultDialogProps
               const player = side === 'BLUE' ? game.blue : game.red
               return (
                 <div key={side} className="mb-1 last:mb-0">
-                  <p>{side === 'BLUE' ? '蓝方' : '红方'}秘卷：{(player.resources?.SECRET_SCROLL?.picks ?? []).map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}</p>
-                  <p>{side === 'BLUE' ? '蓝方' : '红方'}通灵：{(player.resources?.SUMMON?.picks ?? []).map((id) => resourceNameOf('SUMMON', id)).join('、') || '无'}</p>
+                  <p>{sideLabel(match, side)}秘卷：{(player.resources?.SECRET_SCROLL?.picks ?? []).map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}</p>
+                  <p>{sideLabel(match, side)}通灵：{(player.resources?.SUMMON?.picks ?? []).map((id) => resourceNameOf('SUMMON', id)).join('、') || '无'}</p>
                 </div>
               )
             })}

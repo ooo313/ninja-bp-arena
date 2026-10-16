@@ -1,7 +1,7 @@
 import type { MatchState } from '@/types/match'
 import { getPhase } from '@/engine/bpEngine'
 import { useMatchSource } from '@/matchSource/context'
-import { SIDE_TEXT } from '@/types/bp'
+import { sideLabel } from '@bp-core'
 import { toast } from '@/store/toastStore'
 
 interface BPControlBarProps {
@@ -21,7 +21,7 @@ export function BPControlBar({ match, onOpenHistory }: BPControlBarProps) {
         ? source.isMyTurn
           ? '轮到你'
           : '等待对方'
-        : `${SIDE_TEXT[phase.side!]}${phase.action === 'BAN' ? '禁用' : '选择'}中`
+        : `${sideLabel(match, phase.side!)}${phase.action === 'BAN' ? '禁用' : '选择'}中`
       : phase.status === 'READY'
         ? '阵容已锁定'
         : phase.status === 'PLAYING'

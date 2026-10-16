@@ -1,3 +1,4 @@
+import { sideAtPosition, sideLabel } from '@bp-core'
 import { useEffect, useMemo, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import type { Side } from '@/types/bp'
@@ -194,7 +195,7 @@ export function BPWorkspace() {
     : source.mySeat === 'OBSERVER'
       ? '观战模式不可操作'
       : waitingOther
-        ? `等待${phase.side === 'BLUE' ? '蓝方' : '红方'}选择`
+        ? `等待${phase.side ? sideLabel(match, phase.side) : '对方'}选择`
         : !source.canOperate ? '当前席位不可操作' : undefined
 
   const stage = (
@@ -238,10 +239,10 @@ export function BPWorkspace() {
       <main className="mx-auto w-full max-w-[1500px] flex-1 px-2.5 py-3 lg:px-5 lg:py-4">
         <div className="grid gap-3 lg:grid-cols-[minmax(280px,320px)_minmax(0,1fr)_minmax(280px,320px)] lg:gap-4">
           <div className="hidden lg:order-1 lg:block">
-            <PlayerPanel side="BLUE" />
+            <PlayerPanel side={sideAtPosition(match, 'BLUE')} />
           </div>
           <div className="hidden lg:order-3 lg:block">
-            <PlayerPanel side="RED" />
+            <PlayerPanel side={sideAtPosition(match, 'RED')} />
           </div>
 
           <div className="space-y-3 lg:order-2">
@@ -376,7 +377,7 @@ export function BPWorkspace() {
       </Dialog>
       <ConfirmDialog
         open={!!winnerConfirm}
-        title={`确认 Game ${phase.gameNumber} ${winnerConfirm === 'BLUE' ? '蓝方' : '红方'}获胜？`}
+        title={`确认 Game ${phase.gameNumber} ${winnerConfirm ? sideLabel(match, winnerConfirm) : ''}获胜？`}
         message="确认后将记录本局比分，此操作可通过撤销回退。"
         confirmText="确认获胜"
         onConfirm={() => winnerConfirm && handleConfirmWinner(winnerConfirm)}
@@ -421,12 +422,12 @@ function OnlineBanners() {
       </div>
       {source.isMyTurn && inBP && source.canOperate && (
         <div className="flex items-center justify-center gap-1.5 rounded border border-gold-accent/40 bg-gold-accent/10 py-1.5 text-xs font-bold text-gold-accent">
-          <CheckCircle2 size={13} /> 轮到你操作（{source.mySeat === 'BLUE' ? '蓝方' : '红方'}）
+          <CheckCircle2 size={13} /> 轮到你操作（{source.mySeat === 'BLUE' || source.mySeat === 'RED' ? sideLabel(match, source.mySeat) : '观众'}）
         </div>
       )}
       {inBP && !source.isMyTurn && !pending && (
         <div className="flex items-center justify-center gap-1.5 rounded border border-border-muted bg-surface-1/60 py-1.5 text-xs text-fog-500">
-          <Hourglass size={12} className="animate-pulse" /> 等待{phase.side === 'BLUE' ? '蓝方' : '红方'}选择……
+          <Hourglass size={12} className="animate-pulse" /> 等待{phase.side ? sideLabel(match, phase.side) : '对方'}选择……
         </div>
       )}
       {pending && pending.requestedByUserId === source.myUserId && (
@@ -447,7 +448,7 @@ function OnlineBanners() {
       )}
       {pending && pending.requestedByUserId !== source.myUserId && (
         <div className="flex flex-wrap items-center justify-center gap-2 rounded border border-gold-accent/40 bg-gold-accent/10 py-1.5 text-xs text-gold-accent">
-          {pending.requestedBy === 'BLUE' ? '蓝方' : '红方'}请求撤销上一步
+          {pending.requestedBy === 'BLUE' || pending.requestedBy === 'RED' ? sideLabel(match, pending.requestedBy) : '观众'}请求撤销上一步
           <button
             type="button"
             onClick={() => {

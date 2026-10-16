@@ -93,11 +93,15 @@ export const FULL_LOADOUT_DEMO_RULE: BattleRule = {
   ],
 }
 
-/** Ninja BP is unchanged. Auxiliary loadouts are private, simultaneous and per ninja. */
+/** Left picks 1 → right 2 → left 2 → right 1. Players exchange positions each game. */
 export const WUDOU_LOADOUT_RULE: BattleRule = {
   ...cloneRule(FULL_LOADOUT_DEMO_RULE),
-  id: 'wudou-sealed-loadout', name: '武斗完整阵容（同时盲选）', version: '1.0',
-  resourceDrafts: FULL_LOADOUT_DEMO_RULE.resourceDrafts!.map((draft) => draft.resourceType === 'NINJA' ? { ...draft } : {
+  id: 'wudou-sealed-loadout', name: '武斗完整阵容（同时盲选）', version: '1.1',
+  swapSidesEachGame: true,
+  pickSequence: DEFAULT_RULE.pickSequence.map((step) => ({ ...step, side: step.side === 'BLUE' ? 'RED' : 'BLUE' })),
+  resourceDrafts: FULL_LOADOUT_DEMO_RULE.resourceDrafts!.map((draft) => draft.resourceType === 'NINJA' ? {
+    ...draft, sequence: draft.sequence.map((step) => step.action === 'BAN' ? { ...step } : { ...step, side: step.side === 'BLUE' ? 'RED' : 'BLUE' }),
+  } : {
     ...draft, slotsPerSide: 3, uniqueAcrossSides: false, selectionMode: 'SIMULTANEOUS',
     sequence: [{ side: 'BLUE', action: 'PICK', count: 3 }, { side: 'RED', action: 'PICK', count: 3 }],
   }),

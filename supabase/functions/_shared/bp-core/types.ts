@@ -118,6 +118,9 @@ export interface ResourceDraftRule {
  * 都由该配置驱动，UI 与引擎不允许硬编码比赛流程。
  */
 export interface BattleRule {
+  /** Exchange screen positions and all sequential first turns after each game.
+   * Stored BLUE/RED identifiers remain attached to the original players/seats. */
+  swapSidesEachGame?: boolean
   id: string
   name: string
   version: string
@@ -147,6 +150,7 @@ export interface BattleRule {
 
 /** Runtime projection. Legacy ninja fields are accepted at the boundary only. */
 export interface NormalizedBattleRule {
+  swapSidesEachGame?: boolean
   id: string
   name: string
   version: string

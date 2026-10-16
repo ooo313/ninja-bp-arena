@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Copy, Download, Play, Share2, Trophy } from 'lucide-react'
 import type { MatchState } from '@/types/match'
-import { SIDE_TEXT } from '@/types/bp'
+import { sideAtPosition, sideLabel, playerName } from '@bp-core'
 import { buildShareText, groupHistoryByGame } from '@/engine/historyEngine'
 import { exportMatchResult } from '@/engine/bpEngine'
 import { useNinjaLookup, useResourceLookup } from '@/hooks/useNinjaLookup'
@@ -68,7 +68,7 @@ export function MatchResult({ match, extraActions, replaySource = 'LOCAL', roomI
         </div>
         {finished && winner && (
           <p className={`text-lg font-bold ${winner === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}`}>
-            {SIDE_TEXT[winner]}胜利
+            {sideLabel(match, winner)}胜利 · {playerName(match, winner)}
           </p>
         )}
         {match.dataPack?.packVersion && (
@@ -85,18 +85,18 @@ export function MatchResult({ match, extraActions, replaySource = 'LOCAL', roomI
               {game.winner && (
                 <span
                   className={`rounded px-2 py-0.5 text-[10px] font-bold ${
-                    game.winner === 'BLUE' ? 'bg-side-blue/20 text-side-blue-soft' : 'bg-side-red/20 text-side-red-soft'
+                    sideAtPosition(match, game.winner, game.gameNumber) === 'BLUE' ? 'bg-side-blue/20 text-side-blue-soft' : 'bg-side-red/20 text-side-red-soft'
                   }`}
                 >
-                  {SIDE_TEXT[game.winner]}获胜
+                  {sideLabel(match, game.winner, game.gameNumber)}获胜
                 </span>
               )}
             </div>
             <div className="grid gap-3 text-xs sm:grid-cols-2">
               <div>
                 <p className="mb-1 text-[10px] font-semibold tracking-widest text-fog-600">BAN</p>
-                <p className="text-side-blue-soft">蓝方：{game.blue.bans.map(nameOf).join('、') || '无'}</p>
-                <p className="text-side-red-soft">红方：{game.red.bans.map(nameOf).join('、') || '无'}</p>
+                <p className={sideAtPosition(match, 'BLUE', game.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>{sideLabel(match, 'BLUE', game.gameNumber)}：{game.blue.bans.map(nameOf).join('、') || '无'}</p>
+                <p className={sideAtPosition(match, 'RED', game.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>{sideLabel(match, 'RED', game.gameNumber)}：{game.red.bans.map(nameOf).join('、') || '无'}</p>
               </div>
               <div className="sm:col-span-2 grid gap-2 sm:grid-cols-2">
                 {(['BLUE', 'RED'] as const).map((side) => {
@@ -105,20 +105,20 @@ export function MatchResult({ match, extraActions, replaySource = 'LOCAL', roomI
                   const summons = player.resources?.SUMMON?.picks ?? []
                   if (!scrolls.length && !summons.length) return null
                   return (
-                    <div key={side} className={side === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>
-                      <p>{side === 'BLUE' ? '蓝方' : '红方'}秘卷：{scrolls.map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}</p>
-                      <p>{side === 'BLUE' ? '蓝方' : '红方'}通灵：{summons.map((id, index) => `${index + 1}.${resourceNameOf('SUMMON', id)}`).join('  ') || '无'}</p>
+                    <div key={side} className={sideAtPosition(match, side, game.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>
+                      <p>{sideLabel(match, side, game.gameNumber)}秘卷：{scrolls.map((id) => resourceNameOf('SECRET_SCROLL', id)).join('、') || '无'}</p>
+                      <p>{sideLabel(match, side, game.gameNumber)}通灵：{summons.map((id, index) => `${index + 1}.${resourceNameOf('SUMMON', id)}`).join('  ') || '无'}</p>
                     </div>
                   )
                 })}
               </div>
               <div>
                 <p className="mb-1 text-[10px] font-semibold tracking-widest text-fog-600">阵容</p>
-                <p className="text-side-blue-soft">
-                  蓝方：{game.blue.picks.map((id, i) => `${i + 1}.${nameOf(id)}`).join('  ') || '无'}
+                <p className={sideAtPosition(match, 'BLUE', game.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>
+                  {sideLabel(match, 'BLUE', game.gameNumber)}：{game.blue.picks.map((id, i) => `${i + 1}.${nameOf(id)}`).join('  ') || '无'}
                 </p>
-                <p className="text-side-red-soft">
-                  红方：{game.red.picks.map((id, i) => `${i + 1}.${nameOf(id)}`).join('  ') || '无'}
+                <p className={sideAtPosition(match, 'RED', game.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>
+                  {sideLabel(match, 'RED', game.gameNumber)}：{game.red.picks.map((id, i) => `${i + 1}.${nameOf(id)}`).join('  ') || '无'}
                 </p>
               </div>
             </div>
@@ -137,8 +137,8 @@ export function MatchResult({ match, extraActions, replaySource = 'LOCAL', roomI
                 {group.actions.map((action, i) => (
                   <li key={action.id} className="flex items-center gap-2 text-xs text-fog-300">
                     <span className="w-6 text-right tabular-nums text-fog-600">{String(i + 1).padStart(2, '0')}</span>
-                    <span className={action.side === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>
-                      {SIDE_TEXT[action.side]}
+                    <span className={sideAtPosition(match, action.side, group.gameNumber) === 'BLUE' ? 'text-side-blue-soft' : 'text-side-red-soft'}>
+                      {sideLabel(match, action.side, group.gameNumber)}
                     </span>
                     <span className={action.action === 'BAN' ? 'text-side-red' : 'text-emerald-400/80'}>
                       {action.action === 'BAN' ? 'BAN' : 'PICK'}

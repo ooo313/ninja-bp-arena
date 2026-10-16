@@ -42,7 +42,7 @@ test('在线同时盲选：双方同阶段操作，单方提交不可见，重�
     await join(observer, code, '盲选观众', true)
     await expect(blue.getByText('盲选红', { exact: true })).toBeVisible({ timeout: 20_000 })
     await blue.getByRole('button', { name: '开始比赛', exact: true }).click()
-    for (const [page, name] of [[blue,'漩涡鸣人'],[red,'宇智波佐助'],[red,'旗木卡卡西'],[blue,'宇智波鼬'],[red,'自来也'],[blue,'纲手'],[blue,'大蛇丸'],[red,'我爱罗'],[red,'迪达拉'],[blue,'蝎']] as const) await ninja(page, name)
+    for (const [page, name] of [[blue,'漩涡鸣人'],[red,'宇智波佐助'],[red,'旗木卡卡西'],[blue,'宇智波鼬'],[blue,'自来也'],[red,'纲手'],[red,'大蛇丸'],[blue,'我爱罗'],[blue,'迪达拉'],[red,'蝎']] as const) await ninja(page, name)
     await fillGroup(red, '秘卷')
     await fillGroup(blue, '秘卷')
     await blue.getByRole('button', { name: '确认秘卷', exact: true }).click()
@@ -65,5 +65,18 @@ test('在线同时盲选：双方同阶段操作，单方提交不可见，重�
       await expect(page.locator('.arena-summon-slot[aria-label$="未公开"]')).toHaveCount(0)
     }
     await expect(observer.getByRole('button', { name: '准备战斗', exact: true })).toBeDisabled()
+    await blue.getByRole('button', { name: '准备战斗', exact: true }).click()
+    await blue.getByRole('button', { name: '蓝方获胜', exact: true }).click()
+    await blue.getByRole('button', { name: '确认获胜', exact: true }).click()
+    await blue.getByRole('button', { name: '进入 Game 2', exact: true }).click()
+    for (const page of [blue, red, observer]) {
+      await expect(page.locator('.arena-player-blue')).toContainText('盲选红', { timeout: 20_000 })
+      await expect(page.locator('.arena-player-red')).toContainText('盲选蓝')
+      await expect(page.locator('.arena-toolbar')).toContainText('GAME 2 · 0 : 1')
+    }
+    await expect(red.getByText('轮到你操作（蓝方）', { exact: false })).toBeVisible({ timeout: 20_000 })
+    await expect(blue.locator('.arena-step-hint')).toContainText('等待1P操作')
+    await ninja(red, '千手柱间')
+    await expect(blue.getByText('轮到你操作（红方）', { exact: false })).toBeVisible({ timeout: 20_000 })
   } finally { for (const context of contexts) await context.close() }
 })
