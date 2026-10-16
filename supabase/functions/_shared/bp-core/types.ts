@@ -99,6 +99,8 @@ export interface ResourceDraftSequenceStep extends BPSequenceStep {
 
 /** 一类资源的完整 Draft 规则；顺序、唯一性与跨局行为均来自规则而非 UI。 */
 export interface ResourceDraftRule {
+  /** Both players submit a complete private loadout, revealed atomically. */
+  selectionMode?: 'SEQUENTIAL' | 'SIMULTANEOUS'
   resourceType: DraftResourceType
   enabled: boolean
   slotsPerSide: number
@@ -157,6 +159,8 @@ export interface NormalizedBattleRule {
 
 /** 一次 Ban / Pick 操作记录 */
 export interface BPAction {
+  /** An atomic simultaneous reveal is undone as a whole. */
+  batchId?: string
   id: string
   gameNumber: number
   side: Side

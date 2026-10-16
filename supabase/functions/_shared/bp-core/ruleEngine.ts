@@ -152,6 +152,8 @@ export function validateBattleRule(rule: BattleRule): string[] {
         if (seen.has(draft.resourceType)) errors.push(`${label}.resourceType 重复`)
         seen.add(draft.resourceType)
         if (typeof draft.enabled !== 'boolean') errors.push(`${label}.enabled 必须是 boolean`)
+        if (draft.selectionMode !== undefined && !['SEQUENTIAL', 'SIMULTANEOUS'].includes(draft.selectionMode)) errors.push(`${label}.selectionMode 非法`)
+        if (draft.selectionMode === 'SIMULTANEOUS' && (draft.resourceType === 'NINJA' || draft.uniqueAcrossSides || !draft.resetEachGame || (Array.isArray(draft.sequence) && draft.sequence.some((step) => step.action !== 'PICK')))) errors.push(`${label} 同时盲选仅支持每局重选、双方可使用相同资源的辅助资源 PICK`)
         if (draft.enabled) enabledCount += 1
         if (typeof draft.crossGameLock !== 'boolean' || typeof draft.uniqueAcrossSides !== 'boolean' || typeof draft.banPersistence !== 'boolean' || typeof draft.resetEachGame !== 'boolean') errors.push(`${label} 的锁定配置必须是 boolean`)
         if (draft.banOnlyFirstGame !== undefined && typeof draft.banOnlyFirstGame !== 'boolean') errors.push(`${label}.banOnlyFirstGame 必须是 boolean`)

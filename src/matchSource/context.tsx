@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react'
-import type { DraftResource, DraftResourceType, MatchState, Ninja, OnlineCommandType, PendingUndo, Side } from '@bp-core'
+import type { DraftResource, DraftResourceType, MatchState, Ninja, OnlineCommandType, PendingUndo, Side, PrivateLoadout } from '@bp-core'
 import type { ConnectionState, Seat } from '@/online/types'
 
 /**
@@ -20,6 +20,8 @@ export interface MatchSource {
 
   selectNinja: (ninjaId: string) => OpResultOrPromise
   selectResource: (resourceType: DraftResourceType, resourceId: string) => OpResultOrPromise
+  submitLoadout?: (side: Side, resourceType: DraftResourceType, resourceIds: string[]) => OpResultOrPromise
+  privateLoadouts?: Partial<Record<Side, PrivateLoadout>>
   /** 本地：直接撤销；在线：发送撤销请求（需对方确认） */
   undo: () => OpResultOrPromise
   redo: () => OpResultOrPromise

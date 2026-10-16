@@ -30,6 +30,7 @@ import { normalizeForSearch, searchRank } from '@/utils/format'
 import { CheckCircle2, Hourglass } from 'lucide-react'
 import { ResourceGrid } from '@/components/resource/ResourceGrid'
 import { GameArena } from '@/components/arena/GameArena'
+import { getSealedDraft } from '@bp-core'
 import { canSelectResource, getResourceCardStatus, getResourceDraftRules, RESOURCE_TYPE_LABEL, type DraftResource, type DraftResourceType } from '@bp-core'
 
 const QUALITY_ORDER = { S: 0, A: 1, B: 2, C: 3 } as const
@@ -46,7 +47,7 @@ export function BPWorkspace() {
   const ninjas = source.matchNinjas ?? storeNinjas
   const settings = useSettingsStore((s) => s.settings)
   const isOnline = source.mode === 'online'
-  const gameView = settings.bpView !== 'classic'
+  const gameView = settings.bpView !== 'classic' || Boolean(match && getSealedDraft(match))
 
   const [search, setSearch] = useState('')
   const [quality, setQuality] = useState<QualityFilter>('ALL')

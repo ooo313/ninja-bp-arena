@@ -34,6 +34,7 @@ export type OnlineCommandType =
   | 'START_MATCH'
   | 'SELECT_NINJA'
   | 'SELECT_RESOURCE'
+  | 'SUBMIT_LOADOUT'
   | 'ENTER_GAME'
   | 'SET_GAME_WINNER'
   | 'NEXT_GAME'
@@ -169,6 +170,7 @@ function applyOneCommand(ctx: RoomCommandContext, cmd: RoomCommand): { match: Ma
 
       // Side 由引擎阶段推导，不信任客户端
       const phase = getPhase(match)
+      if (match.rule.resourceDrafts?.some((draft) => draft.resourceType === phase.resourceType && draft.selectionMode === 'SIMULTANEOUS')) return reject('INVALID_COMMAND', '请一次提交完整阵容，双方确认后统一公开')
       if (!phase.side || phase.sequenceComplete) return reject('NOT_YOUR_TURN', '当前不是选择阶段')
       if (phase.side !== ctx.mySeat) return reject('NOT_YOUR_TURN', '还没有轮到你操作')
       if (cmd.payload?.side !== undefined && cmd.payload.side !== ctx.mySeat) return reject('INVALID_COMMAND', '阵营与当前行动方不一致')

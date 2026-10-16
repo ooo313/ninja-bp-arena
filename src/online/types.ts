@@ -1,4 +1,4 @@
-import type { BattleResourceSnapshot, MatchState, OnlineCommandType, PendingUndo, RoomStatus, Seat } from '@bp-core'
+import type { BattleResourceSnapshot, MatchState, OnlineCommandType, PendingUndo, RoomStatus, Seat, PrivateLoadout } from '@bp-core'
 
 /** 客户端在线模式的类型（与 Shared BP Core / 数据库结构对应） */
 
@@ -12,6 +12,7 @@ export interface RoomMember {
 
 /** 从数据库拉取的权威房间快照 */
 export interface RoomSnapshot {
+  privateLoadout?: PrivateLoadout | null
   room: {
     id: string
     code: string
@@ -32,6 +33,7 @@ export interface RoomSnapshot {
 }
 
 export interface CommandResponse {
+  privateLoadout?: PrivateLoadout | null
   status: 'APPLIED' | 'REJECTED'
   idempotent?: boolean
   match?: MatchState

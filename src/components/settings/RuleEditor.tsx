@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { BattleRule, BPSequenceStep, DraftResourceType, ResourceDraftRule } from '@bp-core'
 import { analyzeRuleFeasibility, getResourceDraftRules, RESOURCE_TYPE_LABEL } from '@bp-core'
-import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, cloneRule } from '@/data/defaultRules'
+import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, WUDOU_LOADOUT_RULE, cloneRule } from '@/data/defaultRules'
 import { useNinjaStore } from '@/store/ninjaStore'
 import { useDataPackStore } from '@/dataPack/store'
 import { builtInPack } from '@/dataPack/loader'
@@ -92,12 +92,14 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
       <p className="text-xs text-fog-500">规则为玩家自定义示例，不代表官方赛事规则。保存仅影响新比赛。</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1 text-xs text-fog-300">模板
-          <select className={fieldClass} value={draft.id === DEFAULT_RULE.id ? 'NINJA' : draft.id === FULL_LOADOUT_DEMO_RULE.id ? 'FULL' : 'CUSTOM'} onChange={(event) => {
+          <select className={fieldClass} value={draft.id === DEFAULT_RULE.id ? 'NINJA' : draft.id === FULL_LOADOUT_DEMO_RULE.id ? 'FULL' : draft.id === WUDOU_LOADOUT_RULE.id ? 'WUDOU' : 'CUSTOM'} onChange={(event) => {
             if (event.target.value === 'NINJA') onChange(cloneRule(DEFAULT_RULE))
             if (event.target.value === 'FULL') onChange(cloneRule(FULL_LOADOUT_DEMO_RULE))
+            if (event.target.value === 'WUDOU') onChange(cloneRule(WUDOU_LOADOUT_RULE))
           }}>
             <option value="NINJA">Ninja Only（示例）</option>
             <option value="FULL">Full Loadout Demo（示例）</option>
+            <option value="WUDOU">武斗完整阵容（同时盲选）</option>
             <option value="CUSTOM">Custom（自定义）</option>
           </select>
         </label>
@@ -122,9 +124,16 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
             {type !== 'NINJA' && <label className="flex items-center gap-2 text-xs text-fog-300"><input type="checkbox" checked={item.enabled} onChange={(event) => updateDraft(type, { enabled: event.target.checked })} />启用</label>}
           </div>
           {item.enabled && <>
+            {type !== 'NINJA' && <label className="mb-3 flex flex-col gap-1 text-xs text-fog-300">选择方式
+              <select className={fieldClass} aria-label={`${RESOURCE_TYPE_LABEL[type]}选择方式`} value={item.selectionMode ?? 'SEQUENTIAL'} onChange={(event) => updateDraft(type, event.target.value === 'SIMULTANEOUS' ? {
+                selectionMode: 'SIMULTANEOUS', uniqueAcrossSides: false, resetEachGame: true,
+                sequence: [{ side: 'BLUE', action: 'PICK', count: item.slotsPerSide }, { side: 'RED', action: 'PICK', count: item.slotsPerSide }],
+              } : { selectionMode: 'SEQUENTIAL' })}><option value="SEQUENTIAL">双方依次选择，即时公开</option><option value="SIMULTANEOUS">双方同时盲选，确认后统一公开</option></select>
+              {item.selectionMode === 'SIMULTANEOUS' && <span className="text-fog-500">每方内部不重复；双方可以选择相同资源；每局重新选择。</span>}
+            </label>}
             <div className="grid grid-cols-2 gap-3 text-xs text-fog-300 sm:grid-cols-3">
               <label className="flex flex-col gap-1">每方上场槽位<input className={fieldClass} type="number" min="1" max="12" value={item.slotsPerSide} onChange={(event) => changeSlots(item, Number(event.target.value))} /></label>
-              {(['BLUE', 'RED'] as const).map((side) => <label key={side} className="flex flex-col gap-1">{side === 'BLUE' ? '蓝方' : '红方'} Ban 数<input className={fieldClass} type="number" min="0" max="12" value={bans(side)} onChange={(event) => changeBans(item, side, Number(event.target.value))} /></label>)}
+              {(['BLUE', 'RED'] as const).map((side) => <label key={side} className="flex flex-col gap-1">{side === 'BLUE' ? '蓝方' : '红方'} Ban 数<input disabled={item.selectionMode === 'SIMULTANEOUS'} className={fieldClass} type="number" min="0" max="12" value={bans(side)} onChange={(event) => changeBans(item, side, Number(event.target.value))} /></label>)}
             </div>
             <div className="mt-3 grid gap-2 text-xs text-fog-300 sm:grid-cols-2">
               {([
@@ -133,9 +142,9 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
                 ['banPersistence', 'Ban 跨局持续生效'],
                 ['banOnlyFirstGame', '仅第一局执行 Ban'],
                 ['resetEachGame', '每局重新选择阵容'],
-              ] as const).map(([key, label]) => <label key={key} className="flex items-center gap-2"><input type="checkbox" checked={Boolean(item[key])} onChange={(event) => updateDraft(type, { [key]: event.target.checked })} />{label}</label>)}
+              ] as const).map(([key, label]) => <label key={key} className="flex items-center gap-2"><input type="checkbox" disabled={item.selectionMode === 'SIMULTANEOUS' && (key === 'uniqueAcrossSides' || key === 'resetEachGame')} checked={Boolean(item[key])} onChange={(event) => updateDraft(type, { [key]: event.target.checked })} />{label}</label>)}
             </div>
-            {advanced && <div className="mt-4 space-y-2 border-t border-border-muted pt-3">
+            {advanced && item.selectionMode !== 'SIMULTANEOUS' && <div className="mt-4 space-y-2 border-t border-border-muted pt-3">
               <p className="text-xs font-semibold text-fog-300">完整 Draft Sequence · 顺序即执行顺序</p>
               {item.sequence.map((step, index) => <div key={index} className="flex flex-wrap items-center gap-2">
                 <span className="w-6 text-xs text-fog-600">{index + 1}.</span>
@@ -160,7 +169,7 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
         <h3 className="mb-2 font-bold text-fog-100">规则预览 · BO{draft.bestOf}</h3>
         <div className="max-h-52 space-y-2 overflow-y-auto">
           {preview.map(({ game, groups }) => <div key={game}><p className="font-semibold text-gold-accent">GAME {game}</p>
-            {groups.length ? groups.map(({ type, steps }) => <p key={type} className="text-fog-400">{RESOURCE_TYPE_LABEL[type]}：{steps.map((step) => `${step.side === 'BLUE' ? '蓝方' : '红方'} ${step.action} ×${step.count}`).join(' → ') || '沿用上一局'}</p>) : <p className="text-fog-400">沿用上一局阵容</p>}
+            {groups.length ? groups.map(({ type, steps }) => <p key={type} className="text-fog-400">{RESOURCE_TYPE_LABEL[type]}：{drafts.find((item) => item.resourceType === type)?.selectionMode === 'SIMULTANEOUS' ? `双方同时盲选各 ${drafts.find((item) => item.resourceType === type)?.slotsPerSide} 个 → 双方确认后公开` : steps.map((step) => `${step.side === 'BLUE' ? '蓝方' : '红方'} ${step.action} ×${step.count}`).join(' → ') || '沿用上一局'}</p>) : <p className="text-fog-400">沿用上一局阵容</p>}
             <p className="text-fog-600">READY → PLAYING → RESULT</p>
           </div>)}
         </div>

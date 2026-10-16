@@ -4,7 +4,7 @@ import { AlertTriangle } from 'lucide-react'
 import { Dialog } from '@/components/common/Dialog'
 import { useBPStore } from '@/store/bpStore'
 import { useSettingsStore } from '@/store/settingsStore'
-import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, cloneRule } from '@/data/defaultRules'
+import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, WUDOU_LOADOUT_RULE, cloneRule } from '@/data/defaultRules'
 import { countEnabledResources, analyzeRuleFeasibility, getResourceDraftRules, RESOURCE_TYPE_LABEL } from '@bp-core'
 import { useNinjaStore } from '@/store/ninjaStore'
 import type { MatchState } from '@/types/match'
@@ -27,8 +27,8 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
   // 这里选引用再 useMemo 克隆。
   const customRule = useSettingsStore((s) => s.customRule)
   const currentRule = useMemo(() => cloneRule(customRule ?? DEFAULT_RULE), [customRule])
-  const [template, setTemplate] = useState<'CURRENT' | 'FULL_LOADOUT'>('CURRENT')
-  const rule = template === 'FULL_LOADOUT' ? cloneRule(FULL_LOADOUT_DEMO_RULE) : currentRule
+  const [template, setTemplate] = useState<'CURRENT' | 'FULL_LOADOUT' | 'WUDOU'>('CURRENT')
+  const rule = template === 'WUDOU' ? cloneRule(WUDOU_LOADOUT_RULE) : template === 'FULL_LOADOUT' ? cloneRule(FULL_LOADOUT_DEMO_RULE) : currentRule
   const [blueName, setBlueName] = useState('')
   const [redName, setRedName] = useState('')
   // 注意：selector 不能每次返回新对象（会触发无限重渲染），这里选 ninjas 数组后计算
@@ -111,9 +111,10 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
 
         <label className="flex flex-col gap-1.5">
           <span className="text-xs font-medium text-fog-300">规则模板</span>
-          <select value={template} onChange={(event) => setTemplate(event.target.value as 'CURRENT' | 'FULL_LOADOUT')} className="rounded-lg border border-ink-500 bg-ink-900 px-3 py-2 text-sm text-fog-100">
+          <select value={template} onChange={(event) => setTemplate(event.target.value as typeof template)} className="rounded-lg border border-ink-500 bg-ink-900 px-3 py-2 text-sm text-fog-100">
             <option value="CURRENT">当前规则 · {currentRule.name}</option>
             <option value="FULL_LOADOUT">Full Loadout Demo（示例）</option>
+            <option value="WUDOU">武斗完整阵容（同时盲选）</option>
           </select>
           <span className="text-[10px] text-fog-600">模板均为玩家工具配置，不代表官方赛事规则。</span>
         </label>

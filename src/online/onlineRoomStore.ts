@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import type { BattleResourceSnapshot, BattleRule, DraftResourceType, MatchState, Ninja, OnlineCommandType, OnlineNinjaSnapshot, PendingUndo, RoomStatus, Seat } from '@bp-core'
-import { toBattleResourceSnapshot, toOnlineNinjaSnapshots } from '@bp-core'
+import { getSealedDraft, toBattleResourceSnapshot, toOnlineNinjaSnapshots, type PrivateLoadout } from '@bp-core'
 import { supabase, isOnlineConfigured } from '@/lib/supabase'
 import { getPhase } from '@bp-core'
 import { roomApi } from './roomClient'
@@ -29,6 +29,7 @@ interface OnlineRoomState {
   roomStatus: RoomStatus | null
   roomExpiresAt: number | null
   match: MatchState | null
+  privateLoadout: PrivateLoadout | null
   revision: number
   members: RoomMember[]
   mySeat: Seat | null
@@ -51,7 +52,7 @@ interface OnlineRoomState {
   createRoom: (input: { displayName: string; seat: 'BLUE' | 'RED'; rule: MatchState['rule'] }) => Promise<{ ok: boolean; code?: string; error?: string }>
   joinRoom: (input: { code: string; seat: 'AUTO' | 'BLUE' | 'RED' | 'OBSERVER'; displayName: string }) => Promise<{ ok: boolean; seat?: Seat; error?: string }>
   enterRoom: (roomId: string, code: string) => Promise<{ ok: boolean; error?: string }>
-  sendCommand: (type: OnlineCommandType, payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string }) => Promise<{ ok: boolean; reason?: string }>
+  sendCommand: (type: OnlineCommandType, payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string; resourceIds?: string[]; phaseKey?: string }) => Promise<{ ok: boolean; reason?: string }>
   /** 强制重新拉取权威快照（怀疑本地状态滞后时使用） */
   resync: () => Promise<void>
   /** 基于最新权威状态判断当前是否轮到本客户端 */
@@ -112,6 +113,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
   roomStatus: null,
   roomExpiresAt: null,
   match: null,
+  privateLoadout: null,
   revision: -1,
   members: [],
   mySeat: null,
@@ -217,7 +219,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
     // Its callbacks must never disconnect or restart the replacement session.
     const previousChannel = currentChannel
     currentChannel = null
-    set({ connection: 'connecting', realtimeConnected: false, pendingCommand: null, roomId, roomCode: code, lastError: null })
+    set({ connection: 'connecting', realtimeConnected: false, pendingCommand: null, privateLoadout: null, roomId, roomCode: code, lastError: null })
     try {
       if (previousChannel) await supabase.removeChannel(previousChannel)
       if (leaving || generation !== roomGeneration) return { ok: false, error: '已离开房间' }
@@ -233,6 +235,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
         roomStatus: snap.room.status,
         roomExpiresAt: new Date(snap.room.expires_at).getTime(),
         match: snap.room.match_state,
+        privateLoadout: snap.privateLoadout ?? null,
         revision: snap.room.revision,
         members: snap.members,
         mySeat: deriveMySeat(snap.members, userId),
@@ -341,6 +344,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
           roomStatus: snap.room.status,
           roomExpiresAt: new Date(snap.room.expires_at).getTime(),
           match: snap.room.revision === current.revision ? current.match : snap.room.match_state,
+          privateLoadout: snap.privateLoadout ?? null,
           revision: snap.room.revision,
           members: snap.members,
           mySeat: deriveMySeat(snap.members, current.userId),
@@ -385,6 +389,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
         if ((res.revision ?? -1) >= get().revision) {
           set({
             match: res.match,
+            privateLoadout: 'privateLoadout' in res ? res.privateLoadout ?? null : get().privateLoadout?.phase_key === getSealedDraft(res.match)?.key ? get().privateLoadout : null,
             revision: res.revision ?? get().revision + 1,
             roomStatus: res.roomStatus ?? get().roomStatus,
             pendingUndo: res.pendingUndo ?? null,
@@ -428,6 +433,8 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
     const state = get()
     if (!state.match || state.roomStatus !== 'ACTIVE' || state.match.status !== 'IN_PROGRESS') return false
     if (state.mySeat !== 'BLUE' && state.mySeat !== 'RED') return false
+    const sealed = getSealedDraft(state.match)
+    if (sealed) return state.privateLoadout?.phase_key !== sealed.key
     return getPhase(state.match).side === state.mySeat && !getPhase(state.match).sequenceComplete
   },
 
@@ -449,7 +456,8 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
       roomStatus: null,
       roomExpiresAt: null,
       match: null,
-      revision: -1,
+      privateLoadout: null,
+  revision: -1,
       members: [],
       mySeat: null,
       isHost: false,

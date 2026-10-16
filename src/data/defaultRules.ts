@@ -93,7 +93,17 @@ export const FULL_LOADOUT_DEMO_RULE: BattleRule = {
   ],
 }
 
-export const BUILT_IN_RULES: BattleRule[] = [NINJA_ONLY_RULE, FULL_LOADOUT_DEMO_RULE]
+/** Ninja BP is unchanged. Auxiliary loadouts are private, simultaneous and per ninja. */
+export const WUDOU_LOADOUT_RULE: BattleRule = {
+  ...cloneRule(FULL_LOADOUT_DEMO_RULE),
+  id: 'wudou-sealed-loadout', name: '武斗完整阵容（同时盲选）', version: '1.0',
+  resourceDrafts: FULL_LOADOUT_DEMO_RULE.resourceDrafts!.map((draft) => draft.resourceType === 'NINJA' ? { ...draft } : {
+    ...draft, slotsPerSide: 3, uniqueAcrossSides: false, selectionMode: 'SIMULTANEOUS',
+    sequence: [{ side: 'BLUE', action: 'PICK', count: 3 }, { side: 'RED', action: 'PICK', count: 3 }],
+  }),
+}
+
+export const BUILT_IN_RULES: BattleRule[] = [NINJA_ONLY_RULE, FULL_LOADOUT_DEMO_RULE, WUDOU_LOADOUT_RULE]
 
 export function cloneRule(rule: BattleRule): BattleRule {
   return JSON.parse(JSON.stringify(rule)) as BattleRule

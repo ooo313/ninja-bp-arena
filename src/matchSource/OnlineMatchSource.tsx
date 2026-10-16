@@ -1,5 +1,5 @@
 import { useEffect, useMemo, type ReactNode } from 'react'
-import { computeTimerPhaseKey, getPhase, snapshotResources, toOnlineNinjaSnapshots } from '@bp-core'
+import { computeTimerPhaseKey, getPhase, getSealedDraft, snapshotResources, toOnlineNinjaSnapshots } from '@bp-core'
 import { useOnlineRoomStore } from '@/online/onlineRoomStore'
 import { MatchSourceProvider, type MatchSource } from './context'
 
@@ -38,6 +38,7 @@ export function OnlineMatchSource({ children }: { children: ReactNode }) {
   const roomNinjas = useOnlineRoomStore((s) => s.roomNinjas)
   const roomPackMetadata = useOnlineRoomStore((s) => s.roomPackMetadata)
   const roomResources = useOnlineRoomStore((s) => s.roomResources)
+  const privateLoadout = useOnlineRoomStore((s) => s.privateLoadout)
 
   // v0.4：房间 Ninja Snapshot 是显示权威（服务端按它校验，双方必然一致）；
   // 旧房间（只有 {id,enabled}）回退本地池按 id 过滤
@@ -56,13 +57,14 @@ export function OnlineMatchSource({ children }: { children: ReactNode }) {
   const resources = snapshotResources(roomResources ?? match?.resourceSnapshot)
 
   const phase = match ? getPhase(match) : null
+  const sealed = match ? getSealedDraft(match) : null
   const isMyTurn = Boolean(
     match &&
       roomStatus === 'ACTIVE' &&
       match.status === 'IN_PROGRESS' &&
       (mySeat === 'BLUE' || mySeat === 'RED') &&
-      phase?.side === mySeat &&
-      !phase.sequenceComplete,
+      (sealed ? privateLoadout?.phase_key !== sealed.key : phase?.side === mySeat) &&
+      !phase?.sequenceComplete,
   )
   const canOperate = isMyTurn && connection === 'connected' && !pendingCommand
   const legacyKey = phase && match ? `${match.id}:G${phase.gameNumber}:${phase.sequenceComplete ? 'DONE' : `${phase.resourceType}:S${phase.stepIndex ?? 0}`}` : null
@@ -74,6 +76,8 @@ export function OnlineMatchSource({ children }: { children: ReactNode }) {
     match,
     selectNinja: (ninjaId) => useOnlineRoomStore.getState().sendCommand('SELECT_NINJA', { ninjaId }),
     selectResource: (resourceType, resourceId) => useOnlineRoomStore.getState().sendCommand('SELECT_RESOURCE', { resourceType, resourceId }),
+    submitLoadout: (_side, resourceType, resourceIds) => useOnlineRoomStore.getState().sendCommand('SUBMIT_LOADOUT', { resourceType, resourceIds, phaseKey: sealed?.key }),
+    privateLoadouts: privateLoadout && privateLoadout.phase_key === sealed?.key ? { [privateLoadout.side]: privateLoadout } : {},
     undo: () => useOnlineRoomStore.getState().sendCommand('REQUEST_UNDO'),
     redo: () => ({ ok: false, reason: '在线模式暂不支持重做' }),
     canUndo: Boolean(match && match.history.length > 0 && roomStatus === 'ACTIVE'),

@@ -370,3 +370,5 @@ do $done$
 begin
   raise notice 'ALL-DB-SECURITY-CHECKS-PASSED';
 end $done$;
+
+\ir sealed-loadout-security.sql

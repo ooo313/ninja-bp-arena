@@ -555,15 +555,18 @@ export function undoLastAction(m: MatchState, context?: TransitionContext): Engi
   if (game.gameNumber !== last.gameNumber) return fail('只能撤销当前小局的操作')
   if (game.winner) return fail('本局已记录胜负，无法直接撤销 BP')
 
-  const resourceType = last.resourceType ?? 'NINJA'
-  const resourceId = last.resourceId ?? last.ninjaId
-  const player = ensurePlayerResourceState(last.side === 'BLUE' ? game.blue : game.red, resourceType)
-  const arr = last.action === 'BAN' ? player.bans : player.picks
-  const idx = arr.lastIndexOf(resourceId)
-  if (idx === -1) return fail('撤销状态不一致')
-  arr.splice(idx, 1)
-
-  next.history = next.history.slice(0, -1)
+  let count = 0
+  for (const action of [...next.history].reverse()) {
+    if (count > 0 && (!last.batchId || action.batchId !== last.batchId)) break
+    if (action.gameNumber !== game.gameNumber) break
+    const player = ensurePlayerResourceState(action.side === 'BLUE' ? game.blue : game.red, action.resourceType ?? 'NINJA')
+    const arr = action.action === 'BAN' ? player.bans : player.picks
+    const idx = arr.lastIndexOf(action.resourceId ?? action.ninjaId)
+    if (idx === -1) return fail('撤销状态不一致')
+    arr.splice(idx, 1)
+    count++
+  }
+  next.history = next.history.slice(0, -count)
   next.updatedAt = nextTimestamp(m, context)
   return { ok: true, state: next }
 }

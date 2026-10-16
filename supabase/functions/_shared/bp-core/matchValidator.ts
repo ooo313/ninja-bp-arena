@@ -63,6 +63,7 @@ function isValidBPAction(action: unknown): boolean {
   if (!isNonEmptyString(action.ninjaId)) return false
   if (action.resourceType !== undefined && !['NINJA', 'SECRET_SCROLL', 'SUMMON'].includes(action.resourceType as string)) return false
   if (action.resourceId !== undefined && !isNonEmptyString(action.resourceId)) return false
+  if (action.batchId !== undefined && (!isNonEmptyString(action.batchId) || action.resourceType === 'NINJA')) return false
   if (typeof action.timestamp !== 'number') return false
   if (!isNonNegativeInt(action.sequenceIndex)) return false
   return true

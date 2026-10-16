@@ -4,7 +4,7 @@
     "strict": true
   },
   "imports": {
-    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.49.4"
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.112.4"
   },
   "lint": {
     "rules": {

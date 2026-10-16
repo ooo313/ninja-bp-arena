@@ -1,5 +1,6 @@
 import { json, handleOptions } from '../_shared/http.ts'
 import { serviceClient, getUserFromRequest } from '../_shared/supabase.ts'
+import { submitPrivateLoadout } from '../_shared/loadoutSubmission.ts'
 import {
   applyRoomCommand,
   validateMatchState,
@@ -92,7 +93,7 @@ Deno.serve(async (req) => {
       commandId?: unknown
       expectedRevision?: unknown
       type?: unknown
-      payload?: { ninjaId?: unknown; resourceId?: unknown; resourceType?: unknown; side?: unknown }
+      payload?: { ninjaId?: unknown; resourceId?: unknown; resourceType?: unknown; side?: unknown; resourceIds?: unknown; phaseKey?: unknown }
     }
 
     const roomId = typeof body.roomId === 'string' ? body.roomId : ''
@@ -135,6 +136,9 @@ Deno.serve(async (req) => {
     if (!member && user.id !== room.host_user_id) {
       return json({ error: 'NOT_MEMBER', message: '你还没有加入这个房间' }, 400)
     }
+
+    // Never write a sealed payload into the member-readable command audit log.
+    if (type === 'SUBMIT_LOADOUT') return await submitPrivateLoadout(admin, user.id, roomId, commandId, body.payload ?? {})
 
     // ---- 3. 幂等检查（已通过授权：room + member 确认后才允许返回任何状态）----
     // 范围化语义：commandId 必须绑定同一 room + 同一 user；

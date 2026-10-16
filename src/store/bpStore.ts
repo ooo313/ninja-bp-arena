@@ -12,7 +12,7 @@ import {
   setGameWinner,
   startMatch,
 } from '@/engine/bpEngine'
-import { getResource, snapshotResources } from '@bp-core'
+import { getResource, snapshotResources, getSealedDraft, isPrivateLoadout, revealSealedLoadouts, validateSealedLoadout, type PrivateLoadout } from '@bp-core'
 import { emptyStacks, recordSnapshot, redo, undo, type UndoStacks } from '@/engine/historyEngine'
 import { validateMatchState } from '@/engine/matchValidator'
 import { useNinjaStore } from './ninjaStore'
@@ -57,6 +57,8 @@ function sanitizeMatchList(raw: unknown, source: string): MatchState[] {
 }
 
 interface BPStore {
+  privateLoadouts: Partial<Record<Side, PrivateLoadout>>
+  submitLoadout: (side: Side, type: DraftResourceType, ids: string[]) => OpResult
   match: MatchState | null
   currentMatchCorrupt: boolean
   stacks: UndoStacks
@@ -92,6 +94,8 @@ function commit(next: MatchState) {
   if (!match) return
   const newStacks = recordSnapshot(stacks, match)
   useBPStore.setState({ match: next, stacks: newStacks })
+  useBPStore.setState({ privateLoadouts: {} })
+  saveJSON(STORAGE_KEYS.sealedLoadouts, {})
   persistMatch(next)
 }
 
@@ -110,6 +114,28 @@ function persistMatch(match: MatchState) {
 }
 
 export const useBPStore = create<BPStore>()((set, get) => ({
+  privateLoadouts: loadJSON(STORAGE_KEYS.sealedLoadouts, {}, (value) => typeof value === 'object' && value !== null && Object.entries(value).every(([side, item]) => isPrivateLoadout(item) && item.side === side)),
+  submitLoadout: (side, type, ids) => {
+    const match = get().match
+    if (!match) return { ok: false, reason: '没有进行中的比赛' }
+    const phase = getSealedDraft(match)
+    const resources = snapshotResources(match.resourceSnapshot)
+    const reason = validateSealedLoadout(match, side, type, ids, resources)
+    if (!phase || reason) return { ok: false, reason: reason ?? '当前不是同时选择阶段' }
+    if (get().privateLoadouts[side]?.phase_key === phase.key) return { ok: false, reason: '己方已确认，等待对手完成' }
+    const otherSide = side === 'BLUE' ? 'RED' : 'BLUE'
+    const other = get().privateLoadouts[otherSide]
+    if (other?.phase_key === phase.key) {
+      const result = revealSealedLoadouts(match, { [side]: ids, [otherSide]: other.resource_ids } as Record<Side, string[]>, resources, Date.now(), { BLUE: crypto.randomUUID(), RED: crypto.randomUUID() })
+      if (!result.ok || !result.state) return { ok: false, reason: result.reason }
+      commit(result.state)
+    } else {
+      const privateLoadouts = { [side]: { phase_key: phase.key, side, resource_ids: [...ids] } }
+      set({ privateLoadouts })
+      saveJSON(STORAGE_KEYS.sealedLoadouts, privateLoadouts)
+    }
+    return { ok: true }
+  },
   // 启动即恢复最近一场比赛：严格校验，损坏数据整体回退为 null
   match: initialCurrentMatch,
   currentMatchCorrupt: initialCurrentMatchCorrupt,
@@ -127,7 +153,8 @@ export const useBPStore = create<BPStore>()((set, get) => ({
       ninjaSnapshot: packSnapshot.ninjaSnapshot,
       resourceSnapshot: packSnapshot.resourceSnapshot,
     }
-    set({ match, stacks: emptyStacks(), currentMatchCorrupt: false })
+    set({ match, stacks: emptyStacks(), currentMatchCorrupt: false, privateLoadouts: {} })
+    saveJSON(STORAGE_KEYS.sealedLoadouts, {})
     persistMatch(match)
     return match
   },
@@ -158,6 +185,7 @@ export const useBPStore = create<BPStore>()((set, get) => ({
     if (resourceType === 'NINJA') return get().selectNinja(resourceId)
     const match = get().match
     if (!match) return { ok: false, reason: '没有进行中的比赛' }
+    if (getSealedDraft(match)) return { ok: false, reason: '请整组确认阵容，双方完成后统一公开' }
     const resource = getResource(snapshotResources(match.resourceSnapshot), resourceType, resourceId)
     const result = selectResource(match, resourceType, resourceId, resource, { now: Date.now() })
     if (!result.ok || !result.state) return { ok: false, reason: result.reason }
@@ -175,7 +203,8 @@ export const useBPStore = create<BPStore>()((set, get) => ({
       if (result.reason) toast(result.reason)
       return false
     }
-    set({ match: result.state, stacks: result.stacks })
+    set({ match: result.state, stacks: result.stacks, privateLoadouts: {} })
+    saveJSON(STORAGE_KEYS.sealedLoadouts, {})
     persistMatch(result.state)
     return true
   },
@@ -188,7 +217,8 @@ export const useBPStore = create<BPStore>()((set, get) => ({
       if (result.reason) toast(result.reason)
       return false
     }
-    set({ match: result.state, stacks: result.stacks })
+    set({ match: result.state, stacks: result.stacks, privateLoadouts: {} })
+    saveJSON(STORAGE_KEYS.sealedLoadouts, {})
     persistMatch(result.state)
     return true
   },

@@ -1,6 +1,7 @@
 import type { BattleResourceSnapshot, BattleRule, DraftResourceType, OnlineCommandType, Seat } from '@bp-core'
 import { supabase } from '@/lib/supabase'
 import type { CommandResponse, RoomSnapshot } from './types'
+import { getSealedDraft, type PrivateLoadout } from '@bp-core'
 
 /**
  * 在线房间 API 封装：Edge Function 调用 + RLS 保护的快照读取。
@@ -88,9 +89,20 @@ export const roomApi = {
     const { data: members, error: membersError } = membersResult
     if (membersError) throw Object.assign(new Error(membersError.message), { code: 'DB_ERROR' })
 
+    let privateLoadout: PrivateLoadout | null = null
+    const typedRoom = room as unknown as RoomSnapshot['room']
+    const sealed = typedRoom ? getSealedDraft(typedRoom.match_state) : null
+    if (sealed) {
+      // RLS returns only this JWT user's row; opponents and observers see none.
+      const result = await client.from('room_loadout_submissions').select('phase_key,side,resource_ids').eq('room_id', roomId).eq('phase_key', sealed.key).abortSignal(signal).maybeSingle()
+      if (result.error) throw Object.assign(new Error(result.error.message), { code: 'DB_ERROR' })
+      privateLoadout = result.data as PrivateLoadout | null
+    }
+
     return {
       room: (room as RoomSnapshot['room']) ?? null,
       members: (members as RoomSnapshot['members']) ?? [],
+      privateLoadout,
     }
   },
 
@@ -106,7 +118,7 @@ export const roomApi = {
     commandId: string
     expectedRevision: number
     type: OnlineCommandType
-    payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string }
+    payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string; resourceIds?: string[]; phaseKey?: string }
   }): Promise<CommandResponse> {
     return callFunction<CommandResponse>('room-command', input)
   },

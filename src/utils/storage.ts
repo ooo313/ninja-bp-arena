@@ -19,6 +19,7 @@ export const STORAGE_KEYS = {
   currentMatch: 'current_match',
   recentMatches: 'recent_matches',
   bpTimer: 'bp_timer',
+  sealedLoadouts: 'sealed_loadouts',
   // v0.4 数据包体系
   activeDataPack: 'active_data_pack',
   installedDataPacks: 'installed_data_packs',

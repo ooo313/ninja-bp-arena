@@ -16,6 +16,7 @@ export function LocalMatchSource({ children }: { children: ReactNode }) {
   const canUndo = useBPStore((s) => s.stacks.past.length > 0)
   const canRedo = useBPStore((s) => s.stacks.future.length > 0)
   const ninjas = useNinjaStore((s) => s.ninjas)
+  const privateLoadouts = useBPStore((s) => s.privateLoadouts)
 
   // v0.4：比赛创建时固化的池快照是显示权威；旧比赛（无快照）回退本地池
   const matchNinjas = match?.ninjaSnapshot
@@ -29,6 +30,8 @@ export function LocalMatchSource({ children }: { children: ReactNode }) {
     matchNinjas,
     selectNinja: (ninjaId) => useBPStore.getState().selectNinja(ninjaId),
     selectResource: (resourceType, resourceId) => useBPStore.getState().selectResource(resourceType, resourceId),
+    submitLoadout: (side, type, ids) => useBPStore.getState().submitLoadout(side, type, ids),
+    privateLoadouts,
     matchResources: { NINJA: matchNinjas, SECRET_SCROLL: snapshot.secretScrolls, SUMMON: snapshot.summons },
     undo: () => ({ ok: useBPStore.getState().undo() }),
     redo: () => ({ ok: useBPStore.getState().redo() }),

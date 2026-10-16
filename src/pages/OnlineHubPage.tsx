@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { LogIn, Plus, WifiOff } from 'lucide-react'
 import { useOnlineRoomStore } from '@/online/onlineRoomStore'
 import { useSettingsStore } from '@/store/settingsStore'
-import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, cloneRule } from '@/data/defaultRules'
+import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, WUDOU_LOADOUT_RULE, cloneRule } from '@/data/defaultRules'
 import { describeSequence } from '@/engine/ruleEngine'
 import { toast } from '@/store/toastStore'
 
@@ -15,8 +15,8 @@ export default function OnlineHubPage() {
   const joinRoom = useOnlineRoomStore((s) => s.joinRoom)
   // 注意：selector 不能直接调 activeRule()（每次返回新对象会无限重渲染）
   const customRule = useSettingsStore((s) => s.customRule)
-  const [ruleTemplate, setRuleTemplate] = useState<'CURRENT' | 'FULL_LOADOUT'>('CURRENT')
-  const rule = cloneRule(ruleTemplate === 'FULL_LOADOUT' ? FULL_LOADOUT_DEMO_RULE : (customRule ?? DEFAULT_RULE))
+  const [ruleTemplate, setRuleTemplate] = useState<'CURRENT' | 'FULL_LOADOUT' | 'WUDOU'>('CURRENT')
+  const rule = cloneRule(ruleTemplate === 'WUDOU' ? WUDOU_LOADOUT_RULE : ruleTemplate === 'FULL_LOADOUT' ? FULL_LOADOUT_DEMO_RULE : (customRule ?? DEFAULT_RULE))
 
   const [displayName, setDisplayName] = useState('')
   const [seat, setSeat] = useState<'BLUE' | 'RED'>('BLUE')
@@ -80,9 +80,10 @@ export default function OnlineHubPage() {
 
       <div className="mt-4 rounded-lg border border-border-muted bg-surface-1/50 p-5">
         <h2 className="text-sm font-bold text-fog-100">比赛规则（当前模板）</h2>
-        <select value={ruleTemplate} onChange={(event) => setRuleTemplate(event.target.value as 'CURRENT' | 'FULL_LOADOUT')} className="mt-2 rounded border border-ink-500 bg-ink-900 px-3 py-1.5 text-xs text-fog-100">
+        <select aria-label="房间规则模板" value={ruleTemplate} onChange={(event) => setRuleTemplate(event.target.value as typeof ruleTemplate)} className="mt-2 rounded border border-ink-500 bg-ink-900 px-3 py-1.5 text-xs text-fog-100">
           <option value="CURRENT">Ninja Only（当前规则）</option>
           <option value="FULL_LOADOUT">Full Loadout Demo（示例）</option>
+          <option value="WUDOU">武斗完整阵容（同时盲选）</option>
         </select>
         <p className="mt-1 text-xs text-fog-500">Ban：{describeSequence(rule.banSequence)}</p>
         <p className="text-xs text-fog-500">Pick：{describeSequence(rule.pickSequence)}</p>
