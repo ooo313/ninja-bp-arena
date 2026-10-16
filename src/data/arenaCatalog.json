@@ -1,0 +1,2330 @@
+{
+  "hyrz-ninja-90524": {
+    "name": "大蛇丸「传说中的三忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90524/bd1.png?t=1791971734",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90524/ap.png?t=1791971734"
+  },
+  "hyrz-ninja-90529": {
+    "name": "宇智波佐助「篮球之星」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90529/bd1.png?t=1791971732",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90529/ap.png?t=1791971732",
+    "localIcon": "icon-90529.webp"
+  },
+  "hyrz-ninja-90389": {
+    "name": "照美冥「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90389/bd1.png?t=1791858251",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90389/ap.png?t=1791858251",
+    "localIcon": "icon-90389.webp"
+  },
+  "hyrz-ninja-90532": {
+    "name": "波风水门「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90532/bd1.png?t=1791858173",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90532/ap.png?t=1791858173",
+    "localIcon": "icon-90532.webp"
+  },
+  "hyrz-ninja-90378": {
+    "name": "旗木卡卡西「元气夏日」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90378/bd1.png?t=1791858171",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90378/ap.png?t=1791858171",
+    "localIcon": "icon-90378.webp"
+  },
+  "hyrz-ninja-90552": {
+    "name": "白「中秋限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90552/bd1.png?t=1791604154",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90552/ap.png?t=1791604154"
+  },
+  "hyrz-ninja-90546": {
+    "name": "角都「晓·北」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90546/bd1.png?t=1791604152",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90546/ap.png?t=1791604152",
+    "localIcon": "icon-90546.webp"
+  },
+  "hyrz-ninja-90448": {
+    "name": "宇智波带土「漂泊浪客」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90448/bd1.png?t=1791442045",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90448/ap.png?t=1791442045",
+    "localIcon": "icon-90448.webp"
+  },
+  "hyrz-ninja-90417": {
+    "name": "小南「漂泊浪客」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90417/bd1.png?t=1791441903",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90417/ap.png?t=1791441903",
+    "localIcon": "icon-90417.webp"
+  },
+  "hyrz-ninja-90525": {
+    "name": "日向雏田「八极宗师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90525/bd1.png?t=1790047353",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90525/ap.png?t=1790047353"
+  },
+  "hyrz-ninja-90174": {
+    "name": "神秘面具男",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90174/bd1.png?t=1790047352",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90174/ap.png?t=1790047352"
+  },
+  "hyrz-ninja-90520": {
+    "name": "不立土",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90520/bd1.png?t=1789107922",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90520/ap.png?t=1789107922",
+    "localIcon": "icon-90520.webp"
+  },
+  "hyrz-ninja-90543": {
+    "name": "宇智波鼬「晓·朱」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90543/bd1.png?t=1789107919",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90543/ap.png?t=1789107919"
+  },
+  "hyrz-ninja-90539": {
+    "name": "枫「夏日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90539/bd1.png?t=1788231223",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90539/ap.png?t=1788231223"
+  },
+  "hyrz-ninja-90545": {
+    "name": "飞段「晓·三」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90545/bd1.png?t=1787823246",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90545/ap.png?t=1787823246",
+    "localIcon": "icon-90545.webp"
+  },
+  "hyrz-ninja-90186": {
+    "name": "阿茨伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90186/bd1.png?t=1787729540",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90186/ap.png?t=1787729540"
+  },
+  "hyrz-ninja-90495": {
+    "name": "宇智波佐助「兄弟之战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90495/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90495/ap.png?t=1787729539",
+    "localIcon": "icon-90495.webp"
+  },
+  "hyrz-ninja-90504": {
+    "name": "矢仓「奇拉比落风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90504/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90504/ap.png?t=1787729539"
+  },
+  "hyrz-ninja-90530": {
+    "name": "千手柱间「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90530/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90530/ap.png?t=1787729539",
+    "localIcon": "icon-90530.webp"
+  },
+  "hyrz-ninja-90534": {
+    "name": "春野樱「沙滩排球」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90534/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90534/ap.png?t=1787729539",
+    "localIcon": "icon-90534.webp"
+  },
+  "hyrz-ninja-90538": {
+    "name": "药师兜「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90538/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90538/ap.png?t=1787729539"
+  },
+  "hyrz-ninja-99052": {
+    "name": "大筒木浦式「异星钓者」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99052/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99052/ap.png?t=1787729539"
+  },
+  "hyrz-ninja-99057": {
+    "name": "勘九郎「指导上忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99057/bd1.png?t=1787729539",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99057/ap.png?t=1787729539",
+    "localIcon": "icon-99057.webp"
+  },
+  "hyrz-ninja-90289": {
+    "name": "迪达拉「晓创生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90289/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90289/ap.png?t=1787729538",
+    "localIcon": "icon-90289.webp"
+  },
+  "hyrz-ninja-90512": {
+    "name": "志村团藏「漂泊寻者」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90512/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90512/ap.png?t=1787729538",
+    "localIcon": "icon-90512.webp"
+  },
+  "hyrz-ninja-90517": {
+    "name": "干柿鬼鲛「青年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90517/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90517/ap.png?t=1787729538",
+    "localIcon": "icon-90517.webp"
+  },
+  "hyrz-ninja-90518": {
+    "name": "夕日红「少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90518/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90518/ap.png?t=1787729538"
+  },
+  "hyrz-ninja-90519": {
+    "name": "惠比寿「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90519/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90519/ap.png?t=1787729538"
+  },
+  "hyrz-ninja-90523": {
+    "name": "纲手「传说中的三忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90523/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90523/ap.png?t=1787729538"
+  },
+  "hyrz-ninja-90536": {
+    "name": "油女取根「漂泊寻者」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90536/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90536/ap.png?t=1787729538"
+  },
+  "hyrz-ninja-90537": {
+    "name": "漩涡鸣人·自来也「修行之旅」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90537/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90537/ap.png?t=1787729538"
+  },
+  "hyrz-ninja-99018": {
+    "name": "奈良鹿台",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99018/bd1.png?t=1787729538",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99018/ap.png?t=1787729538"
+  },
+  "hyrz-ninja-90472": {
+    "name": "秋道丁次「赛事限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90472/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90472/ap.png?t=1787729537"
+  },
+  "hyrz-ninja-90479": {
+    "name": "雨乃",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90479/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90479/ap.png?t=1787729537"
+  },
+  "hyrz-ninja-90480": {
+    "name": "旗木卡卡西「神威对决」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90480/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90480/ap.png?t=1787729537",
+    "localIcon": "icon-90480.webp"
+  },
+  "hyrz-ninja-90482": {
+    "name": "猿飞阿斯玛「神驹佑将」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90482/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90482/ap.png?t=1787729537",
+    "localIcon": "icon-90482.webp"
+  },
+  "hyrz-ninja-90485": {
+    "name": "宇智波斑「神驹佑将」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90485/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90485/ap.png?t=1787729537"
+  },
+  "hyrz-ninja-90487": {
+    "name": "小南「神驹佑将」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90487/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90487/ap.png?t=1787729537",
+    "localIcon": "icon-90487.webp"
+  },
+  "hyrz-ninja-90493": {
+    "name": "天天「神驹佑将」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90493/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90493/ap.png?t=1787729537"
+  },
+  "hyrz-ninja-90503": {
+    "name": "二位由木人「奇拉比落风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90503/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90503/ap.png?t=1787729537"
+  },
+  "hyrz-ninja-90511": {
+    "name": "宇智波带土「十尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90511/bd1.png?t=1787729537",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90511/ap.png?t=1787729537"
+  },
+  "hyrz-ninja-90468": {
+    "name": "静音「冬日睡衣」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90468/bd1.png?t=1787729536",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90468/ap.png?t=1787729536"
+  },
+  "hyrz-ninja-90475": {
+    "name": "纲手「妖怪奇谭」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90475/bd1.png?t=1787729536",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90475/ap.png?t=1787729536",
+    "localIcon": "icon-90475.webp"
+  },
+  "hyrz-ninja-90484": {
+    "name": "迈特凯「青春爆炸」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90484/bd1.png?t=1787729536",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90484/ap.png?t=1787729536",
+    "localIcon": "icon-90484.webp"
+  },
+  "hyrz-ninja-90500": {
+    "name": "漩涡鸣人·宇智波佐助",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90500/bd1.png?t=1787729536",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90500/ap.png?t=1787729536"
+  },
+  "hyrz-ninja-99017": {
+    "name": "荒谷",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99017/bd1.png?t=1787729536",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99017/ap.png?t=1787729536"
+  },
+  "hyrz-ninja-99103": {
+    "name": "巳月「仙人模式」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99103/bd1.png?t=1787729536",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99103/ap.png?t=1787729536",
+    "localIcon": "icon-99103.webp"
+  },
+  "hyrz-ninja-90269": {
+    "name": "机械鸣人「初始形态」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90269/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90269/ap.png?t=1787729535",
+    "localIcon": "icon-90269.webp"
+  },
+  "hyrz-ninja-90460": {
+    "name": "“宇智波斑”「五影会谈」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90460/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90460/ap.png?t=1787729535"
+  },
+  "hyrz-ninja-90462": {
+    "name": "重吾「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90462/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90462/ap.png?t=1787729535"
+  },
+  "hyrz-ninja-90464": {
+    "name": "宇智波佐助「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90464/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90464/ap.png?t=1787729535",
+    "localIcon": "icon-90464.webp"
+  },
+  "hyrz-ninja-90466": {
+    "name": "佩恩「畜生道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90466/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90466/ap.png?t=1787729535"
+  },
+  "hyrz-ninja-90469": {
+    "name": "大野木「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90469/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90469/ap.png?t=1787729535",
+    "localIcon": "icon-90469.webp"
+  },
+  "hyrz-ninja-90476": {
+    "name": "圈圈脸「大和」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90476/bd1.png?t=1787729535",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90476/ap.png?t=1787729535",
+    "localIcon": "icon-90476.webp"
+  },
+  "hyrz-ninja-90152": {
+    "name": "佩恩「地狱道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90152/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90152/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-90249": {
+    "name": "桃地再不斩「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90249/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90249/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-90316": {
+    "name": "波风水门「九喇嘛连结」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90316/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90316/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-90458": {
+    "name": "卯月夕颜「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90458/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90458/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-90459": {
+    "name": "日向花火「武当宗师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90459/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90459/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-90467": {
+    "name": "土台「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90467/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90467/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-99015": {
+    "name": "新希",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99015/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99015/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-99055": {
+    "name": "黑土「夏日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99055/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99055/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-99056": {
+    "name": "香燐「夏日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99056/bd1.png?t=1787729534",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99056/ap.png?t=1787729534"
+  },
+  "hyrz-ninja-90306": {
+    "name": "宇智波斑「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90306/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90306/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90372": {
+    "name": "宇智波泉奈",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90372/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90372/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90453": {
+    "name": "野原琳「漂泊浪客」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90453/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90453/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90454": {
+    "name": "自来也「传说中的三忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90454/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90454/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90456": {
+    "name": "神农「羁绊」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90456/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90456/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90457": {
+    "name": "雨琉「羁绊」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90457/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90457/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90465": {
+    "name": "烈斗「初代目风影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90465/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90465/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90474": {
+    "name": "漩涡鸣人「暴怒·第六尾」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90474/bd1.png?t=1787729533",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90474/ap.png?t=1787729533"
+  },
+  "hyrz-ninja-90214": {
+    "name": "药师野乃宇",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90214/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90214/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90322": {
+    "name": "蝎「绯流琥」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90322/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90322/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90436": {
+    "name": "不动",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90436/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90436/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90443": {
+    "name": "大筒木舍人「最终章」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90443/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90443/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90444": {
+    "name": "油女龙马",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90444/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90444/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90445": {
+    "name": "药师兜「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90445/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90445/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90446": {
+    "name": "大蛇丸「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90446/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90446/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90449": {
+    "name": "佐井「最终章」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90449/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90449/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90450": {
+    "name": "阿三",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90450/bd1.png?t=1787729532",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90450/ap.png?t=1787729532"
+  },
+  "hyrz-ninja-90244": {
+    "name": "旗木卡卡西「须佐能乎」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90244/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90244/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90423": {
+    "name": "山中井野「赛事限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90423/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90423/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90427": {
+    "name": "月光疾风「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90427/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90427/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90432": {
+    "name": "御手洗红豆「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90432/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90432/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90437": {
+    "name": "夕日红「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90437/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90437/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90442": {
+    "name": "黑绝",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90442/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90442/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90447": {
+    "name": "马基",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90447/bd1.png?t=1787729531",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90447/ap.png?t=1787729531"
+  },
+  "hyrz-ninja-90150": {
+    "name": "佩恩「饿鬼道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90150/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90150/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90238": {
+    "name": "李洛克「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90238/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90238/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90315": {
+    "name": "宇智波止水「须佐能乎」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90315/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90315/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90419": {
+    "name": "旗木卡卡西「幻之真容」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90419/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90419/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90422": {
+    "name": "犬塚花",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90422/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90422/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90431": {
+    "name": "艾「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90431/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90431/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90439": {
+    "name": "药师兜「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90439/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90439/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-99013": {
+    "name": "笕堇",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99013/bd1.png?t=1787729530",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99013/ap.png?t=1787729530"
+  },
+  "hyrz-ninja-90151": {
+    "name": "佩恩「人间道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90151/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90151/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-90370": {
+    "name": "白「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90370/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90370/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-90405": {
+    "name": "宇智波鼬「夏日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90405/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90405/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-90424": {
+    "name": "天天「峨眉宗师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90424/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90424/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-90425": {
+    "name": "日向雏田「最终章」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90425/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90425/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-90426": {
+    "name": "奈良鹿丸「最终章」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90426/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90426/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-99101": {
+    "name": "漩涡博人「桃式显现」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99101/bd1.png?t=1787729529",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99101/ap.png?t=1787729529"
+  },
+  "hyrz-ninja-90237": {
+    "name": "日向宁次「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90237/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90237/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90250": {
+    "name": "角都「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90250/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90250/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90340": {
+    "name": "枫「新佩恩六道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90340/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90340/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90410": {
+    "name": "春野樱「赛事限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90410/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90410/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90416": {
+    "name": "壹·叁「火之意志继承者」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90416/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90416/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90418": {
+    "name": "君麻吕「漂泊浪客」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90418/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90418/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90420": {
+    "name": "千手扉间「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90420/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90420/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90421": {
+    "name": "宇智波斑「秽土转生·解」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90421/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90421/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-99050": {
+    "name": "大筒木桃式",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99050/bd1.png?t=1787729528",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99050/ap.png?t=1787729528"
+  },
+  "hyrz-ninja-90165": {
+    "name": "鬼灯满月「忍刀七人众」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90165/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90165/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90313": {
+    "name": "宇智波佐助「永恒万花筒」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90313/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90313/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90407": {
+    "name": "不缘",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90407/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90407/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90409": {
+    "name": "日向花火「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90409/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90409/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90411": {
+    "name": "千手柱间「木叶创立」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90411/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90411/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90412": {
+    "name": "我爱罗「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90412/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90412/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90413": {
+    "name": "萨姆伊「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90413/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90413/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90414": {
+    "name": "大和「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90414/bd1.png?t=1787729527",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90414/ap.png?t=1787729527"
+  },
+  "hyrz-ninja-90399": {
+    "name": "卑留呼「火之意志继承者」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90399/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90399/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90400": {
+    "name": "贰「火之意志继承者」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90400/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90400/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90401": {
+    "name": "春野樱「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90401/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90401/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90402": {
+    "name": "漩涡鸣人「中秋限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90402/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90402/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90403": {
+    "name": "神秘面具男「红夜之刃」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90403/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90403/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90404": {
+    "name": "纲手「侠隐江湖」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90404/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90404/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90406": {
+    "name": "宇智波鼬「红夜之刃」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90406/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90406/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-99012": {
+    "name": "尤鲁伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99012/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99012/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-99079": {
+    "name": "长十郎「六代目水影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99079/bd1.png?t=1787729526",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99079/ap.png?t=1787729526"
+  },
+  "hyrz-ninja-90277": {
+    "name": "山中风",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90277/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90277/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90294": {
+    "name": "长门「青年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90294/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90294/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90305": {
+    "name": "千手柱间「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90305/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90305/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90312": {
+    "name": "漩涡鸣人「九喇嘛连结」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90312/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90312/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90339": {
+    "name": "羽高「新佩恩六道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90339/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90339/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90395": {
+    "name": "帕库拉「元气夏日」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90395/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90395/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90396": {
+    "name": "李洛克「截拳宗师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90396/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90396/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-99051": {
+    "name": "大筒木金式",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99051/bd1.png?t=1787729525",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99051/ap.png?t=1787729525"
+  },
+  "hyrz-ninja-90291": {
+    "name": "飞段「晓创生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90291/bd1.png?t=1787729524",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90291/ap.png?t=1787729524"
+  },
+  "hyrz-ninja-90376": {
+    "name": "三船「青年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90376/bd1.png?t=1787729524",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90376/ap.png?t=1787729524"
+  },
+  "hyrz-ninja-90393": {
+    "name": "佩恩·六道「漂泊浪客」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90393/bd1.png?t=1787729524",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90393/ap.png?t=1787729524"
+  },
+  "hyrz-ninja-90394": {
+    "name": "宇智波佐助「忍者之路」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90394/bd1.png?t=1787729524",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90394/ap.png?t=1787729524"
+  },
+  "hyrz-ninja-99010": {
+    "name": "梅塔尔·李",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99010/bd1.png?t=1787729524",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99010/ap.png?t=1787729524"
+  },
+  "hyrz-ninja-99011": {
+    "name": "秋道蝶蝶",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99011/bd1.png?t=1787729524",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99011/ap.png?t=1787729524"
+  },
+  "hyrz-ninja-90320": {
+    "name": "三代目风影「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90320/bd1.png?t=1787729523",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90320/ap.png?t=1787729523"
+  },
+  "hyrz-ninja-90326": {
+    "name": "艾「青年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90326/bd1.png?t=1787729523",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90326/ap.png?t=1787729523"
+  },
+  "hyrz-ninja-90338": {
+    "name": "汉「新佩恩六道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90338/bd1.png?t=1787729523",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90338/ap.png?t=1787729523"
+  },
+  "hyrz-ninja-90346": {
+    "name": "紫阳花",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90346/bd1.png?t=1787729523",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90346/ap.png?t=1787729523"
+  },
+  "hyrz-ninja-90388": {
+    "name": "迪达拉「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90388/bd1.png?t=1787729523",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90388/ap.png?t=1787729523"
+  },
+  "hyrz-ninja-90392": {
+    "name": "大野木「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90392/bd1.png?t=1787729523",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90392/ap.png?t=1787729523"
+  },
+  "hyrz-ninja-90245": {
+    "name": "迈特凯「死门」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90245/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90245/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-90287": {
+    "name": "御手洗红豆「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90287/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90287/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-90348": {
+    "name": "迈特戴",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90348/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90348/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-90386": {
+    "name": "黑土「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90386/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90386/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-90387": {
+    "name": "赤土「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90387/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90387/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-90390": {
+    "name": "宇智波佐助「赛事限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90390/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90390/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-99091": {
+    "name": "达鲁伊「五代目雷影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99091/bd1.png?t=1787729522",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99091/ap.png?t=1787729522"
+  },
+  "hyrz-ninja-90114": {
+    "name": "宇智波带土「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90114/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90114/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90231": {
+    "name": "奈良鹿丸「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90231/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90231/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90299": {
+    "name": "弥彦「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90299/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90299/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90317": {
+    "name": "宇智波斑「木叶创立」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90317/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90317/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90337": {
+    "name": "老紫「新佩恩六道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90337/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90337/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90383": {
+    "name": "丸星古介",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90383/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90383/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90384": {
+    "name": "海野伊鲁卡「西装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90384/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90384/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90385": {
+    "name": "不风",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90385/bd1.png?t=1787729521",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90385/ap.png?t=1787729521"
+  },
+  "hyrz-ninja-90307": {
+    "name": "香燐「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90307/bd1.png?t=1787729520",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90307/ap.png?t=1787729520"
+  },
+  "hyrz-ninja-90380": {
+    "name": "日向雏田「忍者之路」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90380/bd1.png?t=1787729520",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90380/ap.png?t=1787729520"
+  },
+  "hyrz-ninja-90381": {
+    "name": "神秘面具男「忍者之路」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90381/bd1.png?t=1787729520",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90381/ap.png?t=1787729520"
+  },
+  "hyrz-ninja-90102": {
+    "name": "千手柱间「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90102/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90102/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-90324": {
+    "name": "波风水门「青年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90324/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90324/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-90333": {
+    "name": "猿飞日斩「三忍之师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90333/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90333/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-90336": {
+    "name": "矢仓「新佩恩六道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90336/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90336/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-90377": {
+    "name": "静音「元气夏日」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90377/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90377/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-90379": {
+    "name": "日向宁次「咏春宗师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90379/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90379/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-99008": {
+    "name": "山中井阵",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99008/bd1.png?t=1787729519",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99008/ap.png?t=1787729519"
+  },
+  "hyrz-ninja-90181": {
+    "name": "奇拉比「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90181/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90181/ap.png?t=1787729518"
+  },
+  "hyrz-ninja-90256": {
+    "name": "罗砂「四代目风影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90256/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90256/ap.png?t=1787729518"
+  },
+  "hyrz-ninja-90301": {
+    "name": "纲手「少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90301/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90301/ap.png?t=1787729518"
+  },
+  "hyrz-ninja-90332": {
+    "name": "摩托伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90332/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90332/ap.png?t=1787729518"
+  },
+  "hyrz-ninja-90334": {
+    "name": "千手扉间「漂泊武士」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90334/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90334/ap.png?t=1787729518",
+    "localPortrait": "portrait-90334.webp"
+  },
+  "hyrz-ninja-90350": {
+    "name": "春野樱「忍者少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90350/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90350/ap.png?t=1787729518"
+  },
+  "hyrz-ninja-99007": {
+    "name": "伊势乌冬「木叶上忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99007/bd1.png?t=1787729518",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99007/ap.png?t=1787729518"
+  },
+  "hyrz-ninja-90084": {
+    "name": "宇智波鼬「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90084/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90084/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90222": {
+    "name": "漩涡玖辛奈「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90222/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90222/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90239": {
+    "name": "天天「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90239/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90239/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90329": {
+    "name": "秋道丁次「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90329/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90329/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90330": {
+    "name": "佐井「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90330/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90330/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90331": {
+    "name": "宇智波止水「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90331/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90331/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90335": {
+    "name": "二位由木人「新佩恩六道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90335/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90335/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90356": {
+    "name": "漩涡鸣人「赛事限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90356/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90356/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-99006": {
+    "name": "伊豆野山葵",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99006/bd1.png?t=1787729517",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99006/ap.png?t=1787729517"
+  },
+  "hyrz-ninja-90187": {
+    "name": "赤土",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90187/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90187/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90198": {
+    "name": "多由也「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90198/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90198/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90210": {
+    "name": "自来也「舞之豪杰」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90210/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90210/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90270": {
+    "name": "药师兜「仙人模式」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90270/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90270/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90302": {
+    "name": "大蛇丸「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90302/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90302/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90321": {
+    "name": "佩恩·天道「超」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90321/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90321/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90361": {
+    "name": "飞段「恶灵之影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90361/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90361/ap.png?t=1787729516",
+    "localPortrait": "portrait-90361.webp"
+  },
+  "hyrz-ninja-99094": {
+    "name": "猿飞未来",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99094/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99094/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-99177": {
+    "name": "黑土「四代目土影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99177/bd1.png?t=1787729516",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99177/ap.png?t=1787729516"
+  },
+  "hyrz-ninja-90097": {
+    "name": "宇智波佐助「须佐能乎」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90097/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90097/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90159": {
+    "name": "西瓜山河豚鬼「忍刀七人众」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90159/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90159/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90194": {
+    "name": "加藤断",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90194/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90194/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90300": {
+    "name": "长门「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90300/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90300/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90351": {
+    "name": "日向雏田「忍者少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90351/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90351/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90357": {
+    "name": "野原琳「元气少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90357/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90357/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90358": {
+    "name": "猿飞阿斯玛「七夕限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90358/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90358/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90359": {
+    "name": "夕日红「七夕限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90359/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90359/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90360": {
+    "name": "李洛克「木叶飞人」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90360/bd1.png?t=1787729515",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90360/ap.png?t=1787729515"
+  },
+  "hyrz-ninja-90106": {
+    "name": "宇智波斑「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90106/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90106/ap.png?t=1787729514",
+    "localPortrait": "portrait-90106.webp"
+  },
+  "hyrz-ninja-90248": {
+    "name": "迪达拉「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90248/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90248/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-90251": {
+    "name": "桃地再不斩「漂泊武士」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90251/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90251/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-90255": {
+    "name": "艾「三代目雷影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90255/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90255/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-90282": {
+    "name": "大和「木叶工匠」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90282/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90282/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-90323": {
+    "name": "迈特凯「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90323/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90323/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-99004": {
+    "name": "风祭萌黄「木叶上忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99004/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99004/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-99005": {
+    "name": "结乃岩部",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99005/bd1.png?t=1787729514",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99005/ap.png?t=1787729514"
+  },
+  "hyrz-ninja-90081": {
+    "name": "“宇智波斑”「白面具」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90081/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90081/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90148": {
+    "name": "并足雷同",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90148/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90148/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90278": {
+    "name": "油女取根",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90278/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90278/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90288": {
+    "name": "蝎「晓创生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90288/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90288/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90353": {
+    "name": "奈良鹿丸「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90353/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90353/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90354": {
+    "name": "日向宁次「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90354/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90354/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90355": {
+    "name": "小南「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90355/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90355/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-99002": {
+    "name": "宇智波佐良娜",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99002/bd1.png?t=1787729513",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99002/ap.png?t=1787729513"
+  },
+  "hyrz-ninja-90110": {
+    "name": "宇智波带土「暴怒」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90110/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90110/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90180": {
+    "name": "狩「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90180/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90180/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90193": {
+    "name": "半藏「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90193/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90193/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90201": {
+    "name": "左近右近「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90201/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90201/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90243": {
+    "name": "旗木卡卡西「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90243/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90243/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90284": {
+    "name": "佐井「中秋限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90284/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90284/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90349": {
+    "name": "天天「忍者少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90349/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90349/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90352": {
+    "name": "春野樱「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90352/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90352/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-99003": {
+    "name": "巳月",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99003/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99003/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-99009": {
+    "name": "猿飞木叶丸",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99009/bd1.png?t=1787729512",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99009/ap.png?t=1787729512"
+  },
+  "hyrz-ninja-90090": {
+    "name": "枫「七尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90090/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90090/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90099": {
+    "name": "漩涡鸣人「九尾查克拉」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90099/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90099/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90183": {
+    "name": "千手扉间「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90183/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90183/ap.png?t=1787729511",
+    "localIcon": "icon-90183.webp",
+    "localPortrait": "portrait-90183.webp"
+  },
+  "hyrz-ninja-90252": {
+    "name": "白「漂泊武士」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90252/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90252/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90283": {
+    "name": "山中井野「忍者少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90283/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90283/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90286": {
+    "name": "照美冥「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90286/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90286/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90290": {
+    "name": "角都「晓创生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90290/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90290/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90309": {
+    "name": "月光疾风「七夕限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90309/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90309/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90310": {
+    "name": "卯月夕颜「七夕限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90310/bd1.png?t=1787729511",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90310/ap.png?t=1787729511"
+  },
+  "hyrz-ninja-90083": {
+    "name": "纲手「百豪」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90083/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90083/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90104": {
+    "name": "无「二代目土影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90104/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90104/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90161": {
+    "name": "林檎雨由利「忍刀七人众」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90161/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90161/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90185": {
+    "name": "黄土「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90185/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90185/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90218": {
+    "name": "香燐「鹰」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90218/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90218/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90254": {
+    "name": "千代「近松十人卫」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90254/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90254/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90295": {
+    "name": "静香",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90295/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90295/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-90298": {
+    "name": "奇拉比「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90298/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90298/ap.png?t=1787729510"
+  },
+  "hyrz-ninja-99001": {
+    "name": "漩涡博人",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99001/bd1.png?t=1787729510",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/99001/ap.png?t=1787729510",
+    "localPortrait": "portrait-99001.webp"
+  },
+  "hyrz-ninja-90082": {
+    "name": "药师兜「半蛇斗篷」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90082/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90082/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90147": {
+    "name": "山城青叶",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90147/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90147/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90166": {
+    "name": "干柿鬼鲛「鲛肌融合」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90166/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90166/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90235": {
+    "name": "犬塚牙「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90235/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90235/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90279": {
+    "name": "宇智波鼬「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90279/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90279/ap.png?t=1787729509",
+    "localIcon": "icon-90279.webp",
+    "localPortrait": "portrait-90279.webp"
+  },
+  "hyrz-ninja-90280": {
+    "name": "油女志乃「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90280/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90280/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90281": {
+    "name": "日向雏田「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90281/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90281/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90296": {
+    "name": "漩涡玖辛奈「少女」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90296/bd1.png?t=1787729509",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90296/ap.png?t=1787729509"
+  },
+  "hyrz-ninja-90101": {
+    "name": "波风水门「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90101/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90101/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90182": {
+    "name": "金角·银角「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90182/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90182/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90197": {
+    "name": "地陆",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90197/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90197/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90200": {
+    "name": "鬼童丸「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90200/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90200/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90240": {
+    "name": "我爱罗「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90240/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90240/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90268": {
+    "name": "日向花火「和服」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90268/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90268/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90274": {
+    "name": "宇智波佐助「疾风传咒印」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90274/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90274/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90275": {
+    "name": "萨姆伊「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90275/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90275/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90276": {
+    "name": "黑土「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90276/bd1.png?t=1787729508",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90276/ap.png?t=1787729508"
+  },
+  "hyrz-ninja-90089": {
+    "name": "羽高「六尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90089/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90089/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90189": {
+    "name": "麻布伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90189/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90189/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90207": {
+    "name": "宇智波止水「忍者新秀」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90207/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90207/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90233": {
+    "name": "秋道丁次「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90233/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90233/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90241": {
+    "name": "手鞠「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90241/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90241/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90264": {
+    "name": "李洛克「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90264/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90264/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90265": {
+    "name": "小南「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90265/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90265/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90271": {
+    "name": "天天「中华面点师」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90271/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90271/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90272": {
+    "name": "猿飞日斩「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90272/bd1.png?t=1787729507",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90272/ap.png?t=1787729507"
+  },
+  "hyrz-ninja-90098": {
+    "name": "长门「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90098/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90098/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90191": {
+    "name": "大蛇丸「晓」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90191/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90191/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90199": {
+    "name": "次郎坊「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90199/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90199/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90219": {
+    "name": "重吾「鹰」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90219/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90219/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90246": {
+    "name": "猿飞阿斯玛「秽土转生」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90246/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90246/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90266": {
+    "name": "野原琳「特别护理」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90266/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90266/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90267": {
+    "name": "自来也「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90267/bd1.png?t=1787729506",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90267/ap.png?t=1787729506"
+  },
+  "hyrz-ninja-90062": {
+    "name": "大野木「三代目土影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90062/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90062/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90103": {
+    "name": "鬼灯幻月「二代目水影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90103/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90103/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90157": {
+    "name": "无梨甚八「忍刀七人众」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90157/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90157/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90230": {
+    "name": "春野樱「百豪」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90230/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90230/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90232": {
+    "name": "山中井野「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90232/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90232/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90236": {
+    "name": "油女志乃「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90236/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90236/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90261": {
+    "name": "静音「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90261/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90261/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90262": {
+    "name": "漩涡玖辛奈「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90262/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90262/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90263": {
+    "name": "波风水门「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90263/bd1.png?t=1787729505",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90263/ap.png?t=1787729505"
+  },
+  "hyrz-ninja-90061": {
+    "name": "照美冥「五代目水影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90061/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90061/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90079": {
+    "name": "长十郎",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90079/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90079/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90080": {
+    "name": "青",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90080/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90080/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90088": {
+    "name": "汉「五尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90088/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90088/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90092": {
+    "name": "三船",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90092/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90092/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90100": {
+    "name": "宇智波斑",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90100/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90100/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90146": {
+    "name": "不知火玄间",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90146/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90146/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90155": {
+    "name": "栗霰串丸「忍刀七人众」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90155/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90155/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90228": {
+    "name": "香燐「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90228/bd1.png?t=1787729504",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90228/ap.png?t=1787729504"
+  },
+  "hyrz-ninja-90024": {
+    "name": "千手柱间",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90024/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90024/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90179": {
+    "name": "帕库拉",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90179/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90179/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90206": {
+    "name": "宇智波鼬「忍者新秀」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90206/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90206/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90220": {
+    "name": "猿飞日斩「火影继承人」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90220/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90220/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90223": {
+    "name": "日向宁次「中秋限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90223/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90223/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90225": {
+    "name": "纲手「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90225/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90225/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90227": {
+    "name": "君麻吕「恶灵之影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90227/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90227/ap.png?t=1787729503",
+    "localPortrait": "portrait-90227.webp"
+  },
+  "hyrz-ninja-90229": {
+    "name": "佐井「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90229/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90229/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90242": {
+    "name": "勘九郎「忍界大战」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90242/bd1.png?t=1787729503",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90242/ap.png?t=1787729503"
+  },
+  "hyrz-ninja-90059": {
+    "name": "宇智波佐助「万花筒写轮眼」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90059/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90059/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90063": {
+    "name": "志村团藏",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90063/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90063/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90144": {
+    "name": "神月出云",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90144/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90144/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90177": {
+    "name": "黑土",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90177/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90177/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90184": {
+    "name": "希",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90184/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90184/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90217": {
+    "name": "鬼灯水月「鹰」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90217/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90217/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90224": {
+    "name": "萨姆伊「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90224/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90224/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90226": {
+    "name": "我爱罗「凭依体」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90226/bd1.png?t=1787729502",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90226/ap.png?t=1787729502"
+  },
+  "hyrz-ninja-90060": {
+    "name": "艾「四代目雷影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90060/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90060/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90091": {
+    "name": "达鲁伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90091/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90091/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90096": {
+    "name": "迈特凯「惊门」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90096/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90096/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90143": {
+    "name": "森乃伊比喜",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90143/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90143/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90149": {
+    "name": "佩恩「修罗道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90149/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90149/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90162": {
+    "name": "奥摩伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90162/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90162/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90173": {
+    "name": "小南「青蛙小队」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90173/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90173/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90188": {
+    "name": "卡鲁伊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90188/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90188/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90190": {
+    "name": "红莲",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90190/bd1.png?t=1787729501",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90190/ap.png?t=1787729501"
+  },
+  "hyrz-ninja-90025": {
+    "name": "千手扉间",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90025/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90025/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90056": {
+    "name": "奇拉比",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90056/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90056/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90066": {
+    "name": "水木「咒印」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90066/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90066/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90087": {
+    "name": "老紫「四尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90087/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90087/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90111": {
+    "name": "漩涡鸣人「第四尾」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90111/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90111/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90154": {
+    "name": "佩恩「畜生道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90154/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90154/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90203": {
+    "name": "旗木卡卡西「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90203/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90203/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90204": {
+    "name": "犬塚牙「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90204/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90204/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90205": {
+    "name": "山中井野「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90205/bd1.png?t=1787729500",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90205/ap.png?t=1787729500"
+  },
+  "hyrz-ninja-90052": {
+    "name": "自来也「仙人模式」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90052/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90052/ap.png?t=1787729499"
+  },
+  "hyrz-ninja-90058": {
+    "name": "漩涡鸣人「仙人模式」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90058/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90058/ap.png?t=1787729499",
+    "localPortrait": "portrait-90058.webp"
+  },
+  "hyrz-ninja-90124": {
+    "name": "绝",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90124/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90124/ap.png?t=1787729499"
+  },
+  "hyrz-ninja-90140": {
+    "name": "托斯砧",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90140/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90140/ap.png?t=1787729499"
+  },
+  "hyrz-ninja-90156": {
+    "name": "通草野饵人「忍刀七人众」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90156/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90156/ap.png?t=1787729499"
+  },
+  "hyrz-ninja-90176": {
+    "name": "夕日红「和服」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90176/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90176/ap.png?t=1787729499"
+  },
+  "hyrz-ninja-90202": {
+    "name": "天天「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90202/bd1.png?t=1787729499",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90202/ap.png?t=1787729499"
+  },
+  "hyrz-ninja-90086": {
+    "name": "矢仓「三尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90086/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90086/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90141": {
+    "name": "金槌",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90141/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90141/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90142": {
+    "name": "惠比寿",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90142/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90142/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90169": {
+    "name": "李洛克「醉拳」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90169/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90169/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90171": {
+    "name": "大蛇丸「木叶三忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90171/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90171/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90175": {
+    "name": "御手洗红豆「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90175/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90175/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90221": {
+    "name": "药师兜「恶灵之影」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90221/bd1.png?t=1787729498",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90221/ap.png?t=1787729498"
+  },
+  "hyrz-ninja-90045": {
+    "name": "角都「地怨虞」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90045/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90045/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90095": {
+    "name": "旗木卡卡西「万花筒写轮眼」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90095/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90095/ap.png?t=1787729497",
+    "localPortrait": "portrait-90095.webp"
+  },
+  "hyrz-ninja-90120": {
+    "name": "卯月夕颜",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90120/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90120/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90132": {
+    "name": "野原琳",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90132/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90132/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90139": {
+    "name": "萨克镫",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90139/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90139/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90145": {
+    "name": "钢子铁",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90145/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90145/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90163": {
+    "name": "纲手「木叶三忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90163/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90163/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90168": {
+    "name": "日向雏田「元气夏日」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90168/bd1.png?t=1787729497",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90168/ap.png?t=1787729497"
+  },
+  "hyrz-ninja-90040": {
+    "name": "蝎「百机操演」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90040/bd1.png?t=1787729496",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90040/ap.png?t=1787729496"
+  },
+  "hyrz-ninja-90054": {
+    "name": "宇智波鼬「须佐能乎」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90054/bd1.png?t=1787729496",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90054/ap.png?t=1787729496"
+  },
+  "hyrz-ninja-90085": {
+    "name": "二位由木人「二尾人柱力」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90085/bd1.png?t=1787729496",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90085/ap.png?t=1787729496"
+  },
+  "hyrz-ninja-90117": {
+    "name": "木叶丸「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90117/bd1.png?t=1787729496",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90117/ap.png?t=1787729496"
+  },
+  "hyrz-ninja-90164": {
+    "name": "自来也「木叶三忍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90164/bd1.png?t=1787729496",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90164/ap.png?t=1787729496"
+  },
+  "hyrz-ninja-90172": {
+    "name": "春野樱「忍者新秀」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90172/bd1.png?t=1787729496",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90172/ap.png?t=1787729496"
+  },
+  "hyrz-ninja-90041": {
+    "name": "千代",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90041/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90041/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90094": {
+    "name": "宇智波止水",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90094/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90094/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90115": {
+    "name": "犬塚牙「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90115/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90115/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90129": {
+    "name": "飞段「死司凭血」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90129/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90129/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90134": {
+    "name": "漩涡鸣人「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90134/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90134/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90136": {
+    "name": "春野樱「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90136/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90136/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90138": {
+    "name": "漩涡鸣人「忍者学员」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90138/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90138/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90170": {
+    "name": "大和「暗部」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90170/bd1.png?t=1787729495",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90170/ap.png?t=1787729495"
+  },
+  "hyrz-ninja-90026": {
+    "name": "猿飞日斩",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90026/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90026/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90049": {
+    "name": "鬼灯水月",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90049/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90049/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90055": {
+    "name": "佩恩「天道」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90055/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90055/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90072": {
+    "name": "月光疾风",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90072/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90072/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90077": {
+    "name": "手鞠「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90077/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90077/ap.png?t=1787729494",
+    "localPortrait": "portrait-90077.webp"
+  },
+  "hyrz-ninja-90130": {
+    "name": "角都",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90130/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90130/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90131": {
+    "name": "日向花火",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90131/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90131/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90133": {
+    "name": "日向雏田「冬日限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90133/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90133/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90135": {
+    "name": "宇智波佐助「新春限定」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90135/bd1.png?t=1787729494",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90135/ap.png?t=1787729494"
+  },
+  "hyrz-ninja-90044": {
+    "name": "飞段",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90044/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90044/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90048": {
+    "name": "香燐",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90048/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90048/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90050": {
+    "name": "重吾",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90050/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90050/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90057": {
+    "name": "小南",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90057/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90057/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90108": {
+    "name": "天天「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90108/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90108/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90112": {
+    "name": "秋道丁次「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90112/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90112/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90116": {
+    "name": "油女志乃「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90116/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90116/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90137": {
+    "name": "手鞠「镰多利」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90137/bd1.png?t=1787729493",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90137/ap.png?t=1787729493"
+  },
+  "hyrz-ninja-90011": {
+    "name": "波风水门",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90011/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90011/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90051": {
+    "name": "日向雏田「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90051/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90051/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90053": {
+    "name": "阿飞",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90053/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90053/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90068": {
+    "name": "多由也",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90068/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90068/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90070": {
+    "name": "左近右近",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90070/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90070/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90125": {
+    "name": "宇智波鼬「暗部」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90125/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90125/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90128": {
+    "name": "山中井野「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90128/bd1.png?t=1787729492",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90128/ap.png?t=1787729492"
+  },
+  "hyrz-ninja-90034": {
+    "name": "我爱罗「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90034/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90034/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90038": {
+    "name": "迪达拉",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90038/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90038/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90067": {
+    "name": "鬼童丸",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90067/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90067/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90069": {
+    "name": "次郎坊",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90069/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90069/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90107": {
+    "name": "日向宁次「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90107/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90107/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90109": {
+    "name": "李洛克「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90109/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90109/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90126": {
+    "name": "旗木卡卡西「暗部」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90126/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90126/ap.png?t=1787729491",
+    "localPortrait": "portrait-90126.webp"
+  },
+  "hyrz-ninja-90127": {
+    "name": "春野樱「夏日泳装」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90127/bd1.png?t=1787729491",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90127/ap.png?t=1787729491"
+  },
+  "hyrz-ninja-90036": {
+    "name": "宇智波佐助「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90036/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90036/ap.png?t=1787729490",
+    "localPortrait": "portrait-90036.webp"
+  },
+  "hyrz-ninja-90037": {
+    "name": "春野樱「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90037/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90037/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90039": {
+    "name": "蝎",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90039/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90039/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90043": {
+    "name": "大和",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90043/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90043/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90046": {
+    "name": "奈良鹿丸「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90046/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90046/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90078": {
+    "name": "勘九郎「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90078/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90078/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90105": {
+    "name": "海野伊鲁卡",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90105/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90105/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90113": {
+    "name": "山中井野「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90113/bd1.png?t=1787729490",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90113/ap.png?t=1787729490"
+  },
+  "hyrz-ninja-90021": {
+    "name": "大蛇丸",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90021/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90021/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90022": {
+    "name": "宇智波鼬",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90022/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90022/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90023": {
+    "name": "干柿鬼鲛",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90023/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90023/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90035": {
+    "name": "漩涡鸣人「疾风传」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90035/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90035/ap.png?t=1787729489",
+    "localPortrait": "portrait-90035.webp"
+  },
+  "hyrz-ninja-90042": {
+    "name": "佐井",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90042/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90042/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90076": {
+    "name": "漩涡玖辛奈",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90076/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90076/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90121": {
+    "name": "天天「新春风旗袍」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90121/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90121/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90122": {
+    "name": "李洛克「杜门」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90122/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90122/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90123": {
+    "name": "宇智波佐助「写轮眼」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90123/bd1.png?t=1787729489",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90123/ap.png?t=1787729489"
+  },
+  "hyrz-ninja-90014": {
+    "name": "秋道丁次",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90014/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90014/ap.png?t=1787729488",
+    "localPortrait": "portrait-90014.webp"
+  },
+  "hyrz-ninja-90020": {
+    "name": "勘九郎",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90020/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90020/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90029": {
+    "name": "君麻吕",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90029/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90029/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90031": {
+    "name": "药师兜",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90031/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90031/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90064": {
+    "name": "木叶丸军团",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90064/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90064/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90065": {
+    "name": "宇智波带土「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90065/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90065/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90071": {
+    "name": "静音",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90071/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90071/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90073": {
+    "name": "御手洗红豆",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90073/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90073/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90074": {
+    "name": "旗木卡卡西「少年」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90074/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90074/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90075": {
+    "name": "夕日红",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90075/bd1.png?t=1787729488",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90075/ap.png?t=1787729488"
+  },
+  "hyrz-ninja-90017": {
+    "name": "天天",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90017/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90017/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90018": {
+    "name": "油女志乃",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90018/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90018/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90019": {
+    "name": "手鞠",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90019/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90019/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90027": {
+    "name": "漩涡鸣人「第一尾」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90027/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90027/ap.png?t=1787729487",
+    "localPortrait": "portrait-90027.webp"
+  },
+  "hyrz-ninja-90028": {
+    "name": "宇智波佐助「咒印」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90028/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90028/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90030": {
+    "name": "君麻吕「咒印」",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90030/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90030/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90032": {
+    "name": "桃地再不斩",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90032/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90032/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90033": {
+    "name": "白",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90033/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90033/ap.png?t=1787729487"
+  },
+  "hyrz-ninja-90047": {
+    "name": "猿飞阿斯玛",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90047/bd1.png?t=1787729487",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90047/ap.png?t=1787729487",
+    "localPortrait": "portrait-90047.webp"
+  },
+  "hyrz-ninja-90006": {
+    "name": "日向雏田",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90006/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90006/ap.png?t=1787729486"
+  },
+  "hyrz-ninja-90007": {
+    "name": "奈良鹿丸",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90007/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90007/ap.png?t=1787729486",
+    "localPortrait": "portrait-90007.webp"
+  },
+  "hyrz-ninja-90008": {
+    "name": "我爱罗",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90008/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90008/ap.png?t=1787729486",
+    "localPortrait": "portrait-90008.webp"
+  },
+  "hyrz-ninja-90009": {
+    "name": "旗木卡卡西",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90009/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90009/ap.png?t=1787729486",
+    "localPortrait": "portrait-90009.webp"
+  },
+  "hyrz-ninja-90010": {
+    "name": "自来也",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90010/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90010/ap.png?t=1787729486",
+    "localPortrait": "portrait-90010.webp"
+  },
+  "hyrz-ninja-90012": {
+    "name": "纲手",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90012/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90012/ap.png?t=1787729486"
+  },
+  "hyrz-ninja-90013": {
+    "name": "迈特凯",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90013/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90013/ap.png?t=1787729486",
+    "localPortrait": "portrait-90013.webp"
+  },
+  "hyrz-ninja-90015": {
+    "name": "日向宁次",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90015/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90015/ap.png?t=1787729486",
+    "localPortrait": "portrait-90015.webp"
+  },
+  "hyrz-ninja-90016": {
+    "name": "犬塚牙",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90016/bd1.png?t=1787729486",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90016/ap.png?t=1787729486"
+  },
+  "hyrz-ninja-90002": {
+    "name": "春野樱",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90002/bd1.png?t=1787729485",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90002/ap.png?t=1787729485",
+    "localPortrait": "portrait-90002.webp"
+  },
+  "hyrz-ninja-90003": {
+    "name": "宇智波佐助",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90003/bd1.png?t=1787729485",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90003/ap.png?t=1787729485",
+    "localPortrait": "portrait-90003.webp"
+  },
+  "hyrz-ninja-90004": {
+    "name": "山中井野",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90004/bd1.png?t=1787729485",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90004/ap.png?t=1787729485"
+  },
+  "hyrz-ninja-90005": {
+    "name": "李洛克",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90005/bd1.png?t=1787729485",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90005/ap.png?t=1787729485"
+  },
+  "hyrz-ninja-90001": {
+    "name": "漩涡鸣人",
+    "portrait": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90001/bd1.png?t=1787729477",
+    "icon": "https://ninja.hyrz.qq.com/hyrz/prod/ninja/90001/ap.png?t=1787729477",
+    "localPortrait": "portrait-90001.webp"
+  }
+}

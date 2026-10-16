@@ -10,7 +10,7 @@ import { useDataPackStore } from '@/dataPack/store'
 export default function App() {
   const location = useLocation()
   const animationsEnabled = useSettingsStore((s) => s.settings.animationsEnabled)
-  const isFocusedView = location.pathname === '/bp' || location.pathname.endsWith('/presentation')
+  const isFocusedView = location.pathname === '/bp' || location.pathname.startsWith('/room/')
 
   // v0.4 数据包引导：v2 用户迁移分类 + 激活包与生效池对齐（幂等）；
   // 随后按「每天最多一次」的频率静默检查远程包更新（只提示，不自动应用）

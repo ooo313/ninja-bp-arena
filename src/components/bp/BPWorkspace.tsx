@@ -29,6 +29,7 @@ import { playSound } from '@/utils/sound'
 import { normalizeForSearch, searchRank } from '@/utils/format'
 import { CheckCircle2, Hourglass } from 'lucide-react'
 import { ResourceGrid } from '@/components/resource/ResourceGrid'
+import { GameArena } from '@/components/arena/GameArena'
 import { canSelectResource, getResourceCardStatus, getResourceDraftRules, RESOURCE_TYPE_LABEL, type DraftResource, type DraftResourceType } from '@bp-core'
 
 const QUALITY_ORDER = { S: 0, A: 1, B: 2, C: 3 } as const
@@ -45,6 +46,7 @@ export function BPWorkspace() {
   const ninjas = source.matchNinjas ?? storeNinjas
   const settings = useSettingsStore((s) => s.settings)
   const isOnline = source.mode === 'online'
+  const gameView = settings.bpView !== 'classic'
 
   const [search, setSearch] = useState('')
   const [quality, setQuality] = useState<QualityFilter>('ALL')
@@ -210,7 +212,23 @@ export function BPWorkspace() {
   )
 
   return (
-    <div className="flex min-h-screen flex-col pb-14 lg:pb-0">
+    <div className={gameView ? 'min-h-screen' : 'flex min-h-screen flex-col pb-14 lg:pb-0'}>
+      {gameView ? <GameArena
+        onlineBanner={isOnline ? <OnlineBanners /> : undefined}
+        onClassic={() => useSettingsStore.getState().update({ bpView: 'classic' })}
+        onHistory={() => setHistoryOpen(true)}
+        onReset={() => setResetOpen(true)}
+        onWinner={setWinnerConfirm}
+        onResults={() => {
+          if (match.status === 'MATCH_FINISHED') useSettingsStore.getState().update({ bpView: 'classic' })
+          else setResultOpen(true)
+        }}
+        onTimerExpire={handleTimerExpire}
+        onTimerRestart={() => { source.restartTimer(); setTimeoutActive(false) }}
+        onResumeTimeout={() => setTimeoutActive(false)}
+        timeoutActive={timeoutActive}
+      /> : <>
+      <button type="button" onClick={() => useSettingsStore.getState().update({ bpView: 'game' })} className="absolute right-3 top-2 z-40 rounded border border-gold-accent/40 bg-surface-1 px-2 py-1 text-xs text-gold-accent">游戏界面</button>
       <BPHeader match={match} onOpenHistory={() => setHistoryOpen(true)} onOpenReset={() => setResetOpen(true)} />
 
       {/* 在线：轮到谁操作 / 撤销请求横幅 */}
@@ -339,6 +357,7 @@ export function BPWorkspace() {
       </main>
 
       <BPControlBar match={match} onOpenHistory={() => setHistoryOpen(true)} />
+      </>}
 
       {/* 弹层 */}
       <BPHistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
