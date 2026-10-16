@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './classic-fixture'
 
 test('Data Page 清晰显示 Demo、来源、版本、数量和素材状态', async ({ page }) => {
   await page.goto('/data')

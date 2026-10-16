@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './classic-fixture'
 
 async function pickNinja(page: import('@playwright/test').Page, name: string) {
   await page.getByRole('button', { name: new RegExp(`^${name}`) }).click()

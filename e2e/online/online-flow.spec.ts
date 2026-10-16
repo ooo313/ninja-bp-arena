@@ -1,4 +1,5 @@
-import { expect, test, type BrowserContext, type Page } from '@playwright/test'
+import { createClassicContext } from '../classic-fixture'
+import { expect, test, type BrowserContext, type Page } from '../classic-fixture'
 
 /**
  * 在线集成：完整用户流程（双 BrowserContext 模拟两名玩家 + 观战者）。
@@ -74,9 +75,9 @@ test.describe.serial('在线 BO3 全流程', () => {
   let observer: Page
 
   test('创建房间 + 双方加入 + 观战加入 + Host 开始', async ({ browser }) => {
-    ctxBlue = await browser.newContext()
-    ctxRed = await browser.newContext()
-    ctxObserver = await browser.newContext()
+    ctxBlue = await createClassicContext(browser)
+    ctxRed = await createClassicContext(browser)
+    ctxObserver = await createClassicContext(browser)
     blue = await ctxBlue.newPage()
     red = await ctxRed.newPage()
     observer = await ctxObserver.newPage()
@@ -217,7 +218,7 @@ test.describe.serial('在线 BO3 全流程', () => {
     const link = await dialog.getByLabel('分享链接').inputValue()
     expect(link).toMatch(/\/share\/[A-Za-z0-9_-]{32,64}$/)
 
-    const publicContext = await browser.newContext()
+    const publicContext = await createClassicContext(browser)
     const publicPage = await publicContext.newPage()
     await publicPage.goto(link)
     await expect(publicPage.getByText('用户分享的 BP 记录').first()).toBeVisible({ timeout: 20_000 })
@@ -227,7 +228,7 @@ test.describe.serial('在线 BO3 全流程', () => {
     await publicContext.close()
 
     await dialog.getByRole('button', { name: '撤销' }).click()
-    const revokedContext = await browser.newContext()
+    const revokedContext = await createClassicContext(browser)
     const revokedPage = await revokedContext.newPage()
     await revokedPage.goto(link)
     await expect(revokedPage.getByText('该分享已失效')).toBeVisible({ timeout: 20_000 })

@@ -48,7 +48,7 @@ export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinne
   const drafts = getResourceDraftRules(match.rule).filter((draft) => draft.enabled)
   const inDraft = phase.status === 'BANNING' || phase.status === 'PICKING'
   const activeType = phase.resourceType ?? 'NINJA'
-  useEffect(() => { setViewType(activeType); setPage(0) }, [activeType])
+  useEffect(() => { setViewType(activeType); setPage(0); setSearch('') }, [activeType])
   const pool = viewType === 'NINJA' ? ninjas : source.matchResources?.[viewType] ?? EMPTY_RESOURCES
   const filtered = useMemo(() => {
     const query = normalizeForSearch(search)

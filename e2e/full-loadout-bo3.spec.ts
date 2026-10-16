@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test'
+import { expect, test, type Page } from './classic-fixture'
 
 const ninjaGames = [
   ['漩涡鸣人', '宇智波佐助', '旗木卡卡西', '宇智波鼬', '自来也', '纲手', '大蛇丸', '我爱罗', '迪达拉', '蝎'],

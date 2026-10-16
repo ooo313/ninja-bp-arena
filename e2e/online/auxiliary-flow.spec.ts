@@ -1,4 +1,5 @@
-import { expect, test, type Page } from '@playwright/test'
+import { createClassicContext } from '../classic-fixture'
+import { expect, test, type Page } from '../classic-fixture'
 
 async function join(page: Page, code: string, name: string, watch = false) {
   await page.goto(`/room/${code}${watch ? '?watch=1' : ''}`)
@@ -34,9 +35,9 @@ async function resource(page: Page, side: '蓝' | '红', type: '秘卷' | '通�
 }
 
 test('在线 Full Loadout：BLUE / RED / Observer 使用同一 Room Snapshot', async ({ browser }) => {
-  const blueContext = await browser.newContext()
-  const redContext = await browser.newContext()
-  const observerContext = await browser.newContext()
+  const blueContext = await createClassicContext(browser)
+  const redContext = await createClassicContext(browser)
+  const observerContext = await createClassicContext(browser)
   const blue = await blueContext.newPage()
   const red = await redContext.newPage()
   const observer = await observerContext.newPage()
@@ -81,9 +82,9 @@ test('在线 Full Loadout：BLUE / RED / Observer 使用同一 Room Snapshot', a
 })
 
 test('Presentation View 复用房间状态且始终只读', async ({ browser }) => {
-  const blueContext = await browser.newContext()
-  const redContext = await browser.newContext()
-  const displayContext = await browser.newContext({ viewport: { width: 1920, height: 1080 } })
+  const blueContext = await createClassicContext(browser)
+  const redContext = await createClassicContext(browser)
+  const displayContext = await createClassicContext(browser, { viewport: { width: 1920, height: 1080 } })
   const blue = await blueContext.newPage()
   const red = await redContext.newPage()
   const display = await displayContext.newPage()

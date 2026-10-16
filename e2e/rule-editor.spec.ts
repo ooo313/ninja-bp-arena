@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './classic-fixture'
 
 test('Rule Editor previews all games and blocks invalid sequences and insufficient pools', async ({ page }) => {
   await page.goto('/settings')

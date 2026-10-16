@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { expect, test } from '@playwright/test'
+import { expect, test } from './classic-fixture'
 
 test('Data Pack 导入预览、应用与恢复内置包', async ({ page }) => {
   await page.goto('/data')

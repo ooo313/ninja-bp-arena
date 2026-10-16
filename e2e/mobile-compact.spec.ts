@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './classic-fixture'
 
 test.use({ viewport: { width: 375, height: 667 } })
 
