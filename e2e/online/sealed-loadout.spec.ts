@@ -74,9 +74,33 @@ test('在线同时盲选：双方同阶段操作，单方提交不可见，重�
       await expect(page.locator('.arena-player-red')).toContainText('盲选蓝')
       await expect(page.locator('.arena-toolbar')).toContainText('GAME 2 · 0 : 1')
     }
-    await expect(red.getByText('轮到你操作（蓝方）', { exact: false })).toBeVisible({ timeout: 20_000 })
+    // Game view renders its turn indicator in the arena, rather than the
+    // classic view's "轮到你操作" banner. Verify both the indicator and permissions.
+    await expect(red.locator('.arena-step-hint')).toContainText('1P · 选择忍者', { timeout: 20_000 })
     await expect(blue.locator('.arena-step-hint')).toContainText('等待1P操作')
+    for (const page of [blue, red, observer]) await page.getByRole('textbox', { name:'搜索忍者' }).fill('千手柱间')
+    const firstPick = { name:'预览忍者 千手柱间', exact:true }
+    await expect(red.getByRole('gridcell', firstPick)).toBeEnabled({ timeout: 20_000 })
+    await expect(blue.getByRole('gridcell', firstPick)).toBeDisabled()
+    await expect(observer.getByRole('gridcell', firstPick)).toBeDisabled()
     await ninja(red, '千手柱间')
-    await expect(blue.getByText('轮到你操作（红方）', { exact: false })).toBeVisible({ timeout: 20_000 })
-  } finally { for (const context of contexts) await context.close() }
+    await expect(blue.locator('.arena-step-hint')).toContainText('2P · 选择忍者', { timeout: 20_000 })
+    await expect(red.locator('.arena-step-hint')).toContainText('等待2P操作', { timeout: 20_000 })
+    // Original blue is now on the right and receives two consecutive picks.
+    await ninja(blue, '波风水门')
+    await expect(blue.locator('.arena-step-hint')).toContainText('2P · 选择忍者')
+    await ninja(blue, '佩恩')
+    await expect(blue.locator('.arena-step-hint')).toContainText('等待1P操作', { timeout: 20_000 })
+    await expect(observer.getByRole('gridcell', firstPick)).toBeDisabled()
+  } finally {
+    // Only close the temporary room created by this test, including on failure.
+    try {
+      const close = blue.getByRole('button', { name: '关闭房间', exact: true })
+      if (await close.isVisible()) {
+        await close.click()
+        await blue.getByRole('dialog').getByRole('button', { name:'关闭房间', exact:true }).click()
+        await expect(blue).not.toHaveURL(/\/room\//, { timeout: 20_000 })
+      }
+    } finally { for (const context of contexts) await context.close() }
+  }
 })
