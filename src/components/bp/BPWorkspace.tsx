@@ -1,5 +1,5 @@
 import { sideAtPosition, sideLabel } from '@bp-core'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import type { Side } from '@/types/bp'
 import { getPhase } from '@/engine/bpEngine'
@@ -48,7 +48,7 @@ export function BPWorkspace() {
   const ninjas = source.matchNinjas ?? storeNinjas
   const settings = useSettingsStore((s) => s.settings)
   const isOnline = source.mode === 'online'
-  const gameView = settings.bpView !== 'classic' || Boolean(match && getSealedDraft(match))
+  const gameView = settings.bpLayout !== 'classic' || Boolean(match && getSealedDraft(match))
 
   const [search, setSearch] = useState('')
   const [quality, setQuality] = useState<QualityFilter>('ALL')
@@ -57,6 +57,7 @@ export function BPWorkspace() {
   const [historyOpen, setHistoryOpen] = useState(false)
   const [resetOpen, setResetOpen] = useState(false)
   const [winnerConfirm, setWinnerConfirm] = useState<Side | null>(null)
+  const matchResultRef = useRef<HTMLDivElement>(null)
   const [resultOpen, setResultOpen] = useState(false)
   const [timeoutActive, setTimeoutActive] = useState(false)
   const [inspected, setInspected] = useState<{ type: DraftResourceType; resource: DraftResource } | null>(null)
@@ -217,12 +218,12 @@ export function BPWorkspace() {
     <div className={gameView ? 'min-h-screen' : 'flex min-h-screen flex-col pb-14 lg:pb-0'}>
       {gameView ? <GameArena
         onlineBanner={isOnline ? <OnlineBanners /> : undefined}
-        onClassic={() => useSettingsStore.getState().update({ bpView: 'classic' })}
+        onClassic={() => useSettingsStore.getState().update({ bpLayout: 'classic' })}
         onHistory={() => setHistoryOpen(true)}
         onReset={() => setResetOpen(true)}
         onWinner={setWinnerConfirm}
         onResults={() => {
-          if (match.status === 'MATCH_FINISHED') useSettingsStore.getState().update({ bpView: 'classic' })
+          if (match.status === 'MATCH_FINISHED') matchResultRef.current?.scrollIntoView({ block: 'start' })
           else setResultOpen(true)
         }}
         onTimerExpire={handleTimerExpire}
@@ -230,7 +231,7 @@ export function BPWorkspace() {
         onResumeTimeout={() => setTimeoutActive(false)}
         timeoutActive={timeoutActive}
       /> : <>
-      <button type="button" onClick={() => useSettingsStore.getState().update({ bpView: 'game' })} className="absolute right-3 top-2 z-40 rounded border border-gold-accent/40 bg-surface-1 px-2 py-1 text-xs text-gold-accent">游戏界面</button>
+      <button type="button" onClick={() => useSettingsStore.getState().update({ bpLayout: 'game' })} className="absolute right-3 top-2 z-40 rounded border border-gold-accent/40 bg-surface-1 px-2 py-1 text-xs text-gold-accent">游戏界面</button>
       <BPHeader match={match} onOpenHistory={() => setHistoryOpen(true)} onOpenReset={() => setResetOpen(true)} />
 
       {/* 在线：轮到谁操作 / 撤销请求横幅 */}
@@ -338,28 +339,31 @@ export function BPWorkspace() {
                 </button>
               </section>
             )}
-            {match.status === 'MATCH_FINISHED' && (
-              <MatchResult
-                match={match}
-                replaySource={isOnline ? 'ONLINE' : 'LOCAL'}
-                roomId={isOnline ? useOnlineRoomStore.getState().roomId ?? undefined : undefined}
-                extraActions={
-                  <button
-                    type="button"
-                    onClick={() => setResetOpen(true)}
-                    className="rounded bg-blue-team px-4 py-2 text-sm font-medium text-white transition-colors hover:brightness-110"
-                  >
-                    重新开始
-                  </button>
-                }
-              />
-            )}
           </div>
         </div>
       </main>
 
       <BPControlBar match={match} onOpenHistory={() => setHistoryOpen(true)} />
       </>}
+
+      {match.status === 'MATCH_FINISHED' && (
+        <div ref={matchResultRef} className="mx-auto w-full max-w-[960px] px-3 py-4">
+          <MatchResult
+            match={match}
+            replaySource={isOnline ? 'ONLINE' : 'LOCAL'}
+            roomId={isOnline ? useOnlineRoomStore.getState().roomId ?? undefined : undefined}
+            extraActions={
+              <button
+                type="button"
+                onClick={() => setResetOpen(true)}
+                className="rounded bg-blue-team px-4 py-2 text-sm font-medium text-white transition-colors hover:brightness-110"
+              >
+                重新开始
+              </button>
+            }
+          />
+        </div>
+      )}
 
       {/* 弹层 */}
       <BPHistoryDrawer open={historyOpen} onClose={() => setHistoryOpen(false)} />
