@@ -10,7 +10,7 @@ import { useDataPackStore } from '@/dataPack/store'
 export default function App() {
   const location = useLocation()
   const animationsEnabled = useSettingsStore((s) => s.settings.animationsEnabled)
-  const gameView = useSettingsStore((s) => s.settings.bpView !== 'classic')
+  const gameView = useSettingsStore((s) => s.settings.bpLayout !== 'classic')
   const isFocusedView = location.pathname === '/bp' || location.pathname.endsWith('/presentation') || (gameView && location.pathname.startsWith('/room/'))
 
   // v0.4 数据包引导：v2 用户迁移分类 + 激活包与生效池对齐（幂等）；
