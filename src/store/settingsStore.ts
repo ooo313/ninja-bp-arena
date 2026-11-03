@@ -6,8 +6,8 @@ import { loadJSON, saveJSON, STORAGE_KEYS } from '@/utils/storage'
 
 /** 应用设置（bp_settings）+ 自定义规则模板（battle_rules） */
 export interface AppSettings {
-  /** Visual layout only; never changes BP rules or match state. */
-  bpView?: 'game' | 'classic'
+  /** Explicit layout choice. Legacy bpView values also came from opening match results. */
+  bpLayout?: 'game' | 'classic'
   soundEnabled: boolean
   animationsEnabled: boolean
   /** 忍者池排序：默认顺序（品质优先）/ 名称 / 发布时间 / 最近新增 */
@@ -17,7 +17,7 @@ export interface AppSettings {
 }
 
 const DEFAULT_SETTINGS: AppSettings = {
-  bpView: 'game',
+  bpLayout: 'game',
   soundEnabled: false,
   animationsEnabled: true,
   ninjaSort: 'quality',
