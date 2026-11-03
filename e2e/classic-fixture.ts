@@ -7,7 +7,7 @@ function seedClassicView(version: number) {
   if (localStorage.getItem(key)) return
   localStorage.setItem(key, JSON.stringify({
     __v: version,
-    data: { bpView: 'classic', soundEnabled: false, animationsEnabled: false, ninjaSort: 'quality', firstUseTipSeen: false },
+    data: { bpLayout: 'classic', soundEnabled: false, animationsEnabled: false, ninjaSort: 'quality', firstUseTipSeen: false },
   }))
 }
 

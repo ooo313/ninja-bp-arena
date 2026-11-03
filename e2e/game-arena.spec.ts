@@ -1,6 +1,15 @@
 import { expect, test, type Page } from '@playwright/test'
+import { STORAGE_SCHEMA_VERSION } from '../src/utils/storage'
 
 async function startGameView(page: Page, fullLoadout = false) {
+  await page.addInitScript((version) => {
+    const key = 'ninja-bp.bp_settings'
+    if (localStorage.getItem(key)) return
+    localStorage.setItem(key, JSON.stringify({
+      __v: version,
+      data: { bpView: 'classic', soundEnabled: false, animationsEnabled: false, ninjaSort: 'quality', firstUseTipSeen: false },
+    }))
+  }, STORAGE_SCHEMA_VERSION)
   await page.goto('/')
   const start = page.getByRole('banner').getByRole('button', { name: '开始 BP' })
   if (!(await start.isVisible())) await page.getByRole('button', { name: '菜单' }).click()
