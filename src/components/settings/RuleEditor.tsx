@@ -108,7 +108,7 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
             const bestOf = Number(event.target.value)
             onChange({ ...draft, bestOf, winsRequired: (bestOf + 1) / 2, id: 'custom-bp-rule', name: 'Custom（自定义示例）' })
           }}>
-            {[1, 3, 5].map((value) => <option key={value} value={value}>BO{value} · 先胜 {(value + 1) / 2} 局</option>)}
+            {[1, 3, 5,7].map((value) => <option key={value} value={value}>BO{value} · 先胜 {(value + 1) / 2} 局</option>)}
           </select>
         </label>
       </div>
