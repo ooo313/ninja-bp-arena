@@ -13,7 +13,7 @@ let roomCode = ''
 
 async function createRoom(page: Page, displayName: string) {
   await page.goto('/online')
-  await page.getByText('比赛规则（当前模板）').waitFor()
+  await expect(page.getByRole('combobox', { name: '房间规则模板' })).toBeVisible()
   await page.getByPlaceholder('蓝方玩家').fill(displayName)
   await page.getByRole('button', { name: /创建房间/ }).click()
   await page.waitForURL(/\/room\/[A-HJ-KM-NP-Z2-9]{6}/, { timeout: 20000 })
@@ -34,19 +34,14 @@ async function joinRoom(page: Page, code: string, displayName: string, watch = f
  * 因此每局最后一手（选择后网格消失）也能正确确认。
  * 整体重试以消化 revision 冲突 / Realtime 滞后 / 重渲染闪烁。
  */
-async function clickNinja(page: Page, name: string, _expectLabel?: string) {
-  void _expectLabel
+async function clickNinja(page: Page, name: string, expectedStatus: string) {
+  const title = expectedStatus === '已禁用' ? `${name}（已被禁用）` : name
+  const slot = page.locator('main aside').getByTitle(title, { exact: true }).first()
+  const card = page.getByRole('button', { name: `${name}（可选）`, exact: true })
   await expect(async () => {
-    const slot = page.locator('aside').getByText(name, { exact: true }).first()
-    if ((await slot.count()) > 0 && (await slot.isVisible())) return  // 已入槽
-    const card = page.getByRole('button', { name: new RegExp(`^${name}（可选）`) })
-    if ((await card.count()) === 0) {
-      const stage = await page.locator('section[aria-live="polite"]').textContent()
-      throw new Error(`${name} 卡片未渲染。阶段: ${stage?.slice(0, 80)}`)
-    }
-    await card.click()
-    await page.waitForTimeout(600)
-    throw new Error(`${name} 待确认，重试`)
+    if (await slot.isVisible()) return
+    await card.click({ timeout: 3_000 })
+    await expect(slot).toBeVisible({ timeout: 8_000 })
   }).toPass({ timeout: 45000 })
 }
 
@@ -228,6 +223,7 @@ test.describe.serial('在线 BO3 全流程', () => {
     await publicContext.close()
 
     await dialog.getByRole('button', { name: '撤销' }).click()
+    await expect(dialog.getByText(/^已撤销/)).toBeVisible({ timeout: 20_000 })
     const revokedContext = await createClassicContext(browser)
     const revokedPage = await revokedContext.newPage()
     await revokedPage.goto(link)

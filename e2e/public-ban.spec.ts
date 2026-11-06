@@ -1,0 +1,26 @@
+import { expect, test } from '@playwright/test'
+
+test('规则允许切换为仅己方锁定，并在本地开赛前选择公 Ban', async ({ page }) => {
+  await page.goto('/settings')
+  const scope = page.getByRole('combobox', { name: '忍者锁定范围' })
+  await expect(scope).toHaveValue('BOTH')
+  await scope.selectOption('OWN')
+  await page.getByLabel('启用赛前公 Ban').check()
+  await page.getByRole('button', { name: '保存规则', exact: true }).click()
+  await page.reload()
+  await expect(scope).toHaveValue('OWN')
+  await expect(page.getByLabel('启用赛前公 Ban')).toBeChecked()
+
+  await page.goto('/')
+  await page.getByRole('banner').getByRole('button', { name: '开始 BP', exact: true }).click()
+  const picker = page.getByRole('group', { name: '赛前公 Ban' })
+  await picker.getByRole('textbox').fill('漩涡鸣人')
+  await picker.getByRole('button', { name: '漩涡鸣人', exact: true }).click()
+  await page.getByRole('button', { name: '开始比赛', exact: true }).click()
+  await page.getByText('全场公 Ban · 1 名').click()
+  await expect(page.locator('details')).toContainText('漩涡鸣人')
+  await page.getByRole('textbox', { name: '搜索忍者', exact: true }).fill('漩涡鸣人')
+  const card = page.getByRole('gridcell', { name: '预览忍者 漩涡鸣人', exact: true })
+  await expect(card).toBeDisabled()
+  await expect(card).toHaveAttribute('data-state', 'BANNED')
+})

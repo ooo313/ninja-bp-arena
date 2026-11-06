@@ -118,7 +118,7 @@ export const roomApi = {
     commandId: string
     expectedRevision: number
     type: OnlineCommandType
-    payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string; resourceIds?: (string | null)[]; phaseKey?: string; deadline?: number }
+    payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string; resourceIds?: (string | null)[]; phaseKey?: string; deadline?: number; publicBans?: string[] }
   }): Promise<CommandResponse> {
     return callFunction<CommandResponse>('room-command', input)
   },

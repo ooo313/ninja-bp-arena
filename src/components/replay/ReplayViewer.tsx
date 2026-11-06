@@ -52,6 +52,7 @@ export function ReplayViewer({ replay, shared }: Props) {
           <span className="max-w-28 truncate text-sm font-semibold text-red-team-soft">{replay.players.red}</span>
         </div>
       </header>
+      {replay.publicBans?.length ? <p className="px-4 pt-3 text-xs text-gold-accent">全场公 Ban · {replay.publicBans.map((id) => nameOf('NINJA', id)).join('、')}</p> : null}
 
       <div className="grid gap-4 p-4 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <div className="space-y-4">

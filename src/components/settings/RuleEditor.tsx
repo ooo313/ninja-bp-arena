@@ -126,6 +126,12 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
         </label>
       </div>
 
+      <label className="flex items-center gap-2 text-xs text-fog-300">
+        <input type="checkbox" checked={Boolean(draft.publicBanEnabled)} onChange={(event) => onChange({ ...draft, publicBanEnabled: event.target.checked })} />
+        启用赛前公 Ban
+      </label>
+      {draft.publicBanEnabled && <p className="text-xs text-fog-500">本地开赛前或在线等待室可选忍者，双方所有小局都禁用这些忍者。</p>}
+
       {savedRules.length > 0 && <section className="space-y-2 rounded border border-border-muted p-3" aria-label="已保存的规则">
         <h3 className="text-sm font-bold text-fog-100">已保存的规则</h3>
         <ul className="space-y-1">
@@ -171,6 +177,14 @@ export function RuleEditor({ draft, onChange, onSave, onRestore }: {
                 ['banOnlyFirstGame', '仅第一局执行 Ban'],
                 ['resetEachGame', '每局重新选择阵容'],
               ] as const).map(([key, label]) => <label key={key} className="flex items-center gap-2"><input type="checkbox" disabled={item.selectionMode === 'SIMULTANEOUS' && (key === 'uniqueAcrossSides' || key === 'resetEachGame')} checked={Boolean(item[key])} onChange={(event) => updateDraft(type, { [key]: event.target.checked })} />{label}</label>)}
+              {item.crossGameLock && <label className="flex items-center gap-2">
+                <span>锁定范围</span>
+                <select className={fieldClass} aria-label={RESOURCE_TYPE_LABEL[type] + '锁定范围'} value={item.crossGameLockScope ?? 'BOTH'}
+                  onChange={(event) => updateDraft(type, { crossGameLockScope: event.target.value === 'OWN' ? 'OWN' : 'BOTH' })}>
+                  <option value="BOTH">双方已使用资源</option>
+                  <option value="OWN">仅己方已使用资源</option>
+                </select>
+              </label>}
             </div>
             {advanced && item.selectionMode !== 'SIMULTANEOUS' && <div className="mt-4 space-y-2 border-t border-border-muted pt-3">
               <p className="text-xs font-semibold text-fog-300">完整 Draft Sequence · 顺序即执行顺序</p>

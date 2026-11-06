@@ -18,6 +18,7 @@ import type { BattleResources } from './resourceRegistry.ts'
 import { getResource, getResourcesByType } from './resourceRegistry.ts'
 import { completeTimedOutStep, DRAFT_TIMEOUT_GRACE_MS } from './draftTimeout.ts'
 import { getSealedDraft } from './sealedLoadout.ts'
+import { validatePublicBans } from './poolRequirement.ts'
 
 /**
  * 在线房间命令处理器（Shared BP Core 的纯函数部分）。
@@ -100,7 +101,7 @@ export interface RoomCommand {
   roomId: string
   expectedRevision: number
   type: OnlineCommandType
-  payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: Side; gameNumber?: number; deadline?: number; phaseKey?: string }
+  payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: Side; gameNumber?: number; deadline?: number; phaseKey?: string; publicBans?: unknown }
 }
 
 export type CommandOutcome =
@@ -157,9 +158,13 @@ function applyOneCommand(ctx: RoomCommandContext, cmd: RoomCommand): { match: Ma
       if (ctx.roomStatus !== 'WAITING') return reject('ROOM_NOT_WAITING', '房间已经开始或已结束')
       if (!ctx.seatMembers.BLUE || !ctx.seatMembers.RED) return reject('SEAT_NOT_READY', '需要蓝红双方都就座后才能开始')
       if (match.status !== 'SETUP') return reject('ROOM_NOT_WAITING', '比赛状态异常')
+      const publicBans = cmd.payload?.publicBans === undefined ? [] : cmd.payload.publicBans
+      const reason = validatePublicBans(match.rule, publicBans, ctx.resources?.ninjas ?? ctx.ninjas)
+      if (reason) return reject('INVALID_COMMAND', reason)
       // 玩家名称由服务端从 room_members.display_name 填充，不信任客户端
       const next = startMatch({
         ...match,
+        ...(match.rule.publicBanEnabled ? { publicBans: publicBans as string[] } : {}),
         bluePlayerName: ctx.seatMembers.BLUE.displayName || match.bluePlayerName,
         redPlayerName: ctx.seatMembers.RED.displayName || match.redPlayerName,
       }, { now: ctx.now })

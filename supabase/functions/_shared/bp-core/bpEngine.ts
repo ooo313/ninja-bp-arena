@@ -1,4 +1,4 @@
-import type { BPActionType, BattleRule, DraftResourceBase, DraftResourceType, PlayerGameState, Side } from './types.ts'
+import type { BPActionType, BattleRule, DraftResourceBase, DraftResourceType, PlayerGameState, ResourceDraftRule, Side } from './types.ts'
 import type { EngineResult, GameState, MatchState } from './types.ts'
 import type { Ninja } from './types.ts'
 import { expandSequence, getResourceDraftRules, normalizeBattleRule, type ExpandedAction } from './ruleEngine.ts'
@@ -49,6 +49,14 @@ export function getPlayerResourceState(
 ): { bans: string[]; picks: string[] } {
   if (resourceType === 'NINJA') return player
   return player.resources?.[resourceType] ?? { bans: [], picks: [] }
+}
+
+export function isUsedResourceLocked(game: GameState, draft: ResourceDraftRule, side: Side | null, id: string): boolean {
+  if (!draft.crossGameLock) return false
+  const blue = getPlayerResourceState(game.blue, draft.resourceType).picks
+  const red = getPlayerResourceState(game.red, draft.resourceType).picks
+  if (draft.crossGameLockScope === 'OWN') return side === 'BLUE' ? blue.includes(id) : side === 'RED' && red.includes(id)
+  return blue.includes(id) || red.includes(id)
 }
 
 function ensurePlayerResourceState(
@@ -136,6 +144,7 @@ export function restartMatch(m: MatchState, context?: TransitionContext): MatchS
     score: { blue: 0, red: 0 },
     currentGame: 1,
     games: [createGameState(1)],
+    publicBans: undefined,
     history: [],
     status: 'SETUP',
     timer: undefined,
@@ -299,6 +308,7 @@ export function canSelectResource(
   }
 
   const label = RESOURCE_TYPE_LABEL[resourceType]
+  if (resourceType === 'NINJA' && m.publicBans?.includes(resourceId)) return deny('该忍者已被公 Ban，本场锁定')
   if (!resource || resource.id !== resourceId) return deny(`${label}不存在`)
   if (!resource.enabled || resource.deprecated) return deny(`该${label}已被停用`)
 
@@ -326,15 +336,9 @@ export function canSelectResource(
     return deny(`该${label}已被禁用`)
   }
 
-  if (draft.crossGameLock) {
-    for (const g of m.games) {
-      if (g.gameNumber === game.gameNumber) continue
-      const blue = getPlayerResourceState(g.blue, resourceType)
-      const red = getPlayerResourceState(g.red, resourceType)
-      if (blue.picks.includes(resourceId) || red.picks.includes(resourceId)) {
-        return deny(resourceType === 'NINJA' ? '该忍者已在之前小局出战' : `该${label}已在之前小局使用`)
-      }
-    }
+  if (draft.crossGameLock && m.games.some((past) => past.gameNumber < game.gameNumber && isUsedResourceLocked(past, draft, phase.side, resourceId))) {
+    if (draft.crossGameLockScope === 'OWN') return deny('己方已在之前小局使用该资源')
+    return deny(resourceType === 'NINJA' ? '该忍者已在之前小局出战' : `该${label}已在之前小局使用`)
   }
 
   return ALLOW
@@ -348,7 +352,8 @@ export interface NinjaStatusInfo {
   reason: string
 }
 
-export function getResourceCardStatus(m: MatchState, resourceType: DraftResourceType, resource: Pick<DraftResourceBase, 'id' | 'enabled' | 'deprecated'>): NinjaStatusInfo {
+export function getResourceCardStatus(m: MatchState, resourceType: DraftResourceType, resource: Pick<DraftResourceBase, 'id' | 'enabled' | 'deprecated'>, side = getPhase(m).side): NinjaStatusInfo {
+  if (resourceType === 'NINJA' && m.publicBans?.includes(resource.id)) return { status: 'BANNED', reason: '公 Ban · 本场锁定' }
   if (!resource.enabled || resource.deprecated) return { status: 'DISABLED', reason: '该资源已被停用' }
   const game = getCurrentGame(m)
   const currentNumber = game.gameNumber
@@ -369,13 +374,8 @@ export function getResourceCardStatus(m: MatchState, resourceType: DraftResource
     }
   }
 
-  if (draft?.crossGameLock) {
-    for (const g of m.games) {
-      if (g.gameNumber === currentNumber) continue
-      if (getPlayerResourceState(g.blue, resourceType).picks.includes(resource.id) || getPlayerResourceState(g.red, resourceType).picks.includes(resource.id)) {
-        return { status: 'USED', reason: '该资源已在之前小局使用' }
-      }
-    }
+  if (draft?.crossGameLock && m.games.some((past) => past.gameNumber < currentNumber && isUsedResourceLocked(past, draft, side, resource.id))) {
+    return { status: 'USED', reason: draft.crossGameLockScope === 'OWN' ? '己方已在之前小局使用' : '该资源已在之前小局使用' }
   }
 
   if (getPhase(m).resourceType !== resourceType || m.status !== 'IN_PROGRESS') return { status: 'LOCKED', reason: '当前非该资源阶段' }
@@ -464,9 +464,11 @@ export function enterGame(m: MatchState, context?: TransitionContext): EngineRes
     if (blue.length !== draft.slotsPerSide || red.length !== draft.slotsPerSide) return fail('双方阵容槽位尚未填满')
     if (new Set(blue).size !== blue.length || new Set(red).size !== red.length) return fail('阵容包含重复资源')
     if (draft.uniqueAcrossSides && blue.some((id) => red.includes(id))) return fail('双方阵容包含重复资源')
-    for (const id of [...blue, ...red]) {
-      const check = canUseFinalResource(m, draft.resourceType, id)
-      if (!check.allowed) return fail(check.reason ?? '阵容包含不可用资源')
+    for (const side of ['BLUE', 'RED'] as const) {
+      for (const id of side === 'BLUE' ? blue : red) {
+        const check = canUseFinalResource(m, draft, side, id)
+        if (!check.allowed) return fail(check.reason ?? '阵容包含不可用资源')
+      }
     }
   }
   const next = cloneMatch(m)
@@ -475,16 +477,15 @@ export function enterGame(m: MatchState, context?: TransitionContext): EngineRes
   return { ok: true, state: next }
 }
 
-function canUseFinalResource(m: MatchState, resourceType: DraftResourceType, id: string): SelectCheck {
-  const draft = getResourceDraftRules(m.rule).find((item) => item.resourceType === resourceType)
+function canUseFinalResource(m: MatchState, draft: ResourceDraftRule, side: Side, id: string): SelectCheck {
+  const resourceType = draft.resourceType
+  if (resourceType === 'NINJA' && m.publicBans?.includes(id)) return deny('阵容包含公 Ban 忍者')
   const game = getCurrentGame(m)
   for (const past of m.games) {
     if (past.gameNumber === game.gameNumber || draft?.banPersistence) {
       if (getPlayerResourceState(past.blue, resourceType).bans.includes(id) || getPlayerResourceState(past.red, resourceType).bans.includes(id)) return deny('阵容包含已禁用资源')
     }
-    if (past.gameNumber < game.gameNumber && draft?.crossGameLock) {
-      if (getPlayerResourceState(past.blue, resourceType).picks.includes(id) || getPlayerResourceState(past.red, resourceType).picks.includes(id)) return deny('阵容包含跨局锁定资源')
-    }
+    if (past.gameNumber < game.gameNumber && isUsedResourceLocked(past, draft, side, id)) return deny('阵容包含跨局锁定资源')
   }
   return ALLOW
 }
@@ -527,21 +528,29 @@ export function nextGame(
     for (const draft of getResourceDraftRules(m.rule)) {
       const steps = sequence.filter((step) => step.resourceType === draft.resourceType)
       if (!steps.length) continue
-      const excluded = new Set<string>()
+      const excluded = new Set(draft.resourceType === 'NINJA' ? m.publicBans ?? [] : [])
+      const used = { BLUE: new Set<string>(), RED: new Set<string>() }
       if (draft.banPersistence || draft.crossGameLock) {
         for (const played of m.games) {
-          for (const player of [played.blue, played.red]) {
+          for (const side of ['BLUE', 'RED'] as const) {
+            const player = side === 'BLUE' ? played.blue : played.red
             const { bans, picks } = getPlayerResourceState(player, draft.resourceType)
             if (draft.banPersistence) for (const id of bans) excluded.add(id)
-            if (draft.crossGameLock) for (const id of picks) excluded.add(id)
+            if (draft.crossGameLock) for (const id of picks) used[side].add(id)
           }
         }
       }
-      const bans = steps.filter((step) => step.action === 'BAN').length
-      const needed = bans + draft.slotsPerSide * (draft.uniqueAcrossSides ? 2 : 1)
-      const available = new Set(getPool(draft.resourceType)
+      const ownOnly = draft.crossGameLock && draft.crossGameLockScope === 'OWN'
+      if (!ownOnly) for (const id of [...used.BLUE, ...used.RED]) excluded.add(id)
+      const pool = [...new Set(getPool(draft.resourceType)
         .filter((item) => item.enabled && !item.deprecated && !excluded.has(item.id))
-        .map((item) => item.id)).size
+        .map((item) => item.id))]
+      const bans = steps.filter((step) => step.action === 'BAN').length
+      const shared = ownOnly ? pool.filter((id) => !used.BLUE.has(id) && !used.RED.has(id)).length : draft.slotsPerSide
+      const needed = bans + draft.slotsPerSide + (draft.uniqueAcrossSides ? Math.min(draft.slotsPerSide, shared) : 0)
+      const available = ownOnly
+        ? Math.min(pool.filter((id) => !used.BLUE.has(id)).length, pool.filter((id) => !used.RED.has(id)).length)
+        : pool.length
       if (available < needed) return fail(`剩余${RESOURCE_TYPE_LABEL[draft.resourceType]}不足，下一局需要 ${needed} 个，当前可用 ${available} 个`)
     }
   }

@@ -1,5 +1,5 @@
 import type { DraftResourceType, MatchState, Side } from './types.ts'
-import { cloneMatch, getCurrentGame, getPhase, getPlayerResourceState, rebuildTimer, selectResource } from './bpEngine.ts'
+import { cloneMatch, getCurrentGame, getPhase, getPlayerResourceState, isUsedResourceLocked, rebuildTimer, selectResource } from './bpEngine.ts'
 import { getResourceDraftRules } from './ruleEngine.ts'
 import { getResource, type BattleResources } from './resourceRegistry.ts'
 
@@ -33,7 +33,7 @@ export function checkSealedChoice(match: MatchState, side: Side, type: DraftReso
     const mine = getPlayerResourceState(side === 'BLUE' ? game.blue : game.red, type)
     const other = getPlayerResourceState(side === 'BLUE' ? game.red : game.blue, type)
     if ((game.gameNumber === match.currentGame || phase.rule.banPersistence) && [...mine.bans, ...other.bans].includes(id)) return { allowed: false, reason: '该资源已被禁用' }
-    if (game.gameNumber < match.currentGame && phase.rule.crossGameLock && [...mine.picks, ...other.picks].includes(id)) return { allowed: false, reason: '该资源已在之前小局使用' }
+    if (game.gameNumber < match.currentGame && isUsedResourceLocked(game, phase.rule, side, id)) return { allowed: false, reason: '该资源已在之前小局使用' }
   }
   return { allowed: true }
 }

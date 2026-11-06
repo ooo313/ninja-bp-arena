@@ -106,6 +106,8 @@ export interface ResourceDraftRule {
   slotsPerSide: number
   sequence: BPSequenceStep[]
   crossGameLock: boolean
+  /** 默认 BOTH，旧规则继续锁定双方；OWN 按原选手身份锁定。 */
+  crossGameLockScope?: 'BOTH' | 'OWN'
   uniqueAcrossSides: boolean
   banPersistence: boolean
   banOnlyFirstGame?: boolean
@@ -121,6 +123,7 @@ export interface BattleRule {
   /** Exchange screen positions and all sequential first turns after each game.
    * Stored BLUE/RED identifiers remain attached to the original players/seats. */
   swapSidesEachGame?: boolean
+  publicBanEnabled?: boolean
   id: string
   name: string
   version: string
@@ -152,6 +155,7 @@ export interface BattleRule {
 /** Runtime projection. Legacy ninja fields are accepted at the boundary only. */
 export interface NormalizedBattleRule {
   swapSidesEachGame?: boolean
+  publicBanEnabled?: boolean
   id: string
   name: string
   version: string
@@ -223,6 +227,7 @@ export interface MatchTimerState {
 export interface MatchState {
   id: string
   rule: BattleRule
+  publicBans?: string[]
   bluePlayerName: string
   redPlayerName: string
   score: { blue: number; red: number }

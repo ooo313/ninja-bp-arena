@@ -1,4 +1,4 @@
-import type { BattleRule } from './types.ts'
+import type { BattleRule, DraftResourceBase } from './types.ts'
 import { getResourceDraftRules, validateBattleRule } from './ruleEngine.ts'
 
 /**
@@ -35,7 +35,8 @@ export function getMinimumRequiredResources(rule: BattleRule): MinimumRequiredRe
     const redPicks = draft.sequence.filter((step) => step.action === 'PICK' && step.side === 'RED').reduce((sum, step) => sum + step.count, 0)
     const picksPerGame = draft.uniqueAcrossSides ? bluePicks + redPicks : Math.max(bluePicks, redPicks)
     const gameCount = draft.resetEachGame ? (rule.bestOf || 1) : 1
-    const picksTotal = draft.crossGameLock ? picksPerGame * gameCount : picksPerGame
+    const priorPicksPerGame = draft.crossGameLockScope === 'OWN' ? Math.max(bluePicks, redPicks) : picksPerGame
+    const picksTotal = picksPerGame + (draft.crossGameLock ? priorPicksPerGame * (gameCount - 1) : 0)
     const required = draft.banPersistence
       ? (draft.banOnlyFirstGame ? bansPerGame : bansPerGame * gameCount) + picksTotal
       : draft.banOnlyFirstGame && gameCount > 1
@@ -46,6 +47,34 @@ export function getMinimumRequiredResources(rule: BattleRule): MinimumRequiredRe
     else result.summons = required
   }
   return result
+}
+
+export const MAX_PUBLIC_BANS = 32
+
+export function isPublicBanList(value: unknown): value is string[] {
+  return Array.isArray(value) && value.length <= MAX_PUBLIC_BANS &&
+    value.every((id) => typeof id === 'string' && id.length > 0 && id.length <= 100) &&
+    new Set(value).size === value.length
+}
+
+export function getPublicBanLimit(rule: BattleRule, pool: Pick<DraftResourceBase, 'id' | 'enabled' | 'deprecated'>[]): number {
+  if (!rule.publicBanEnabled) return 0
+  const enabled = new Set(pool.filter((item) => item.enabled && !item.deprecated).map((item) => item.id)).size
+  return Math.min(MAX_PUBLIC_BANS, Math.max(0, enabled - getMinimumRequiredPoolSize(rule)))
+}
+
+export function validatePublicBans(
+  rule: BattleRule,
+  value: unknown,
+  pool: Pick<DraftResourceBase, 'id' | 'enabled' | 'deprecated'>[],
+): string | null {
+  if (!isPublicBanList(value)) return '公 Ban 列表无效或包含重复忍者'
+  if (value.length === 0) return null
+  if (!rule.publicBanEnabled) return '当前规则未开启公 Ban'
+  const eligible = new Set(pool.filter((item) => item.enabled && !item.deprecated).map((item) => item.id))
+  if (value.some((id) => !eligible.has(id))) return '公 Ban 包含不存在或已停用的忍者'
+  const limit = getPublicBanLimit(rule, pool)
+  return value.length > limit ? `公 Ban 最多可选 ${limit} 名，需为各局 BP 保留足够忍者` : null
 }
 
 export interface RuleFeasibility {

@@ -33,7 +33,7 @@ export function GameResultDialog({ match, open, onClose }: GameResultDialogProps
           {playerScore(match, sideAtPosition(match, 'BLUE'))} <span className="text-fog-600">:</span> {playerScore(match, sideAtPosition(match, 'RED'))}
         </span>
         <p className="text-xs text-fog-500">
-          {ninjaRule?.crossGameLock ? '已出场的忍者将在后续小局中保持锁定。' : '已出场的忍者可在后续小局再次选择。'}
+          {ninjaRule?.crossGameLock ? ninjaRule.crossGameLockScope === 'OWN' ? '各选手仅锁定自己已出场的忍者。' : '双方已出场的忍者将在后续小局中保持锁定。' : '已出场的忍者可在后续小局再次选择。'}
         </p>
         {(game.blue.resources || game.red.resources) && (
           <div className="w-full rounded border border-ink-600 bg-ink-900/50 p-3 text-xs text-fog-300">

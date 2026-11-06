@@ -117,6 +117,7 @@ export function buildShareText(
   lines.push('忍界 BP｜武斗赛模拟结果')
   lines.push(`${m.rule.name}`)
   lines.push(m.rule.swapSidesEachGame ? `${matchFormatLabel(m.rule.bestOf)}  ${m.bluePlayerName} ${m.score.blue} : ${m.score.red} ${m.redPlayerName}` : `${matchFormatLabel(m.rule.bestOf)}  蓝方 ${m.score.blue} : ${m.score.red} 红方`)
+  if (m.publicBans?.length) lines.push('全场公 Ban · ' + m.publicBans.map(nameOf).join('、'))
   if (finished && winnerSide) {
     lines.push(`总胜者：${sideLabel(m, winnerSide)}（${playerName(m, winnerSide)}）`)
   }

@@ -6,6 +6,7 @@ import { getPhase } from '@/engine/bpEngine'
 import { useNinjaStore } from '@/store/ninjaStore'
 import { useSettingsStore } from '@/store/settingsStore'
 import { toast } from '@/store/toastStore'
+import { useNinjaLookup } from '@/hooks/useNinjaLookup'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 import { BPHeader } from '@/components/bp/BPHeader'
 import { BPStage } from '@/components/bp/BPStage'
@@ -41,6 +42,7 @@ import { canSelectResource, getResourceCardStatus, getResourceDraftRules, RESOUR
 export function BPWorkspace() {
   const source = useMatchSource()
   const match = source.match
+  const { nameOf } = useNinjaLookup(match)
   const storeNinjas = useNinjaStore((s) => s.ninjas)
   // v0.4 显示权威：本地 = 比赛快照；在线 = 房间 Ninja Snapshot；都缺失才用本地池
   const ninjas = source.matchNinjas ?? storeNinjas
@@ -198,6 +200,10 @@ export function BPWorkspace() {
 
   return (
     <div className={gameView ? 'min-h-screen' : 'flex min-h-screen flex-col pb-14 lg:pb-0'}>
+      {match.publicBans?.length ? <details className="mx-auto max-w-[1500px] px-3 py-1 text-xs text-fog-300">
+        <summary className="cursor-pointer text-gold-accent">全场公 Ban · {match.publicBans.length} 名</summary>
+        <p className="mt-1">{match.publicBans.map(nameOf).join('、')}</p>
+      </details> : null}
       {gameView ? <GameArena
         onlineBanner={isOnline ? <OnlineBanners /> : undefined}
         onClassic={() => useSettingsStore.getState().update({ bpLayout: 'classic' })}

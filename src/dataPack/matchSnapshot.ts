@@ -12,7 +12,7 @@ import type { MatchState, OnlineNinjaSnapshot } from '@bp-core'
 
 /** 收集比赛中引用过的忍者 ID（games 的 bans/picks + history） */
 export function collectReferencedNinjaIds(match: MatchState): Set<string> {
-  const ids = new Set<string>()
+  const ids = new Set(match.publicBans ?? [])
   for (const action of match.history) ids.add(action.ninjaId)
   for (const game of match.games) {
     for (const id of game.blue.bans) ids.add(id)
@@ -32,7 +32,7 @@ export function compactMatchForHistory(match: MatchState): MatchState {
   if (!match.ninjaSnapshot && !match.resourceSnapshot) return match
   const referenced = collectReferencedNinjaIds(match)
   const byType = {
-    NINJA: new Set<string>(),
+    NINJA: new Set(match.publicBans ?? []),
     SECRET_SCROLL: new Set<string>(),
     SUMMON: new Set<string>(),
   }

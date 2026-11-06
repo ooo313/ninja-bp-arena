@@ -2,10 +2,11 @@ import { matchFormatLabel } from '@bp-core'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AlertTriangle } from 'lucide-react'
+import { PublicBanPicker } from './PublicBanPicker'
 import { Dialog } from '@/components/common/Dialog'
 import { useBPStore } from '@/store/bpStore'
 import { useRuleSelection } from '@/components/settings/useRuleSelection'
-import { countEnabledResources, analyzeRuleFeasibility, getResourceDraftRules, RESOURCE_TYPE_LABEL } from '@bp-core'
+import { countEnabledResources, analyzeRuleFeasibility, getResourceDraftRules, getPublicBanLimit, validatePublicBans, RESOURCE_TYPE_LABEL } from '@bp-core'
 import { useNinjaStore } from '@/store/ninjaStore'
 import type { MatchState } from '@/types/match'
 import { useDataPackStore } from '@/dataPack/store'
@@ -26,6 +27,7 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
   const { options, selected, select, rule } = useRuleSelection()
   const [blueName, setBlueName] = useState('')
   const [redName, setRedName] = useState('')
+  const [publicBans, setPublicBans] = useState<string[]>([])
   // 注意：selector 不能每次返回新对象（会触发无限重渲染），这里选 ninjas 数组后计算
   const ninjas = useNinjaStore((s) => s.ninjas)
   const activePackId = useDataPackStore((s) => s.activePackId)
@@ -37,11 +39,14 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
     summons: countEnabledResources(activePack?.summons ?? []),
   }
   const analysis = analyzeRuleFeasibility(rule, available)
+  const selectedBans = rule.publicBanEnabled ? publicBans : []
+  const banError = validatePublicBans(rule, selectedBans, ninjas)
   const poolInsufficient = analysis.errors.length > 0
 
   const handleStart = () => {
-    if (poolInsufficient) return
-    startNewMatch(blueName, redName, rule)
+    if (poolInsufficient || banError) return
+    startNewMatch(blueName, redName, rule, selectedBans)
+    setPublicBans([])
     onClose()
     navigate('/bp')
   }
@@ -59,8 +64,8 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
           <button
             type="button"
             onClick={handleStart}
-            disabled={poolInsufficient}
-            title={poolInsufficient ? analysis.errors[0] : undefined}
+            disabled={poolInsufficient || Boolean(banError)}
+            title={banError ?? analysis.errors[0]}
             className="rounded-lg bg-side-blue px-5 py-2 text-sm font-bold text-white transition-colors hover:bg-side-blue/85 disabled:cursor-not-allowed disabled:opacity-40"
           >
             开始比赛
@@ -106,12 +111,14 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
 
         <label className="flex flex-col gap-1.5">
           <span className="text-xs font-medium text-fog-300">规则模板</span>
-          <select value={selected} onChange={(event) => select(event.target.value)} className="rounded-lg border border-ink-500 bg-ink-900 px-3 py-2 text-sm text-fog-100">
+          <select value={selected} onChange={(event) => { select(event.target.value); setPublicBans([]) }} className="rounded-lg border border-ink-500 bg-ink-900 px-3 py-2 text-sm text-fog-100">
             {options.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
           </select>
           <span className="text-[10px] text-fog-600">模板均为玩家工具配置，不代表官方赛事规则。</span>
         </label>
 
+        {rule.publicBanEnabled && <PublicBanPicker ninjas={ninjas} selected={publicBans} limit={getPublicBanLimit(rule, ninjas)} onChange={setPublicBans} />}
+        {banError && <p role="alert" className="text-xs text-red-team-soft">{banError}</p>}
         <div className="rounded-lg border border-ink-600 bg-ink-900/60 p-3 text-xs">
           <p className="mb-1 font-semibold text-fog-300">规则模板：{rule.name}</p>
           {getResourceDraftRules(rule).filter((draft) => draft.enabled).map((draft) => <p key={draft.resourceType} className="text-fog-500">{RESOURCE_TYPE_LABEL[draft.resourceType]}：{draft.sequence.map((step) => `${step.side === 'BLUE' ? '蓝方' : '红方'} ${step.action}×${step.count}`).join(' → ')}</p>)}

@@ -208,7 +208,7 @@ export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinne
         <div className={`arena-pool ${sealed ? 'is-sealed-draft' : ''}`} role="grid" aria-label={`${RESOURCE_TYPE_LABEL[viewType]}资源列表`}>
           {visible.items.map((resource) => {
             const eligibility = sealed ? checkSealedChoice(match, actingSide, viewType, resource.id, resources, slotIds.filter((id, index): id is string => Boolean(id) && index !== activeSlot)) : canSelectResource(match, viewType, resource.id, resource)
-            const state = getResourceCardStatus(match, viewType, resource).status
+            const state = getResourceCardStatus(match, viewType, resource, sealed ? actingSide : phase.side).status
             const highlighted = selected?.id === resource.id
             const locked = !eligibility.allowed || !source.canOperate || Boolean(ownLocked) || busy || Boolean(source.pendingCommand) || timeoutActive
             return <button key={resource.id} type="button" role="gridcell" data-resource-card data-state={state} aria-label={`预览${RESOURCE_TYPE_LABEL[viewType]} ${resource.name}`} aria-pressed={highlighted} disabled={locked} title={`${resource.name}${eligibility.reason ? ' · ' + eligibility.reason : ''}`} className={`arena-card ${highlighted ? 'is-active' : ''} ${state !== 'AVAILABLE' ? 'state-' + state.toLowerCase() : ''}`} onClick={() => setPreview({ type: viewType, id: resource.id, revision: match.updatedAt })}>

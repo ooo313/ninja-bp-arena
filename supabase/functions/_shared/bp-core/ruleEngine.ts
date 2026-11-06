@@ -43,6 +43,7 @@ export function normalizeBattleRule(rule: BattleRule | NormalizedBattleRule): No
       }]
   return {
     swapSidesEachGame: rule.swapSidesEachGame,
+    publicBanEnabled: rule.publicBanEnabled,
     id: rule.id, name: rule.name, version: rule.version,
     bestOf: rule.bestOf, winsRequired: rule.winsRequired,
     timerEnabled: rule.timerEnabled, timerSeconds: rule.timerSeconds,
@@ -122,6 +123,7 @@ export function matchFormatLabel(bestOf: number): string {
 /** 校验整份规则（设置页保存 / 在线房间创建时使用） */
 export function validateBattleRule(rule: BattleRule): string[] {
   const errors: string[] = []
+  if (rule.publicBanEnabled !== undefined && typeof rule.publicBanEnabled !== 'boolean') errors.push('公 Ban 开关必须是 boolean')
   if (rule.swapSidesEachGame !== undefined && typeof rule.swapSidesEachGame !== 'boolean') errors.push('swapSidesEachGame 必须是 boolean')
   if (![0, 1, 3, 5, 7].includes(rule.bestOf)) errors.push('赛制只支持无上限或 BO1 / BO3 / BO5 / BO7')
   if (rule.winsRequired !== (rule.bestOf === 0 ? 0 : (rule.bestOf + 1) / 2)) errors.push('winsRequired 必须与赛制一致')
@@ -161,6 +163,7 @@ export function validateBattleRule(rule: BattleRule): string[] {
         if (draft.selectionMode !== undefined && !['SEQUENTIAL', 'SIMULTANEOUS'].includes(draft.selectionMode)) errors.push(`${label}.selectionMode 非法`)
         if (draft.selectionMode === 'SIMULTANEOUS' && (draft.resourceType === 'NINJA' || draft.uniqueAcrossSides || !draft.resetEachGame || (Array.isArray(draft.sequence) && draft.sequence.some((step) => step.action !== 'PICK')))) errors.push(`${label} 同时盲选仅支持每局重选、双方可使用相同资源的辅助资源 PICK`)
         if (draft.enabled) enabledCount += 1
+        if (draft.crossGameLockScope !== undefined && draft.crossGameLockScope !== 'BOTH' && draft.crossGameLockScope !== 'OWN') errors.push(`${label}.crossGameLockScope 非法`)
         if (typeof draft.crossGameLock !== 'boolean' || typeof draft.uniqueAcrossSides !== 'boolean' || typeof draft.banPersistence !== 'boolean' || typeof draft.resetEachGame !== 'boolean') errors.push(`${label} 的锁定配置必须是 boolean`)
         if (draft.banOnlyFirstGame !== undefined && typeof draft.banOnlyFirstGame !== 'boolean') errors.push(`${label}.banOnlyFirstGame 必须是 boolean`)
         if (!Number.isInteger(draft.slotsPerSide) || draft.slotsPerSide < (draft.enabled ? 1 : 0) || draft.slotsPerSide > 12) {

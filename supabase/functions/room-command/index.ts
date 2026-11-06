@@ -95,7 +95,7 @@ Deno.serve(async (req) => {
       commandId?: unknown
       expectedRevision?: unknown
       type?: unknown
-      payload?: { ninjaId?: unknown; resourceId?: unknown; resourceType?: unknown; side?: unknown; resourceIds?: unknown; phaseKey?: unknown; deadline?: unknown }
+      payload?: { ninjaId?: unknown; resourceId?: unknown; resourceType?: unknown; side?: unknown; resourceIds?: unknown; phaseKey?: unknown; deadline?: unknown; publicBans?: unknown }
     }
 
     const roomId = typeof body.roomId === 'string' ? body.roomId : ''
@@ -216,6 +216,7 @@ Deno.serve(async (req) => {
         expectedRevision,
         type,
         payload: {
+          publicBans: body.payload?.publicBans,
           phaseKey: typeof body.payload?.phaseKey === 'string' ? body.payload.phaseKey : undefined,
           deadline: typeof body.payload?.deadline === 'number' ? body.payload.deadline : undefined,
           ninjaId: typeof body.payload?.ninjaId === 'string' ? body.payload.ninjaId : undefined,

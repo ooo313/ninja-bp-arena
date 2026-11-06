@@ -1,4 +1,4 @@
-import { matchFormatLabel } from '@bp-core'
+import { getPublicBanLimit, matchFormatLabel, validatePublicBans } from '@bp-core'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Copy, DoorClosed, Save } from 'lucide-react'
@@ -7,6 +7,7 @@ import { roomApi } from '@/online/roomClient'
 import { describeSequence } from '@/engine/ruleEngine'
 import { OnlineMatchSource } from '@/matchSource/OnlineMatchSource'
 import { BPWorkspace } from '@/components/bp/BPWorkspace'
+import { PublicBanPicker } from '@/components/match/PublicBanPicker'
 import { ConfirmDialog } from '@/components/common/ConfirmDialog'
 import { toast } from '@/store/toastStore'
 import { copyToClipboard } from '@/utils/clipboard'
@@ -236,6 +237,10 @@ function WaitingRoom({ code }: { code: string }) {
     return installedPacks.find((pack) => pack.manifest.id === activePackId) ?? null
   }, [activePackId, installedPacks])
   const [starting, setStarting] = useState(false)
+  const [publicBans, setPublicBans] = useState<string[]>([])
+  const roomNinjas = useOnlineRoomStore((s) => s.roomNinjas) ?? []
+  const selectedBans = match?.rule.publicBanEnabled ? publicBans : []
+  const banError = match ? validatePublicBans(match.rule, selectedBans, roomNinjas) : null
 
   const blue = members.find((m) => m.seat === 'BLUE')
   const red = members.find((m) => m.seat === 'RED')
@@ -262,7 +267,7 @@ function WaitingRoom({ code }: { code: string }) {
 
   const start = async () => {
     setStarting(true)
-    const r = await sendCommand('START_MATCH')
+    const r = await sendCommand('START_MATCH', match?.rule.publicBanEnabled ? { publicBans: selectedBans } : undefined)
     setStarting(false)
     if (!r.ok && r.reason) toast(r.reason, 'error')
   }
@@ -345,11 +350,17 @@ function WaitingRoom({ code }: { code: string }) {
         </p>
       )}
 
+      {match?.rule.publicBanEnabled && <div className="mt-5">
+        {isHost ? <PublicBanPicker ninjas={roomNinjas} selected={publicBans} limit={getPublicBanLimit(match.rule, roomNinjas)} onChange={setPublicBans} />
+          : <p className="text-xs text-fog-500">本场已开启赛前公 Ban，房主将在开赛时公布名单。</p>}
+        {banError && <p role="alert" className="mt-2 text-xs text-red-team-soft">{banError}</p>}
+      </div>}
+
       {isHost ? (
         <button
           type="button"
           onClick={() => void start()}
-          disabled={!bothReady || starting}
+          disabled={!bothReady || starting || Boolean(banError)}
           className="mt-6 w-full rounded bg-gold px-4 py-3 text-sm font-bold text-ink-950 transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
         >
           {starting ? '正在开始……' : bothReady ? '开始比赛' : '等待对方加入后开始'}

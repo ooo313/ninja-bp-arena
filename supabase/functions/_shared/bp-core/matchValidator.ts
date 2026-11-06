@@ -1,3 +1,4 @@
+import { isPublicBanList } from './poolRequirement.ts'
 import type { BattleRule, BPAction, MatchStatus, Side, BPActionType, MatchState, Ninja } from './types.ts'
 import { validateBattleRule } from './ruleEngine.ts'
 import { getCurrentDraftPhase, getGameSequence, getPlayerResourceState } from './bpEngine.ts'
@@ -162,6 +163,8 @@ export function validateMatchState(value: unknown): boolean {
   // currentGame 必须指向最后一局
   if (!Array.isArray(value.games) || value.games.length === 0) return false
   const rule = value.rule as unknown as BattleRule
+  if (value.publicBans !== undefined && (!isPublicBanList(value.publicBans) || (!rule.publicBanEnabled && value.publicBans.length > 0))) return false
+  const publicBans = new Set(value.publicBans as string[] | undefined)
   if (rule.bestOf !== 0 && value.games.length > rule.bestOf) return false
   for (let i = 0; i < value.games.length; i += 1) {
     const game = value.games[i] as Record<string, unknown>
@@ -192,6 +195,7 @@ export function validateMatchState(value: unknown): boolean {
 
   const match = value as unknown as MatchState
   for (const game of games) {
+    if ([...game.blue.bans, ...game.red.bans, ...game.blue.picks, ...game.red.picks].some((id) => publicBans.has(id))) return false
     const sequence = getGameSequence(match, game.gameNumber)
     for (const type of ['NINJA', 'SECRET_SCROLL', 'SUMMON'] as const) {
       const blue = getPlayerResourceState(game.blue, type)

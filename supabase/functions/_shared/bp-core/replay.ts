@@ -7,6 +7,7 @@ import type {
   Side,
 } from './types.ts'
 import { validateStoredRule } from './matchValidator.ts'
+import { isPublicBanList } from './poolRequirement.ts'
 
 export const REPLAY_SCHEMA_VERSION = 1
 export const REPLAY_IMPORT_MAX_BYTES = 2 * 1024 * 1024
@@ -55,6 +56,7 @@ export interface BPReplay {
   completedAt: number
   source: ReplaySource
   rule: BattleRule
+  publicBans?: string[]
   players: { blue: string; red: string }
   finalScore: { blue: number; red: number }
   winner: Side
@@ -155,7 +157,7 @@ export function createReplayFromMatch(
   if (match.status !== 'MATCH_FINISHED') throw new Error('只有已完成比赛可以生成复盘')
   const actions: ReplayAction[] = []
   const games: ReplayGame[] = []
-  const refs = new Set<string>()
+  const refs = new Set((match.publicBans ?? []).map((id) => resourceKey('NINJA', id)))
 
   for (const game of match.games) {
     if (!game.winner) continue
@@ -212,6 +214,7 @@ export function createReplayFromMatch(
     completedAt: match.updatedAt,
     source,
     rule: structuredClone(match.rule),
+    ...(match.publicBans?.length ? { publicBans: [...match.publicBans] } : {}),
     players: { blue: match.bluePlayerName, red: match.redPlayerName },
     finalScore: { ...match.score },
     winner,
@@ -319,6 +322,14 @@ export function validateReplay(value: unknown, maxBytes = REPLAY_IMPORT_MAX_BYTE
     else referenced.add(resourceKey(action.resourceType as DraftResourceType, action.resourceId as string))
   }
   for (const [game, winner] of gameWinners) if (results.get(game) !== winner) errors.push(`Game ${game} RESULT 与 winner 不一致`)
+  if (value.publicBans !== undefined) {
+    if (!isPublicBanList(value.publicBans) || (value.publicBans.length > 0 && !rule?.publicBanEnabled)) errors.push('公 Ban 列表无效')
+    else for (const id of value.publicBans) {
+      const key = resourceKey('NINJA', id)
+      if (referenced.has(key)) errors.push('公 Ban 忍者出现在 BP 记录中')
+      if (!snapshotKeys.has(key)) errors.push('公 Ban 缺少忍者快照')
+    }
+  }
   for (const ref of referenced) if (!snapshotKeys.has(ref)) errors.push(`缺少资源快照 ${ref}`)
 
   if (rule && isObject(value.finalScore)) {

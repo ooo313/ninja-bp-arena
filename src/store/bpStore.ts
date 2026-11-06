@@ -66,7 +66,7 @@ interface BPStore {
   recentMatches: MatchState[]
 
   /** 新建并开始比赛（首页「开始 BP」） */
-  startNewMatch: (bluePlayerName?: string, redPlayerName?: string, ruleOverride?: BattleRule) => MatchState
+  startNewMatch: (bluePlayerName?: string, redPlayerName?: string, ruleOverride?: BattleRule, publicBans?: string[]) => MatchState
   /** 继续历史中的未完成比赛 */
   continueMatch: (id: string) => MatchState | null
   selectNinja: (ninjaId: string) => OpResult
@@ -156,7 +156,7 @@ export const useBPStore = create<BPStore>()((set, get) => ({
   stacks: emptyStacks(),
   recentMatches: sanitizeMatchList(loadJSON<unknown>(STORAGE_KEYS.recentMatches, []), 'recent_matches'),
 
-  startNewMatch: (bluePlayerName, redPlayerName, ruleOverride) => {
+  startNewMatch: (bluePlayerName, redPlayerName, ruleOverride, publicBans = []) => {
     const rule = ruleOverride ?? useSettingsStore.getState().activeRule()
     // v0.4：创建比赛时固化忍者池快照与数据包元信息；
     // 之后数据包更新 / 忍者删除不影响进行中的比赛与历史显示
@@ -164,6 +164,7 @@ export const useBPStore = create<BPStore>()((set, get) => ({
     const match: MatchState = {
       ...startMatch(createMatch(rule, bluePlayerName, redPlayerName, { id: crypto.randomUUID(), now: Date.now() }), { now: Date.now() }),
       ...(packSnapshot.dataPack ? { dataPack: packSnapshot.dataPack } : {}),
+      ...(rule.publicBanEnabled ? { publicBans: [...publicBans] } : {}),
       ninjaSnapshot: packSnapshot.ninjaSnapshot,
       resourceSnapshot: packSnapshot.resourceSnapshot,
     }
@@ -284,7 +285,7 @@ export const useBPStore = create<BPStore>()((set, get) => ({
   resetMatch: () => {
     const match = get().match
     if (!match) return
-    get().startNewMatch(match.bluePlayerName, match.redPlayerName)
+    get().startNewMatch(match.bluePlayerName, match.redPlayerName, match.rule, match.publicBans)
   },
 
   deleteRecent: (id) => {
