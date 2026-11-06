@@ -115,12 +115,16 @@ export function parseSequenceSteps(input: unknown, label: string, expectedAction
   return { steps, errors }
 }
 
+export function matchFormatLabel(bestOf: number): string {
+  return bestOf === 0 ? '无上限' : `BO${bestOf}`
+}
+
 /** 校验整份规则（设置页保存 / 在线房间创建时使用） */
 export function validateBattleRule(rule: BattleRule): string[] {
   const errors: string[] = []
   if (rule.swapSidesEachGame !== undefined && typeof rule.swapSidesEachGame !== 'boolean') errors.push('swapSidesEachGame 必须是 boolean')
-  if (![1, 3, 5, 7].includes(rule.bestOf)) errors.push('赛制 bestOf 只支持 1 / 3 / 5 / 7')
-  if (rule.winsRequired !== (rule.bestOf + 1) / 2) errors.push('winsRequired 必须等于过半胜场')
+  if (![0, 1, 3, 5, 7].includes(rule.bestOf)) errors.push('赛制只支持无上限或 BO1 / BO3 / BO5 / BO7')
+  if (rule.winsRequired !== (rule.bestOf === 0 ? 0 : (rule.bestOf + 1) / 2)) errors.push('winsRequired 必须与赛制一致')
   if (typeof rule.timerEnabled !== 'boolean') errors.push('timerEnabled 必须是 boolean')
   if (!Number.isInteger(rule.timerSeconds) || rule.timerSeconds < 5 || rule.timerSeconds > 600) {
     errors.push('倒计时秒数必须在 5 ~ 600 之间')
@@ -171,8 +175,8 @@ export function validateBattleRule(rule: BattleRule): string[] {
             errors.push(`${label}.sequence 包含非法步骤`)
             continue
           }
-          if (draft.enabled && !draft.resetEachGame && draft.crossGameLock && rule.bestOf > 1) errors.push(`${label} 继承阵容不能同时启用跨局锁定`)
-          if (draft.enabled && !draft.resetEachGame && !draft.banPersistence && draft.sequence.some((step) => step.action === 'BAN') && rule.bestOf > 1) errors.push(`${label} 继承 Ban 时必须启用跨局 Ban 持续`)
+          if (draft.enabled && !draft.resetEachGame && draft.crossGameLock && rule.bestOf !== 1) errors.push(`${label} 继承阵容不能同时启用跨局锁定`)
+          if (draft.enabled && !draft.resetEachGame && !draft.banPersistence && draft.sequence.some((step) => step.action === 'BAN') && rule.bestOf !== 1) errors.push(`${label} 继承 Ban 时必须启用跨局 Ban 持续`)
           const picks = draft.sequence.filter((step) => step.action === 'PICK')
           if (draft.enabled && draft.sequence.some((step, stepIndex) => step.action === 'BAN' && draft.sequence.slice(0, stepIndex).some((prior) => prior.action === 'PICK'))) errors.push(`${label}.sequence 不能在 PICK 后执行 BAN`)
           const blue = picks.filter((step) => step.side === 'BLUE').reduce((sum, step) => sum + step.count, 0)

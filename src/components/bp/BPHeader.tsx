@@ -1,3 +1,4 @@
+import { matchFormatLabel } from '@bp-core'
 import { Link } from 'react-router-dom'
 import { History, RotateCcw, Settings2 } from 'lucide-react'
 import type { MatchState } from '@/types/match'
@@ -32,7 +33,7 @@ export function BPHeader({ match, onOpenHistory, onOpenReset }: BPHeaderProps) {
           <span className="hidden items-center gap-1.5 text-[11px] tracking-widest text-fog-600 md:flex">
             <span className="font-semibold text-gold-accent">GAME {phase.gameNumber}</span>
             <span>/</span>
-            <span>BO{match.rule.bestOf}</span>
+            <span>{matchFormatLabel(match.rule.bestOf)}</span>
             <span className="max-w-[160px] truncate">{match.rule.name}</span>
           </span>
         </div>

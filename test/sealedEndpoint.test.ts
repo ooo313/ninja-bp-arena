@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { submitPrivateLoadout } from '../supabase/functions/_shared/loadoutSubmission'
-import { createMatch, getPhase, getSealedDraft, selectResource, startMatch, toBattleResourceSnapshot, type MatchState, type Side } from '../supabase/functions/_shared/bp-core/index'
+import { expirePrivateLoadout, submitPrivateLoadout } from '../supabase/functions/_shared/loadoutSubmission'
+import { createMatch, DRAFT_TIMEOUT_GRACE_MS, getPhase, getSealedDraft, rebuildTimer, selectResource, startMatch, toBattleResourceSnapshot, type MatchState, type Side } from '../supabase/functions/_shared/bp-core/index'
 import { WUDOU_LOADOUT_RULE } from '../src/data/defaultRules'
 
 function fixture() {
@@ -36,9 +36,16 @@ function fixture() {
       }
       return query
     },
-    async rpc(_name: string, args: Record<string, unknown>) {
+    async rpc(name: string, args: Record<string, unknown>) {
       // The real migration enforces this comparison under SELECT FOR UPDATE.
       if (room.revision !== args.p_expected_revision) return { data: null, error: { message: 'REVISION_CONFLICT' } }
+      if (name === 'apply_room_state_cas') {
+        expect(args.p_payload).not.toHaveProperty('resourceIds')
+        room.match_state = structuredClone(args.p_next_match_state as MatchState)
+        room.revision++
+        commits.push({ match: structuredClone(room.match_state), revision: room.revision })
+        return { data: room.revision, error: null }
+      }
       const other = submissions.find((row) => row.phase_key === args.p_phase_key && row.side !== args.p_side)
       if ((other?.command_id ?? null) !== args.p_opponent_command_id) return { data: null, error: { message: 'REVISION_CONFLICT' } }
       submissions.push({ room_id: 'room', phase_key: args.p_phase_key, user_id: args.p_user_id, side: args.p_side, command_id: args.p_command_id, resource_type: args.p_resource_type, resource_ids: args.p_resource_ids })
@@ -50,10 +57,31 @@ function fixture() {
   }
   const phaseKey = getSealedDraft(match)!.key
   const submit = (user: string, ids = ['s0','s1','s2'], command = `${user}-command`, overrides: Record<string, unknown> = {}) => submitPrivateLoadout(db as unknown as Parameters<typeof submitPrivateLoadout>[0], user, 'room', command, { phaseKey, resourceType: 'SECRET_SCROLL', resourceIds: ids, ...overrides })
-  return { room, submissions, commits, submit }
+  const expire = (seat: Side, deadline: number, resourceIds: (string | null)[]) => expirePrivateLoadout(
+    db as unknown as Parameters<typeof expirePrivateLoadout>[0], {
+      userId: seat.toLowerCase(), seat, roomId: room.id, commandId: seat + '-timeout',
+      revision: room.revision, status: room.status, match: room.match_state, snapshot: room.resource_snapshot,
+      expiresAt: Infinity, payload: { phaseKey, deadline, resourceIds },
+    },
+  )
+  return { room, submissions, commits, submit, expire }
 }
 
 describe('服务端私密整组提交', () => {
+  it('超时后保留已提交阵容，并一次公开另一方补齐的选择', async () => {
+    const state = fixture()
+    state.room.match_state = rebuildTimer(state.room.match_state, Date.now())
+    const locked = await state.submit('blue', ['s3', 's2', 's1'])
+    expect(locked.status).toBe(200)
+    const deadline = Date.now() - DRAFT_TIMEOUT_GRACE_MS - 100
+    state.room.match_state.timer!.deadlineAt = deadline
+    const expired = await state.expire('RED', deadline, [null, 's0', 's3'])
+    expect(expired.status).toBe(200)
+    expect(state.commits[0].match.history).toHaveLength(10)
+    expect(state.room.match_state.games[0].blue.resources?.SECRET_SCROLL?.picks).toEqual(['s3', 's2', 's1'])
+    expect(state.room.match_state.games[0].red.resources?.SECRET_SCROLL?.picks).toEqual(['s1', 's0', 's3'])
+    expect(getSealedDraft(state.room.match_state)?.resourceType).toBe('SUMMON')
+  })
   it('首位提交者只收到自己的选择，公共状态和历史均不含秘卷', async () => {
     const state = fixture()
     const response = await state.submit('blue')

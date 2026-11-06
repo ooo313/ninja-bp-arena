@@ -15,6 +15,7 @@ export const STORAGE_SCHEMA_VERSION = 5
 export const STORAGE_KEYS = {
   ninjaPool: 'ninja_pool',
   battleRules: 'battle_rules',
+  savedRules: 'saved_rules',
   bpSettings: 'bp_settings',
   currentMatch: 'current_match',
   recentMatches: 'recent_matches',

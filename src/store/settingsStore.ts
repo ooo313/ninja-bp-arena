@@ -32,6 +32,9 @@ interface SettingsStore {
   settings: AppSettings
   /** 自定义规则；为空表示使用默认模板 */
   customRule: BattleRule | null
+  savedRules: BattleRule[]
+  saveRuleAs: (name: string, rule: BattleRule) => BattleRule | null
+  deleteSavedRule: (id: string) => boolean
   update: (patch: Partial<AppSettings>) => void
   saveCustomRule: (rule: BattleRule) => void
   resetCustomRule: () => void
@@ -49,6 +52,28 @@ export const useSettingsStore = create<SettingsStore>()((set, get) => ({
     null,
     (v) => v === null || validateStoredRule(v),
   ),
+
+  savedRules: loadJSON<BattleRule[]>(STORAGE_KEYS.savedRules, [], (value) =>
+    Array.isArray(value) && value.every(validateStoredRule)),
+
+  saveRuleAs: (name, rule) => {
+    const title = name.trim()
+    if (!title || title.length > 40 || !validateStoredRule(rule)) return null
+    const saved = { ...cloneRule(rule), id: 'saved-' + crypto.randomUUID(), name: title }
+    const savedRules = [...get().savedRules, saved]
+    if (saveJSON(STORAGE_KEYS.savedRules, savedRules) !== 'ok') return null
+    set({ savedRules })
+    get().saveCustomRule(cloneRule(saved))
+    return saved
+  },
+
+  deleteSavedRule: (id) => {
+    const savedRules = get().savedRules.filter((rule) => rule.id !== id)
+    if (saveJSON(STORAGE_KEYS.savedRules, savedRules) !== 'ok') return false
+    set({ savedRules })
+    if (get().customRule?.id === id) get().resetCustomRule()
+    return true
+  },
 
   update: (patch) => {
     const settings = { ...get().settings, ...patch }

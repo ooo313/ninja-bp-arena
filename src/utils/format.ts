@@ -1,3 +1,12 @@
+const NINJA_QUALITY_ORDER = { S: 0, A: 1, B: 2, C: 3 } as const
+type NinjaSortKey = { quality: keyof typeof NINJA_QUALITY_ORDER; name: string; sortOrder?: number }
+
+export function compareNinjaQuality(a: NinjaSortKey, b: NinjaSortKey): number {
+  return NINJA_QUALITY_ORDER[a.quality] - NINJA_QUALITY_ORDER[b.quality] ||
+    (a.sortOrder ?? 0) - (b.sortOrder ?? 0) ||
+    a.name.localeCompare(b.name, 'zh-Hans-CN')
+}
+
 export function formatClock(totalSeconds: number): string {
   const s = Math.max(0, Math.floor(totalSeconds))
   const m = Math.floor(s / 60)

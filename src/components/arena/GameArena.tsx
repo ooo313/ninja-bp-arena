@@ -1,5 +1,5 @@
 import { sideAtPosition, sideLabel, playerName, playerScore } from '@bp-core'
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react'
 import { ArrowLeft, History, LayoutGrid, Maximize, Search, Undo2, Volume2, VolumeX } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { canSelectResource, getCurrentGame, getPhase, getPlayerResourceState, getResourceCardStatus, getResourceDraftRules, RESOURCE_TYPE_LABEL, type DraftResource, type DraftResourceType, type Side } from '@bp-core'
@@ -9,11 +9,12 @@ import { useSettingsStore } from '@/store/settingsStore'
 import { useDataPackStore } from '@/dataPack/store'
 import { useTimerStore } from '@/store/timerStore'
 import { resolveResourceAsset } from '@/dataPack/assetResolver'
-import { normalizeForSearch, searchRank } from '@/utils/format'
+import { compareNinjaQuality, normalizeForSearch, searchRank } from '@/utils/format'
 import { toast } from '@/store/toastStore'
 import { arenaAsset, displaySlots, pageItems, resourceArt } from './presentation'
 import auxiliaryData from '@/data/arenaAuxiliary.json'
 import { checkSealedChoice, getSealedDraft, snapshotResources } from '@bp-core'
+import type { TimeoutPreview } from '@/hooks/useDraftTimeout'
 import './arena.css'
 
 interface Props {
@@ -23,16 +24,14 @@ interface Props {
   onReset: () => void
   onWinner: (side: Side) => void
   onResults: () => void
-  onTimerExpire: () => void
-  onTimerRestart: () => void
-  onResumeTimeout: () => void
+  timeoutPreview: RefObject<TimeoutPreview | null>
   timeoutActive: boolean
 }
 const TYPE_ORDER: DraftResourceType[] = ['NINJA', 'SECRET_SCROLL', 'SUMMON']
 const EMPTY_RESOURCES: DraftResource[] = []
 
 /** Presentation only. Confirmation delegates the unchanged command to MatchSource. */
-export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinner, onResults, onTimerExpire, onTimerRestart, onResumeTimeout, timeoutActive }: Props) {
+export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinner, onResults, timeoutPreview, timeoutActive }: Props) {
   const source = useMatchSource()
   const match = source.match!
   const phase = getPhase(match)
@@ -69,10 +68,33 @@ export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinne
   const pool = viewType === 'NINJA' ? ninjas : source.matchResources?.[viewType] ?? EMPTY_RESOURCES
   const filtered = useMemo(() => {
     const query = normalizeForSearch(search)
-    return pool.filter((resource) => (quality === 'ALL' || viewType !== 'NINJA' || ('quality' in resource && resource.quality === quality)) && (!query || searchRank(resource, query) < Infinity))
-  }, [pool, quality, search, viewType])
+    const items = pool.filter((resource) =>
+      (quality === 'ALL' || viewType !== 'NINJA' || ('quality' in resource && resource.quality === quality)) &&
+      searchRank(resource, query) < Infinity)
+    if (viewType !== 'NINJA') return items
+    return items.sort((a, b) => searchRank(a, query) - searchRank(b, query) ||
+      ('quality' in a && 'quality' in b && settings.ninjaSort !== 'name' ? compareNinjaQuality(a, b) : a.name.localeCompare(b.name, 'zh-Hans-CN')))
+  }, [pool, quality, search, viewType, settings.ninjaSort])
   const visible = pageItems(filtered, page)
   const selected = preview?.type === viewType && preview.revision === match.updatedAt ? pool.find((resource) => resource.id === preview.id) : undefined
+  const sealedKey = sealed?.key
+  const phaseKey = sealedKey ?? phase.phaseKey
+  useEffect(() => {
+    const loadouts: TimeoutPreview['loadouts'] = {}
+    if (sealedKey) {
+      for (const side of ['BLUE', 'RED'] as const) {
+        if (source.mode === 'online' && source.mySeat !== side) continue
+        const slots = [...(draftSlots[sealedKey + ':' + side] ?? [])]
+        if (side === actingSide && selected) {
+          while (slots.length <= activeSlot) slots.push(null)
+          slots[activeSlot] = selected.id
+        }
+        loadouts[side] = slots
+      }
+    }
+    timeoutPreview.current = { phaseKey, updatedAt: match.updatedAt, resourceId: selected?.id, loadouts }
+    return () => { timeoutPreview.current = null }
+  }, [timeoutPreview, sealedKey, phaseKey, match.updatedAt, source.mode, source.mySeat, draftSlots, actingSide, activeSlot, selected])
   const check = selected ? sealed ? checkSealedChoice(match, actingSide, viewType, selected.id, resources, slotIds.filter((id, index): id is string => Boolean(id) && index !== activeSlot)) : canSelectResource(match, viewType, selected.id, selected) : undefined
   const canConfirm = inDraft && activeType === viewType && source.canOperate && !ownLocked && !busy && !source.pendingCommand && !timeoutActive && (selected ? Boolean(check?.allowed) : Boolean(sealed && batchComplete))
   const canControl = source.mode === 'local' || Boolean(source.isHost && source.connection === 'connected' && !source.pendingCommand)
@@ -113,7 +135,7 @@ export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinne
     try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen() }
     catch { toast('当前浏览器不支持全屏显示', 'info') }
   }
-  const status = busy || source.pendingCommand ? '正在确认，请稍候…' : ownLocked ? '己方已确认 · 等待对手完成后统一公开' : timeoutActive && inDraft ? '本轮计时结束 · 等待处理' : sealed && (source.mode === 'local' || source.mySeat === 'BLUE' || source.mySeat === 'RED') ? selected ? `已预览：${selected.name} · 点击选择放入第 ${activeSlot + 1} 个位置` : batchComplete ? `已选满 ${sealed.count} 个 · 确认整组后等待双方公开` : `选择第 ${activeSlot + 1} 个${RESOURCE_TYPE_LABEL[sealed.resourceType]} · 尚未提交` : source.mode === 'online' && !source.isMyTurn && inDraft ? `等待${phasePosition === 'BLUE' ? '1P' : '2P'}操作` : selected ? `已预览：${selected.name} · 点击选择确认` : inDraft ? '先点选头像预览，再点击「选择」确认' : phase.status === 'READY' ? '阵容锁定 · 准备进入战斗' : '本场配置与进度已保留'
+  const status = busy || source.pendingCommand ? '正在确认，请稍候…' : ownLocked ? '己方已确认 · 等待对手完成后统一公开' : timeoutActive && inDraft ? '本轮计时结束 · 正在自动确认' : sealed && (source.mode === 'local' || source.mySeat === 'BLUE' || source.mySeat === 'RED') ? selected ? `已预览：${selected.name} · 点击选择放入第 ${activeSlot + 1} 个位置` : batchComplete ? `已选满 ${sealed.count} 个 · 确认整组后等待双方公开` : `选择第 ${activeSlot + 1} 个${RESOURCE_TYPE_LABEL[sealed.resourceType]} · 尚未提交` : source.mode === 'online' && !source.isMyTurn && inDraft ? `等待${phasePosition === 'BLUE' ? '1P' : '2P'}操作` : selected ? `已预览：${selected.name} · 点击选择确认` : inDraft ? '先点选头像预览，再点击「选择」确认' : phase.status === 'READY' ? '阵容锁定 · 准备进入战斗' : '本场配置与进度已保留'
 
   const visibleLoadout = (side: Side, type: 'SECRET_SCROLL' | 'SUMMON') => {
     const confirmed = getPlayerResourceState(side === 'BLUE' ? game.blue : game.red, type).picks
@@ -175,14 +197,13 @@ export function GameArena({ onlineBanner, onClassic, onHistory, onReset, onWinne
       <div className="arena-player arena-player-blue"><span>{playerName(match, left)}</span><span className="arena-player-emblem"><img src={arenaAsset('one-p.webp')} alt="1P 蓝方" /></span></div>
       <div className="arena-player arena-player-red"><span className="arena-player-emblem"><img src={arenaAsset('two-p.webp')} alt="2P 红方" /></span><span>{playerName(match, right)}</span></div>
       {renderSummons('BLUE')}{renderSummons('RED')}
-      <div className="arena-heading"><h1>{titleArt ? <img src={arenaAsset(titleArt)} alt={title} /> : title}</h1>{inDraft && match.rule.timerEnabled ? <ArenaCountdown seconds={timeSeconds} deadline={source.mode === 'online' ? source.onlineDeadline : undefined} onExpire={onTimerExpire} /> : <span className="arena-round-label">{inDraft ? '不限时' : `${leftScore} : ${rightScore}`}</span>}</div>
+      <div className="arena-heading"><h1>{titleArt ? <img src={arenaAsset(titleArt)} alt={title} /> : title}</h1>{inDraft && match.rule.timerEnabled ? <ArenaCountdown seconds={timeSeconds} deadline={source.mode === 'online' ? source.onlineDeadline : undefined} /> : <span className="arena-round-label">{inDraft ? '不限时' : `${leftScore} : ${rightScore}`}</span>}</div>
       <div className="arena-stage">{renderTeam('BLUE')}{renderTeam('RED')}</div>
       {source.pendingUndo && <div className="arena-online-notice">{onlineBanner}</div>}
       {inDraft && viewType !== 'NINJA' && selected && <div className="arena-aux-preview" aria-live="polite"><ResourceImage resource={selected} className="arena-aux-art" /><span>{selected.name}</span><small>预览 · 尚未提交</small></div>}
       <div className="arena-stage-divider" />
       <div className="arena-step-hint" aria-live="polite"><i className={phasePosition === 'RED' ? 'red' : ''} />{sealed ? `双方同时选择${RESOURCE_TYPE_LABEL[sealed.resourceType]}` : inDraft ? `${phasePosition === 'BLUE' ? '1P' : '2P'} · ${phase.action === 'BAN' ? '禁用' : '选择'}${RESOURCE_TYPE_LABEL[activeType]}` : title}<span>{status}</span></div>
       {sealed && <div className="arena-draft-editor" aria-label="己方阵容编辑">{source.mode === 'local' && <div className="arena-local-sides">{([left, right]).map((side) => <button key={side} aria-pressed={actingSide === side} onClick={() => { setLocalPosition(sideAtPosition(match, side)); setPreview(null) }}>{sideLabel(match, side)}操作</button>)}</div>}{(source.mode === 'local' || source.mySeat === 'BLUE' || source.mySeat === 'RED') ? slotIds.map((id, index) => <button key={index} disabled={Boolean(ownLocked) || busy || !source.canOperate} aria-pressed={activeSlot === index} onClick={() => editSlot(index)} aria-label={`编辑第${index + 1}个${RESOURCE_TYPE_LABEL[sealed.resourceType]}`}>{sealed.resourceType === 'SECRET_SCROLL' ? `${index + 1}号忍者` : `通灵${index + 1}`} · {resourceById(id, sealed.resourceType)?.name ?? '待选择'}</button>) : <span>双方选择中 · 确认后统一公开</span>}</div>}
-      {inDraft && timeoutActive && <div className="arena-timeout"><span>本轮计时结束</span><button disabled={!canControl} onClick={onTimerRestart}>重新计时</button>{source.mode === 'local' && <button onClick={onResumeTimeout}>继续操作</button>}</div>}
       {inDraft ? <>
         <div className={`arena-pool ${sealed ? 'is-sealed-draft' : ''}`} role="grid" aria-label={`${RESOURCE_TYPE_LABEL[viewType]}资源列表`}>
           {visible.items.map((resource) => {
@@ -228,13 +249,11 @@ function ResourceImage({ resource, portrait = false, className }: { resource: Dr
   return url ? <img src={url} alt={resource.name} className={className} decoding="async" loading={portrait ? 'eager' : 'lazy'} onError={() => setFailed((previous) => [...previous, url])} /> : <span className={`${className} arena-image-placeholder`}>{resource.name.slice(0, 2)}</span>
 }
 
-function ArenaCountdown({ seconds, deadline, onExpire }: { seconds: number; deadline?: number | null; onExpire: () => void }) {
+function ArenaCountdown({ seconds, deadline }: { seconds: number; deadline?: number | null }) {
   const localDeadline = useTimerStore((state) => state.deadlineAt)
   const effectiveDeadline = deadline !== undefined ? deadline : localDeadline
   const [now, setNow] = useState(Date.now)
-  const expired = useRef<number | null>(null)
   useEffect(() => { const timer = window.setInterval(() => setNow(Date.now()), 250); return () => window.clearInterval(timer) }, [])
   const remaining = effectiveDeadline ? Math.min(seconds, Math.max(0, Math.ceil((effectiveDeadline - now) / 1000))) : seconds
-  useEffect(() => { if (effectiveDeadline && remaining === 0 && expired.current !== effectiveDeadline) { expired.current = effectiveDeadline; onExpire() } }, [effectiveDeadline, remaining, onExpire])
   return <span className={`arena-countdown ${remaining <= 10 ? 'warning' : ''}`} role="timer" aria-label={`剩余 ${remaining} 秒`}>{remaining}</span>
 }

@@ -15,7 +15,9 @@ import {
 } from './bpEngine.ts'
 import type { Ninja } from './types.ts'
 import type { BattleResources } from './resourceRegistry.ts'
-import { getResource } from './resourceRegistry.ts'
+import { getResource, getResourcesByType } from './resourceRegistry.ts'
+import { completeTimedOutStep, DRAFT_TIMEOUT_GRACE_MS } from './draftTimeout.ts'
+import { getSealedDraft } from './sealedLoadout.ts'
 
 /**
  * 在线房间命令处理器（Shared BP Core 的纯函数部分）。
@@ -35,6 +37,7 @@ export type OnlineCommandType =
   | 'SELECT_NINJA'
   | 'SELECT_RESOURCE'
   | 'SUBMIT_LOADOUT'
+  | 'EXPIRE_DRAFT'
   | 'ENTER_GAME'
   | 'SET_GAME_WINNER'
   | 'NEXT_GAME'
@@ -97,7 +100,7 @@ export interface RoomCommand {
   roomId: string
   expectedRevision: number
   type: OnlineCommandType
-  payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: Side; gameNumber?: number }
+  payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: Side; gameNumber?: number; deadline?: number; phaseKey?: string }
 }
 
 export type CommandOutcome =
@@ -117,6 +120,7 @@ export type RejectCode =
   | 'NOT_MEMBER'
   | 'NOT_HOST'
   | 'NOT_YOUR_TURN'
+  | 'DRAFT_DEADLINE'
   | 'NOT_PERMITTED'
   | 'ROOM_EXPIRED'
   | 'ROOM_CLOSED'
@@ -162,11 +166,29 @@ function applyOneCommand(ctx: RoomCommandContext, cmd: RoomCommand): { match: Ma
       return { match: next, extra: 'ACTIVE' }
     }
 
+    case 'EXPIRE_DRAFT': {
+      if (ctx.roomStatus !== 'ACTIVE') return reject('ROOM_NOT_ACTIVE', '比赛未在进行中')
+      const phase = getPhase(match)
+      const deadline = match.timer?.deadlineAt
+      if (getSealedDraft(match) || !phase.side || !phase.resourceType || !deadline ||
+          !match.rule.timerEnabled || cmd.payload?.deadline !== deadline || cmd.payload.phaseKey !== phase.phaseKey) {
+        return reject('REVISION_CONFLICT', '选择阶段已变化')
+      }
+      const ownsTurn = ctx.mySeat === phase.side
+      if (ctx.now < deadline + (ownsTurn ? 0 : DRAFT_TIMEOUT_GRACE_MS)) return reject('DRAFT_DEADLINE', '尚未到自动确认时间')
+      const pool = ctx.resources ? getResourcesByType(ctx.resources, phase.resourceType) : phase.resourceType === 'NINJA' ? ctx.ninjas : []
+      const result = completeTimedOutStep(match, pool, ownsTurn ? cmd.payload.resourceId : undefined, ctx.now)
+      if (!result.ok || !result.state) return reject('ENGINE_REJECTED', result.reason ?? '超时确认失败')
+      return { match: result.state }
+    }
+
     case 'SELECT_NINJA':
     case 'SELECT_RESOURCE': {
       if (ctx.roomStatus !== 'ACTIVE') return reject('ROOM_NOT_ACTIVE', '比赛未在进行中')
       if (!isSeatPlayer(ctx.mySeat)) return reject('NOT_PERMITTED', '观战者不能操作 BP')
       if (match.status === 'MATCH_FINISHED') return reject('MATCH_FINISHED', '比赛已经结束')
+
+      if (match.rule.timerEnabled && match.timer?.deadlineAt && ctx.now >= match.timer.deadlineAt) return reject('DRAFT_DEADLINE', '本步已超时，正在自动确认')
 
       // Side 由引擎阶段推导，不信任客户端
       const phase = getPhase(match)
@@ -215,7 +237,8 @@ function applyOneCommand(ctx: RoomCommandContext, cmd: RoomCommand): { match: Ma
     case 'NEXT_GAME': {
       if (!ctx.isHost) return reject('NOT_HOST', '只有房主可以进入下一局')
       if (ctx.roomStatus !== 'ACTIVE') return reject('ROOM_NOT_ACTIVE', '比赛未在进行中')
-      const result = nextGame(match, { now: ctx.now })
+      const result = nextGame(match, { now: ctx.now }, (type) =>
+        ctx.resources ? getResourcesByType(ctx.resources, type) : type === 'NINJA' ? ctx.ninjas : [])
       if (!result.ok || !result.state) return reject('ENGINE_REJECTED', result.reason ?? '无法进入下一局')
       return { match: result.state }
     }
@@ -272,6 +295,7 @@ function applyOneCommand(ctx: RoomCommandContext, cmd: RoomCommand): { match: Ma
       const isActingSide = isSeatPlayer(ctx.mySeat) && phase.side === ctx.mySeat && !phase.sequenceComplete
       if (!isActingSide && !ctx.isHost) return reject('NOT_PERMITTED', '只有当前行动方或房主可以重新计时')
       if (!match.rule.timerEnabled) return reject('INVALID_COMMAND', '本房间未启用倒计时')
+      if (match.timer?.deadlineAt && ctx.now >= match.timer.deadlineAt) return reject('DRAFT_DEADLINE', '本步已超时，正在自动确认')
       return { match }
     }
 

@@ -52,7 +52,7 @@ interface OnlineRoomState {
   createRoom: (input: { displayName: string; seat: 'BLUE' | 'RED'; rule: MatchState['rule'] }) => Promise<{ ok: boolean; code?: string; error?: string }>
   joinRoom: (input: { code: string; seat: 'AUTO' | 'BLUE' | 'RED' | 'OBSERVER'; displayName: string }) => Promise<{ ok: boolean; seat?: Seat; error?: string }>
   enterRoom: (roomId: string, code: string) => Promise<{ ok: boolean; error?: string }>
-  sendCommand: (type: OnlineCommandType, payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string; resourceIds?: string[]; phaseKey?: string }) => Promise<{ ok: boolean; reason?: string }>
+  sendCommand: (type: OnlineCommandType, payload?: { ninjaId?: string; resourceId?: string; resourceType?: DraftResourceType; side?: string; resourceIds?: (string | null)[]; phaseKey?: string; deadline?: number }) => Promise<{ ok: boolean; reason?: string }>
   /** 强制重新拉取权威快照（怀疑本地状态滞后时使用） */
   resync: () => Promise<void>
   /** 基于最新权威状态判断当前是否轮到本客户端 */
@@ -233,7 +233,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
       const parsed = parseRoomNinjaSnapshot(snap.room.pool)
       set({
         roomStatus: snap.room.status,
-        roomExpiresAt: new Date(snap.room.expires_at).getTime(),
+        roomExpiresAt: snap.room.expires_at === 'infinity' ? null : Date.parse(snap.room.expires_at),
         match: snap.room.match_state,
         privateLoadout: snap.privateLoadout ?? null,
         revision: snap.room.revision,
@@ -342,7 +342,7 @@ export const useOnlineRoomStore = create<OnlineRoomState>()((set, get) => ({
         if (snap.room.revision < current.revision) return
         set({
           roomStatus: snap.room.status,
-          roomExpiresAt: new Date(snap.room.expires_at).getTime(),
+          roomExpiresAt: snap.room.expires_at === 'infinity' ? null : Date.parse(snap.room.expires_at),
           match: snap.room.revision === current.revision ? current.match : snap.room.match_state,
           privateLoadout: snap.privateLoadout ?? null,
           revision: snap.room.revision,

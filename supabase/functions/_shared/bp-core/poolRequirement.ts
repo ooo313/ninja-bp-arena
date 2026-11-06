@@ -34,7 +34,7 @@ export function getMinimumRequiredResources(rule: BattleRule): MinimumRequiredRe
     const bluePicks = draft.sequence.filter((step) => step.action === 'PICK' && step.side === 'BLUE').reduce((sum, step) => sum + step.count, 0)
     const redPicks = draft.sequence.filter((step) => step.action === 'PICK' && step.side === 'RED').reduce((sum, step) => sum + step.count, 0)
     const picksPerGame = draft.uniqueAcrossSides ? bluePicks + redPicks : Math.max(bluePicks, redPicks)
-    const gameCount = draft.resetEachGame ? rule.bestOf : 1
+    const gameCount = draft.resetEachGame ? (rule.bestOf || 1) : 1
     const picksTotal = draft.crossGameLock ? picksPerGame * gameCount : picksPerGame
     const required = draft.banPersistence
       ? (draft.banOnlyFirstGame ? bansPerGame : bansPerGame * gameCount) + picksTotal

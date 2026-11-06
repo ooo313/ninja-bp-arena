@@ -1,7 +1,8 @@
 import type { MatchState } from '@/types/match'
-import { sideAtPosition, sideLabel, playerName, playerScore } from '@bp-core'
+import { getResourceDraftRules, sideAtPosition, sideLabel, playerName, playerScore } from '@bp-core'
 import { useMatchSource } from '@/matchSource/context'
 import { Dialog } from '@/components/common/Dialog'
+import { toast } from '@/store/toastStore'
 import { useResourceLookup } from '@/hooks/useNinjaLookup'
 
 interface GameResultDialogProps {
@@ -20,6 +21,7 @@ export function GameResultDialog({ match, open, onClose }: GameResultDialogProps
   if (!winner) return null
 
   const isBlue = sideAtPosition(match, winner) === 'BLUE'
+  const ninjaRule = getResourceDraftRules(match.rule).find((draft) => draft.resourceType === 'NINJA')
 
   return (
     <Dialog open={open} onClose={onClose} title={`GAME ${game.gameNumber} RESULT`}>
@@ -31,7 +33,7 @@ export function GameResultDialog({ match, open, onClose }: GameResultDialogProps
           {playerScore(match, sideAtPosition(match, 'BLUE'))} <span className="text-fog-600">:</span> {playerScore(match, sideAtPosition(match, 'RED'))}
         </span>
         <p className="text-xs text-fog-500">
-          已使用的忍者将在后续小局中保持禁用；首局 Ban 全场有效。
+          {ninjaRule?.crossGameLock ? '已出场的忍者将在后续小局中保持锁定。' : '已出场的忍者可在后续小局再次选择。'}
         </p>
         {(game.blue.resources || game.red.resources) && (
           <div className="w-full rounded border border-ink-600 bg-ink-900/50 p-3 text-xs text-fog-300">
@@ -51,7 +53,10 @@ export function GameResultDialog({ match, open, onClose }: GameResultDialogProps
             type="button"
             onClick={() => {
               void Promise.resolve(source.nextGame()).then((result) => {
-                if (!result.ok && result.reason) return
+                if (!result.ok) {
+                  toast(result.reason ?? '无法进入下一局', 'error')
+                  return
+                }
                 onClose()
               })
             }}

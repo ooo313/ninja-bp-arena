@@ -26,15 +26,13 @@ import { useMatchSource } from '@/matchSource/context'
 import { syncLocalTimer } from '@/matchSource/LocalMatchSource'
 import { useOnlineRoomStore } from '@/online/onlineRoomStore'
 import { useBPStore } from '@/store/bpStore'
-import { playSound } from '@/utils/sound'
-import { normalizeForSearch, searchRank } from '@/utils/format'
+import { useDraftTimeout, type TimeoutPreview } from '@/hooks/useDraftTimeout'
+import { compareNinjaQuality, normalizeForSearch, searchRank } from '@/utils/format'
 import { CheckCircle2, Hourglass } from 'lucide-react'
 import { ResourceGrid } from '@/components/resource/ResourceGrid'
 import { GameArena } from '@/components/arena/GameArena'
 import { getSealedDraft } from '@bp-core'
 import { canSelectResource, getResourceCardStatus, getResourceDraftRules, RESOURCE_TYPE_LABEL, type DraftResource, type DraftResourceType } from '@bp-core'
-
-const QUALITY_ORDER = { S: 0, A: 1, B: 2, C: 3 } as const
 
 /**
  * BP 工作区（本地 / 在线共用）。
@@ -59,7 +57,8 @@ export function BPWorkspace() {
   const [winnerConfirm, setWinnerConfirm] = useState<Side | null>(null)
   const matchResultRef = useRef<HTMLDivElement>(null)
   const [resultOpen, setResultOpen] = useState(false)
-  const [timeoutActive, setTimeoutActive] = useState(false)
+  const timeoutPreview = useRef<TimeoutPreview | null>(null)
+  const timeoutActive = useDraftTimeout(source, timeoutPreview)
   const [inspected, setInspected] = useState<{ type: DraftResourceType; resource: DraftResource } | null>(null)
 
   useKeyboardShortcuts({
@@ -86,9 +85,7 @@ export function BPWorkspace() {
       list = [...list].sort(
         (a, b) =>
           (query ? searchRank(a, query) - searchRank(b, query) : 0) ||
-          (a.sortOrder ?? 0) - (b.sortOrder ?? 0) ||
-          QUALITY_ORDER[a.quality] - QUALITY_ORDER[b.quality] ||
-          a.name.localeCompare(b.name, 'zh-Hans-CN'),
+          compareNinjaQuality(a, b),
       )
     }
     return list
@@ -111,7 +108,6 @@ export function BPWorkspace() {
   useEffect(() => {
     if (!match) return
     if (source.mode === 'local') syncLocalTimer(match, inBPNow)
-    setTimeoutActive(false)
   }, [match, source.mode, inBPNow])
 
   if (!match) return <Navigate to="/" replace />
@@ -142,7 +138,6 @@ export function BPWorkspace() {
             toast(result.reason, 'error')
             return
           }
-          setTimeoutActive(false)
         })()
         return
       }
@@ -152,7 +147,6 @@ export function BPWorkspace() {
         toast(result.reason, 'error')
         return
       }
-      setTimeoutActive(false)
     })
   }
 
@@ -163,7 +157,6 @@ export function BPWorkspace() {
     }
     void Promise.resolve(source.selectResource(resourceType, resourceId)).then((result) => {
       if (!result.ok && result.reason) toast(result.reason, 'error')
-      setTimeoutActive(false)
     })
   }
 
@@ -173,7 +166,6 @@ export function BPWorkspace() {
         if (result.reason) toast(result.reason, 'error')
         return
       }
-      setTimeoutActive(false)
       if (isOnline) {
         const status = useOnlineRoomStore.getState().match?.status
         if (status !== 'MATCH_FINISHED') setResultOpen(true)
@@ -183,16 +175,12 @@ export function BPWorkspace() {
     })
   }
 
-  const handleTimerExpire = () => {
-    setTimeoutActive(true)
-    playSound('timeout', settings.soundEnabled)
-  }
-
   const deadlineOverride = isOnline ? (source.onlineDeadline ?? null) : undefined
   const waitingOther = isOnline && inBP && !source.isMyTurn
   const enabledResourceTypes = getResourceDraftRules(match.rule).filter((rule) => rule.enabled).map((rule) => rule.resourceType)
   const interactionReason = viewedResourceType !== phase.resourceType
     ? `当前阶段为${phase.resourceType ? RESOURCE_TYPE_LABEL[phase.resourceType] : '其他资源'}`
+    : timeoutActive ? '正在自动确认'
     : source.mySeat === 'OBSERVER'
       ? '观战模式不可操作'
       : waitingOther
@@ -203,12 +191,6 @@ export function BPWorkspace() {
     <BPStage
       match={match}
       timeoutActive={timeoutActive}
-      onResumeTimeout={() => setTimeoutActive(false)}
-      onRestartTimer={() => {
-        source.restartTimer()
-        setTimeoutActive(false)
-      }}
-      onTimerExpire={handleTimerExpire}
       deadlineOverride={deadlineOverride}
       className="sticky top-0 z-20 shadow-lg shadow-arena-bg/40 lg:static lg:shadow-none"
     />
@@ -226,9 +208,7 @@ export function BPWorkspace() {
           if (match.status === 'MATCH_FINISHED') matchResultRef.current?.scrollIntoView({ block: 'start' })
           else setResultOpen(true)
         }}
-        onTimerExpire={handleTimerExpire}
-        onTimerRestart={() => { source.restartTimer(); setTimeoutActive(false) }}
-        onResumeTimeout={() => setTimeoutActive(false)}
+        timeoutPreview={timeoutPreview}
         timeoutActive={timeoutActive}
       /> : <>
       <button type="button" onClick={() => useSettingsStore.getState().update({ bpLayout: 'game' })} className="absolute right-3 top-2 z-40 rounded border border-gold-accent/40 bg-surface-1 px-2 py-1 text-xs text-gold-accent">游戏界面</button>
@@ -399,7 +379,6 @@ export function BPWorkspace() {
         danger
         onConfirm={() => {
           source.resetMatch()
-          setTimeoutActive(false)
           toast('比赛已重置', 'success')
         }}
         onClose={() => setResetOpen(false)}

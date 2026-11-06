@@ -506,17 +506,45 @@ export function setGameWinner(m: MatchState, side: Side, context?: TransitionCon
 
   const reachedWins = next.score.blue >= next.rule.winsRequired || next.score.red >= next.rule.winsRequired
   const noGamesLeft = next.currentGame >= next.rule.bestOf
-  if (reachedWins || noGamesLeft) next.status = 'MATCH_FINISHED'
+  if (next.rule.bestOf !== 0 && (reachedWins || noGamesLeft)) next.status = 'MATCH_FINISHED'
   next.updatedAt = nextTimestamp(m, context)
   return { ok: true, state: next }
 }
 
 /** 进入下一局（保持 Ban 与已使用忍者） */
-export function nextGame(m: MatchState, context?: TransitionContext): EngineResult {
+export function nextGame(
+  m: MatchState,
+  context?: TransitionContext,
+  getPool?: (type: DraftResourceType) => Pick<DraftResourceBase, 'id' | 'enabled' | 'deprecated'>[],
+): EngineResult {
   if (m.status === 'MATCH_FINISHED') return fail('比赛已经结束')
   const game = getCurrentGame(m)
   if (!game.winner) return fail('本局尚未记录胜负')
-  if (m.currentGame >= m.rule.bestOf) return fail('已经是最后一局')
+  if (m.rule.bestOf !== 0 && m.currentGame >= m.rule.bestOf) return fail('已经是最后一局')
+
+  if (m.rule.bestOf === 0 && getPool) {
+    const sequence = getGameSequence(m, m.currentGame + 1)
+    for (const draft of getResourceDraftRules(m.rule)) {
+      const steps = sequence.filter((step) => step.resourceType === draft.resourceType)
+      if (!steps.length) continue
+      const excluded = new Set<string>()
+      if (draft.banPersistence || draft.crossGameLock) {
+        for (const played of m.games) {
+          for (const player of [played.blue, played.red]) {
+            const { bans, picks } = getPlayerResourceState(player, draft.resourceType)
+            if (draft.banPersistence) for (const id of bans) excluded.add(id)
+            if (draft.crossGameLock) for (const id of picks) excluded.add(id)
+          }
+        }
+      }
+      const bans = steps.filter((step) => step.action === 'BAN').length
+      const needed = bans + draft.slotsPerSide * (draft.uniqueAcrossSides ? 2 : 1)
+      const available = new Set(getPool(draft.resourceType)
+        .filter((item) => item.enabled && !item.deprecated && !excluded.has(item.id))
+        .map((item) => item.id)).size
+      if (available < needed) return fail(`剩余${RESOURCE_TYPE_LABEL[draft.resourceType]}不足，下一局需要 ${needed} 个，当前可用 ${available} 个`)
+    }
+  }
 
   const next = cloneMatch(m)
   next.currentGame += 1

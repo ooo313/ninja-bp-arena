@@ -1,3 +1,4 @@
+import { matchFormatLabel } from '@bp-core'
 import { sideAtPosition, playerName, playerScore } from '@bp-core'
 import type { MatchState } from '@/types/match'
 import { getPhase } from '@/engine/bpEngine'
@@ -27,7 +28,7 @@ export function ScoreBoard({ match }: ScoreBoardProps) {
           {playerScore(match, right)}
         </span>
         <span className="text-[9px] tracking-widest text-fog-600">
-          {matchOver ? 'MATCH FINISHED' : `GAME ${phase.gameNumber} / BO${match.rule.bestOf}`}
+          {matchOver ? 'MATCH FINISHED' : `GAME ${phase.gameNumber} / ${matchFormatLabel(match.rule.bestOf)}`}
         </span>
       </div>
       <div className="flex flex-col items-start leading-tight sm:items-center">

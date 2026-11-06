@@ -12,7 +12,7 @@ import {
   setGameWinner,
   startMatch,
 } from '@/engine/bpEngine'
-import { getResource, snapshotResources, getSealedDraft, isPrivateLoadout, revealSealedLoadouts, validateSealedLoadout, type PrivateLoadout } from '@bp-core'
+import { getResourcesByType, completeTimedOutLoadouts, completeTimedOutStep, getPhase, getResource, snapshotResources, getSealedDraft, isPrivateLoadout, revealSealedLoadouts, validateSealedLoadout, type PrivateLoadout } from '@bp-core'
 import { emptyStacks, recordSnapshot, redo, undo, type UndoStacks } from '@/engine/historyEngine'
 import { validateMatchState } from '@/engine/matchValidator'
 import { useNinjaStore } from './ninjaStore'
@@ -58,6 +58,7 @@ function sanitizeMatchList(raw: unknown, source: string): MatchState[] {
 
 interface BPStore {
   privateLoadouts: Partial<Record<Side, PrivateLoadout>>
+  expireDraft: (preferred: Partial<Record<Side, (string | null)[]>>, resourceId?: string) => OpResult
   submitLoadout: (side: Side, type: DraftResourceType, ids: string[]) => OpResult
   match: MatchState | null
   currentMatchCorrupt: boolean
@@ -115,6 +116,19 @@ function persistMatch(match: MatchState) {
 
 export const useBPStore = create<BPStore>()((set, get) => ({
   privateLoadouts: loadJSON(STORAGE_KEYS.sealedLoadouts, {}, (value) => typeof value === 'object' && value !== null && Object.entries(value).every(([side, item]) => isPrivateLoadout(item) && item.side === side)),
+  expireDraft: (preferred, resourceId) => {
+    const { match, privateLoadouts } = get()
+    if (!match) return { ok: false, reason: '没有进行中的比赛' }
+    const resources = snapshotResources(match.resourceSnapshot)
+    if (!match.resourceSnapshot) resources.ninjas = match.ninjaSnapshot?.map((ninja) => ({ ...ninja, tags: [] })) ?? useNinjaStore.getState().ninjas
+    const now = Date.now()
+    const type = getPhase(match).resourceType
+    const result = getSealedDraft(match)
+      ? completeTimedOutLoadouts(match, resources, privateLoadouts, preferred, now, { BLUE: crypto.randomUUID(), RED: crypto.randomUUID() })
+      : completeTimedOutStep(match, type ? getResourcesByType(resources, type) : [], resourceId, now)
+    if (result.ok && result.state) commit(result.state)
+    return { ok: result.ok, reason: result.reason }
+  },
   submitLoadout: (side, type, ids) => {
     const match = get().match
     if (!match) return { ok: false, reason: '没有进行中的比赛' }
@@ -248,7 +262,11 @@ export const useBPStore = create<BPStore>()((set, get) => ({
   nextGame: () => {
     const match = get().match
     if (!match) return { ok: false, reason: '没有进行中的比赛' }
-    const result = nextGame(match, { now: Date.now() })
+    const resources = snapshotResources(match.resourceSnapshot)
+    const result = nextGame(match, { now: Date.now() }, (type) =>
+      type === 'NINJA' && !match.resourceSnapshot
+        ? match.ninjaSnapshot ?? useNinjaStore.getState().ninjas
+        : getResourcesByType(resources, type))
     if (!result.ok || !result.state) return { ok: false, reason: result.reason }
     commit(result.state)
     return { ok: true }

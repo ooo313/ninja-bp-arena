@@ -1,3 +1,4 @@
+import { matchFormatLabel } from '@bp-core'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { Copy, DoorClosed, Save } from 'lucide-react'
@@ -326,7 +327,7 @@ function WaitingRoom({ code }: { code: string }) {
       {match && (
         <div className="mt-5 rounded-lg border border-border-muted bg-surface-1/50 p-4 text-xs text-fog-500">
           <p className="font-semibold text-fog-300">{match.rule.name}</p>
-          <p>BO{match.rule.bestOf} · 先胜 {match.rule.winsRequired} 局</p>
+          <p>{matchFormatLabel(match.rule.bestOf)}{match.rule.bestOf > 0 && ` · 先胜 ${match.rule.winsRequired} 局`}</p>
           <p>Ban：{describeSequence(match.rule.banSequence)}</p>
           <p>Pick：{describeSequence(match.rule.pickSequence)}</p>
           <p className="mt-1 border-t border-border-muted pt-1">

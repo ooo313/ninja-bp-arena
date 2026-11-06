@@ -125,6 +125,7 @@ export interface BattleRule {
   name: string
   version: string
 
+  /** 0 表示无限局，winsRequired 同为 0。 */
   bestOf: number
   winsRequired: number
 

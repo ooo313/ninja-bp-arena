@@ -14,9 +14,8 @@ import { ConfirmDialog } from '@/components/common/ConfirmDialog'
 import { validateNinjaForm } from '@/engine/validators'
 import { exportNinjaPoolJSON, parseNinjaImport, previewImport } from '@/utils/importExport'
 import { copyToClipboard, downloadTextFile } from '@/utils/clipboard'
-import { normalizeForSearch } from '@/utils/format'
+import { compareNinjaQuality, normalizeForSearch } from '@/utils/format'
 
-const QUALITY_ORDER = { S: 0, A: 1, B: 2, C: 3 } as const
 
 interface FormState {
   id: string | null
@@ -89,11 +88,7 @@ export default function NinjaPoolPage() {
       if (ninjaSort === 'newest') {
         return (b.releaseDate ?? '0000').localeCompare(a.releaseDate ?? '0000') || a.name.localeCompare(b.name, 'zh-Hans-CN')
       }
-      return (
-        (a.sortOrder ?? 0) - (b.sortOrder ?? 0) ||
-        QUALITY_ORDER[a.quality] - QUALITY_ORDER[b.quality] ||
-        a.name.localeCompare(b.name, 'zh-Hans-CN')
-      )
+      return compareNinjaQuality(a, b)
     })
   }, [ninjas, search, quality, seriesFilter, tagFilter, ninjaSort])
 

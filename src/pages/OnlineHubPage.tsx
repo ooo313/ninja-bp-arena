@@ -1,9 +1,9 @@
+import { matchFormatLabel } from '@bp-core'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { LogIn, Plus, WifiOff } from 'lucide-react'
 import { useOnlineRoomStore } from '@/online/onlineRoomStore'
-import { useSettingsStore } from '@/store/settingsStore'
-import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, WUDOU_LOADOUT_RULE, cloneRule } from '@/data/defaultRules'
+import { useRuleSelection } from '@/components/settings/useRuleSelection'
 import { describeSequence } from '@/engine/ruleEngine'
 import { toast } from '@/store/toastStore'
 
@@ -13,10 +13,7 @@ export default function OnlineHubPage() {
   const configOk = useOnlineRoomStore((s) => s.configOk)
   const createRoom = useOnlineRoomStore((s) => s.createRoom)
   const joinRoom = useOnlineRoomStore((s) => s.joinRoom)
-  // 注意：selector 不能直接调 activeRule()（每次返回新对象会无限重渲染）
-  const customRule = useSettingsStore((s) => s.customRule)
-  const [ruleTemplate, setRuleTemplate] = useState<'CURRENT' | 'FULL_LOADOUT' | 'WUDOU'>('CURRENT')
-  const rule = cloneRule(ruleTemplate === 'WUDOU' ? WUDOU_LOADOUT_RULE : ruleTemplate === 'FULL_LOADOUT' ? FULL_LOADOUT_DEMO_RULE : (customRule ?? DEFAULT_RULE))
+  const { options, selected, select, rule } = useRuleSelection()
 
   const [displayName, setDisplayName] = useState('')
   const [seat, setSeat] = useState<'BLUE' | 'RED'>('BLUE')
@@ -79,17 +76,16 @@ export default function OnlineHubPage() {
       </header>
 
       <div className="mt-4 rounded-lg border border-border-muted bg-surface-1/50 p-5">
-        <h2 className="text-sm font-bold text-fog-100">比赛规则（当前模板）</h2>
-        <select aria-label="房间规则模板" value={ruleTemplate} onChange={(event) => setRuleTemplate(event.target.value as typeof ruleTemplate)} className="mt-2 rounded border border-ink-500 bg-ink-900 px-3 py-1.5 text-xs text-fog-100">
-          <option value="CURRENT">Ninja Only（当前规则）</option>
-          <option value="FULL_LOADOUT">Full Loadout Demo（示例）</option>
-          <option value="WUDOU">武斗完整阵容（同时盲选）</option>
+        <h2 className="text-sm font-bold text-fog-100">比赛规则</h2>
+        <select aria-label="房间规则模板" value={selected} onChange={(event) => select(event.target.value)} className="mt-2 rounded border border-ink-500 bg-ink-900 px-3 py-1.5 text-xs text-fog-100">
+          {options.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
         </select>
+        <Link className="ml-2 text-xs text-gold-accent underline" to="/settings">编辑或保存自定义规则</Link>
         <p className="mt-1 text-xs text-fog-500">Ban：{describeSequence(rule.banSequence)}</p>
         <p className="text-xs text-fog-500">Pick：{describeSequence(rule.pickSequence)}</p>
         <p className="mt-1 text-[11px] text-fog-600">
-          BO{rule.bestOf} · 先胜 {rule.winsRequired} 局 · {rule.timerEnabled ? `每步 ${rule.timerSeconds} 秒` : '无倒计时'}
-          （可在「规则设置」中修改，创建房间时固化）
+          {matchFormatLabel(rule.bestOf)}{rule.bestOf > 0 && ` · 先胜 ${rule.winsRequired} 局`} · {rule.timerEnabled ? `每步 ${rule.timerSeconds} 秒` : '无倒计时'}
+           · 创建房间时生效
         </p>
       </div>
 

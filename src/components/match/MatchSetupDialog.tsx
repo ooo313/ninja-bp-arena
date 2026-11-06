@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react'
+import { matchFormatLabel } from '@bp-core'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AlertTriangle } from 'lucide-react'
 import { Dialog } from '@/components/common/Dialog'
 import { useBPStore } from '@/store/bpStore'
-import { useSettingsStore } from '@/store/settingsStore'
-import { DEFAULT_RULE, FULL_LOADOUT_DEMO_RULE, WUDOU_LOADOUT_RULE, cloneRule } from '@/data/defaultRules'
+import { useRuleSelection } from '@/components/settings/useRuleSelection'
 import { countEnabledResources, analyzeRuleFeasibility, getResourceDraftRules, RESOURCE_TYPE_LABEL } from '@bp-core'
 import { useNinjaStore } from '@/store/ninjaStore'
 import type { MatchState } from '@/types/match'
@@ -23,12 +23,7 @@ interface MatchSetupDialogProps {
 export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialogProps) {
   const navigate = useNavigate()
   const startNewMatch = useBPStore((s) => s.startNewMatch)
-  // 注意：selector 不能直接调用 activeRule()（每次返回新对象会触发无限重渲染），
-  // 这里选引用再 useMemo 克隆。
-  const customRule = useSettingsStore((s) => s.customRule)
-  const currentRule = useMemo(() => cloneRule(customRule ?? DEFAULT_RULE), [customRule])
-  const [template, setTemplate] = useState<'CURRENT' | 'FULL_LOADOUT' | 'WUDOU'>('CURRENT')
-  const rule = template === 'WUDOU' ? cloneRule(WUDOU_LOADOUT_RULE) : template === 'FULL_LOADOUT' ? cloneRule(FULL_LOADOUT_DEMO_RULE) : currentRule
+  const { options, selected, select, rule } = useRuleSelection()
   const [blueName, setBlueName] = useState('')
   const [redName, setRedName] = useState('')
   // 注意：selector 不能每次返回新对象（会触发无限重渲染），这里选 ninjas 数组后计算
@@ -111,10 +106,8 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
 
         <label className="flex flex-col gap-1.5">
           <span className="text-xs font-medium text-fog-300">规则模板</span>
-          <select value={template} onChange={(event) => setTemplate(event.target.value as typeof template)} className="rounded-lg border border-ink-500 bg-ink-900 px-3 py-2 text-sm text-fog-100">
-            <option value="CURRENT">当前规则 · {currentRule.name}</option>
-            <option value="FULL_LOADOUT">Full Loadout Demo（示例）</option>
-            <option value="WUDOU">武斗完整阵容（同时盲选）</option>
+          <select value={selected} onChange={(event) => select(event.target.value)} className="rounded-lg border border-ink-500 bg-ink-900 px-3 py-2 text-sm text-fog-100">
+            {options.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
           </select>
           <span className="text-[10px] text-fog-600">模板均为玩家工具配置，不代表官方赛事规则。</span>
         </label>
@@ -123,7 +116,7 @@ export function MatchSetupDialog({ open, onClose, unfinished }: MatchSetupDialog
           <p className="mb-1 font-semibold text-fog-300">规则模板：{rule.name}</p>
           {getResourceDraftRules(rule).filter((draft) => draft.enabled).map((draft) => <p key={draft.resourceType} className="text-fog-500">{RESOURCE_TYPE_LABEL[draft.resourceType]}：{draft.sequence.map((step) => `${step.side === 'BLUE' ? '蓝方' : '红方'} ${step.action}×${step.count}`).join(' → ')}</p>)}
           <p className="mt-1.5 text-[10px] text-fog-600">
-            BO{rule.bestOf} · 先胜 {rule.winsRequired} 局 · {rule.timerEnabled ? `每步倒计时 ${rule.timerSeconds} 秒` : '无倒计时'} ·
+            {matchFormatLabel(rule.bestOf)}{rule.bestOf > 0 && ` · 先胜 ${rule.winsRequired} 局`} · {rule.timerEnabled ? `每步倒计时 ${rule.timerSeconds} 秒` : '无倒计时'} ·
             可在「规则设置」中修改
           </p>
           {poolInsufficient && (

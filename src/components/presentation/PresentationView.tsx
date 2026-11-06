@@ -33,7 +33,7 @@ export function PresentationView({ code }: { code: string }) {
         <div className="grid flex-1 items-stretch gap-5 py-5 lg:grid-cols-[minmax(300px,1fr)_minmax(420px,1.35fr)_minmax(300px,1fr)]">
           <PlayerPanel side={sideAtPosition(match, 'BLUE')} />
           <div className="flex flex-col justify-center gap-5">
-            <BPStage match={match} timeoutActive={false} onResumeTimeout={() => undefined} onRestartTimer={() => undefined} onTimerExpire={() => undefined} deadlineOverride={source.onlineDeadline} />
+            <BPStage match={match} timeoutActive={false} deadlineOverride={source.onlineDeadline} />
             <section className="rounded-xl border border-border-muted bg-surface-1/60 p-6 text-center">
               <p className="text-xs tracking-[0.25em] text-fog-600">CURRENT PHASE</p>
               <p className="mt-3 text-3xl font-black tracking-wide text-fog-100">

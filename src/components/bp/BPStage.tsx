@@ -1,3 +1,4 @@
+import { matchFormatLabel } from '@bp-core'
 import { sideAtPosition, sideLabel, playerScore } from '@bp-core'
 import type { MatchState } from '@/types/match'
 import { getPhase } from '@/engine/bpEngine'
@@ -51,9 +52,6 @@ interface BPStageProps {
   match: MatchState
   /** 超时遮罩是否激活（激活时给出恢复操作，不代替玩家选择） */
   timeoutActive: boolean
-  onResumeTimeout: () => void
-  onRestartTimer: () => void
-  onTimerExpire: () => void
   /** 在线模式：服务端权威 deadline（本地为 undefined → 用 timerStore） */
   deadlineOverride?: number | null
   className?: string
@@ -66,9 +64,6 @@ interface BPStageProps {
 export function BPStage({
   match,
   timeoutActive,
-  onResumeTimeout,
-  onRestartTimer,
-  onTimerExpire,
   deadlineOverride,
   className = '',
 }: BPStageProps) {
@@ -93,7 +88,7 @@ export function BPStage({
       aria-live="polite"
     >
       <div className="flex items-center gap-2 text-[11px] tracking-widest text-fog-600">
-        <span>BO{rule.bestOf}</span>
+        <span>{matchFormatLabel(rule.bestOf)}</span>
         <span className="text-ink-400">/</span>
         <span className="font-semibold text-gold">GAME {phase.gameNumber}</span>
         <span className="text-ink-400">/</span>
@@ -108,7 +103,6 @@ export function BPStage({
             <CountdownTimer
               seconds={timerSeconds}
               running={inBP}
-              onExpire={onTimerExpire}
               deadlineOverride={deadlineOverride}
             />
             <div className="text-left">
@@ -123,28 +117,10 @@ export function BPStage({
                 {RESOURCE_TYPE_LABEL[phase.resourceType!].toUpperCase()} · {phase.doneInStep + 1} / {phase.stepCount}
               </p>
               <p className="mt-0.5 text-sm font-medium text-fog-100">
-                {timeoutActive ? '操作超时 · 管理员可继续操作' : `${sideText}${isNinja ? '' : resourceLabel}${actionCn} · ${remainText}`}
+                {timeoutActive ? '操作超时 · 正在自动确认' : `${sideText}${isNinja ? '' : resourceLabel}${actionCn} · ${remainText}`}
               </p>
             </div>
           </div>
-          {timeoutActive && (
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={onResumeTimeout}
-                className="rounded bg-side-blue px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-side-blue/85"
-              >
-                继续选择
-              </button>
-              <button
-                type="button"
-                onClick={onRestartTimer}
-                className="rounded border border-ink-500 px-3 py-1.5 text-xs text-fog-300 transition-colors hover:bg-ink-600"
-              >
-                重新计时
-              </button>
-            </div>
-          )}
           <SequenceStrip match={match} />
         </>
       ) : (

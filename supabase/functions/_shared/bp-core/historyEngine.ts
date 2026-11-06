@@ -1,3 +1,4 @@
+import { matchFormatLabel } from './ruleEngine.ts'
 import type { MatchState } from './types.ts'
 import { SIDE_TEXT, ACTION_TEXT, type BPAction } from './types.ts'
 import { sideLabel, playerName, sideAtPosition } from './sideRotation.ts'
@@ -111,11 +112,11 @@ export function buildShareText(
 ): string {
   const lines: string[] = []
   const finished = m.status === 'MATCH_FINISHED'
-  const winnerSide = m.score.blue >= m.rule.winsRequired ? 'BLUE' : m.score.red >= m.rule.winsRequired ? 'RED' : null
+  const winnerSide = m.rule.bestOf === 0 ? null : m.score.blue >= m.rule.winsRequired ? 'BLUE' : m.score.red >= m.rule.winsRequired ? 'RED' : null
 
   lines.push('忍界 BP｜武斗赛模拟结果')
   lines.push(`${m.rule.name}`)
-  lines.push(m.rule.swapSidesEachGame ? `BO${m.rule.bestOf}  ${m.bluePlayerName} ${m.score.blue} : ${m.score.red} ${m.redPlayerName}` : `BO${m.rule.bestOf}  蓝方 ${m.score.blue} : ${m.score.red} 红方`)
+  lines.push(m.rule.swapSidesEachGame ? `${matchFormatLabel(m.rule.bestOf)}  ${m.bluePlayerName} ${m.score.blue} : ${m.score.red} ${m.redPlayerName}` : `${matchFormatLabel(m.rule.bestOf)}  蓝方 ${m.score.blue} : ${m.score.red} 红方`)
   if (finished && winnerSide) {
     lines.push(`总胜者：${sideLabel(m, winnerSide)}（${playerName(m, winnerSide)}）`)
   }

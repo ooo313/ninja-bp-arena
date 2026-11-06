@@ -1,8 +1,10 @@
 import { json, handleOptions } from '../_shared/http.ts'
 import { serviceClient, getUserFromRequest } from '../_shared/supabase.ts'
-import { submitPrivateLoadout } from '../_shared/loadoutSubmission.ts'
+import { expirePrivateLoadout, submitPrivateLoadout } from '../_shared/loadoutSubmission.ts'
 import {
   applyRoomCommand,
+  getSealedDraft,
+  type MatchState,
   validateMatchState,
   type OnlineCommandType,
   type PendingUndo,
@@ -93,7 +95,7 @@ Deno.serve(async (req) => {
       commandId?: unknown
       expectedRevision?: unknown
       type?: unknown
-      payload?: { ninjaId?: unknown; resourceId?: unknown; resourceType?: unknown; side?: unknown; resourceIds?: unknown; phaseKey?: unknown }
+      payload?: { ninjaId?: unknown; resourceId?: unknown; resourceType?: unknown; side?: unknown; resourceIds?: unknown; phaseKey?: unknown; deadline?: unknown }
     }
 
     const roomId = typeof body.roomId === 'string' ? body.roomId : ''
@@ -135,6 +137,17 @@ Deno.serve(async (req) => {
     // ---- 授权拦截（必须先于幂等检查：非成员绝不返回任何房间状态）----
     if (!member && user.id !== room.host_user_id) {
       return json({ error: 'NOT_MEMBER', message: '你还没有加入这个房间' }, 400)
+    }
+
+    const match = room.match_state as MatchState
+    const expiresAt = room.expires_at === 'infinity' ? Infinity : Date.parse(room.expires_at)
+    const mySeat = (member?.seat as Seat | undefined) ?? null
+    if (type === 'EXPIRE_DRAFT' && (getSealedDraft(match) || Array.isArray(body.payload?.resourceIds))) {
+      if (expectedRevision !== room.revision) return json({ error: 'REVISION_CONFLICT', message: '阵容已更新，正在同步', revision: room.revision, match }, 409)
+      return await expirePrivateLoadout(admin, {
+        userId: user.id, seat: mySeat, roomId, commandId, revision: room.revision, status: room.status,
+        match, snapshot: room.resource_snapshot, expiresAt, payload: body.payload ?? {},
+      })
     }
 
     // Never write a sealed payload into the member-readable command audit log.
@@ -182,11 +195,11 @@ Deno.serve(async (req) => {
     // ---- 4. 运行 Shared BP Core（与浏览器同一套规则；Side 由阶段推导，不信任客户端）----
     const outcome = applyRoomCommand(
       {
-        match: room.match_state as never,
+        match,
         revision: room.revision,
         roomStatus: room.status,
-        expiresAt: new Date(room.expires_at).getTime(),
-        mySeat: (member?.seat as Seat | undefined) ?? null,
+        expiresAt,
+        mySeat,
         // 真正身份 = JWT user.id，绝不使用请求体传入的任何身份
         isHost: user.id === room.host_user_id,
         myUserId: user.id,
@@ -203,6 +216,8 @@ Deno.serve(async (req) => {
         expectedRevision,
         type,
         payload: {
+          phaseKey: typeof body.payload?.phaseKey === 'string' ? body.payload.phaseKey : undefined,
+          deadline: typeof body.payload?.deadline === 'number' ? body.payload.deadline : undefined,
           ninjaId: typeof body.payload?.ninjaId === 'string' ? body.payload.ninjaId : undefined,
           resourceId: typeof body.payload?.resourceId === 'string' ? body.payload.resourceId : undefined,
           resourceType: ['NINJA', 'SECRET_SCROLL', 'SUMMON'].includes(String(body.payload?.resourceType))
@@ -218,6 +233,7 @@ Deno.serve(async (req) => {
     )
 
     if (outcome.status === 'REJECTED') {
+      if (type === 'EXPIRE_DRAFT') return json({ status: 'REJECTED', code: outcome.code, message: outcome.message, revision: room.revision, match }, outcome.code === 'REVISION_CONFLICT' ? 409 : 400)
       // 审计写入：并发重复 commandId 时 upsert 冲突跳过，仍返回稳定业务响应
       await admin
         .from('room_commands')

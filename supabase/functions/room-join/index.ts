@@ -75,7 +75,7 @@ Deno.serve(async (req) => {
     if (roomError) return json({ error: 'DB_ERROR', message: roomError.message }, 500)
     if (!room) return json({ error: 'ROOM_NOT_FOUND', message: '房间不存在，请核对房间号' }, 404)
     if (room.status === 'CLOSED') return json({ error: 'ROOM_CLOSED', message: '房间已关闭' }, 410)
-    if (new Date(room.expires_at as string).getTime() < Date.now()) {
+    if (room.expires_at !== 'infinity' && Date.parse(room.expires_at as string) <= Date.now()) {
       return json({ error: 'ROOM_EXPIRED', message: '房间已过期' }, 410)
     }
 

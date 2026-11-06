@@ -35,7 +35,7 @@ function isStringArray(v: unknown): v is string[] {
 function isValidGameState(game: unknown, bestOf: number): boolean {
   if (!isRecord(game)) return false
   // 严格：gameNumber 必须 1..bestOf
-  if (!isNonNegativeInt(game.gameNumber) || game.gameNumber < 1 || game.gameNumber > bestOf) return false
+  if (!isNonNegativeInt(game.gameNumber) || game.gameNumber < 1 || (bestOf !== 0 && game.gameNumber > bestOf)) return false
   if (game.started !== undefined && typeof game.started !== 'boolean') return false
   if (game.winner !== undefined && game.winner !== 'BLUE' && game.winner !== 'RED') return false
   for (const side of ['blue', 'red'] as const) {
@@ -162,7 +162,7 @@ export function validateMatchState(value: unknown): boolean {
   // currentGame 必须指向最后一局
   if (!Array.isArray(value.games) || value.games.length === 0) return false
   const rule = value.rule as unknown as BattleRule
-  if (value.games.length > rule.bestOf) return false
+  if (rule.bestOf !== 0 && value.games.length > rule.bestOf) return false
   for (let i = 0; i < value.games.length; i += 1) {
     const game = value.games[i] as Record<string, unknown>
     if (!isValidGameState(game, rule.bestOf)) return false
@@ -170,7 +170,6 @@ export function validateMatchState(value: unknown): boolean {
   }
   const lastGame = value.games[value.games.length - 1] as Record<string, unknown>
   if (lastGame.gameNumber !== value.currentGame) return false
-  if (value.currentGame > rule.bestOf) return false
 
   // 比分只能从已完成小局得出；状态也必须与胜场一致。
   const score = value.score as { blue: number; red: number }
@@ -182,7 +181,7 @@ export function validateMatchState(value: unknown): boolean {
   if (games.some((game) => game.winner && game.started === false)) return false
   const reached = blueWins >= rule.winsRequired || redWins >= rule.winsRequired
   const playedOut = games.length === rule.bestOf && Boolean(games[games.length - 1].winner)
-  if ((value.status === 'MATCH_FINISHED') !== (reached || playedOut)) return false
+  if ((value.status === 'MATCH_FINISHED') !== (rule.bestOf !== 0 && (reached || playedOut))) return false
 
   // history
   if (!Array.isArray(value.history)) return false
